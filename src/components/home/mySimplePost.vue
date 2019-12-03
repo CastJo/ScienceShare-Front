@@ -1,0 +1,59 @@
+<template>
+	<div>
+		<el-card class="myPostCard">
+			<div class="myPostList">
+				<el-table :data="this.post" style="width: 100%" height="250" :default-sort="{prop: 'createdDate', order: 'descending'}"
+				 @row-click="handleRowClick">
+					<el-table-column prop="title" label="他的帖子" width="250" v-if="other">
+					</el-table-column>
+					<el-table-column prop="title" label="我的帖子" width="250" v-else>
+					</el-table-column>
+
+					<el-table-column prop="createdDate" label="时间" :formatter="formatter">
+					</el-table-column>
+					<el-table-column prop="replyNum" label="回复数">
+					</el-table-column>
+				</el-table>
+			</div>
+		</el-card>
+	</div>
+</template>
+
+<script>
+	import {
+		dateFormat
+	} from "../../assets/js/time";
+
+	export default {
+		name: "mySimplePost",
+		data() {
+			return {
+
+			}
+		},
+		props: ['post', 'other'],
+		methods: {
+			formatter(row, column) {
+				return dateFormat(row.createdDate)
+			},
+			handleRowClick(row) {
+				this.$router.push(`/content/${row.id}`)
+			},
+			toMyPost() {
+				this.$router.push('/myPost')
+			}
+		}
+	}
+</script>
+
+<style>
+	.myPostCard {
+		margin-top: 20px;
+		width: 790px;
+	}
+
+	.myPostList {
+		margin-top: -10px;
+		margin-left: 0px;
+	}
+</style>
