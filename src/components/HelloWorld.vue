@@ -1,86 +1,6 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-<<<<<<< Updated upstream
-    <h2>Essential Links</h2>
-    <ul>
-      <li>
-        <a
-          href="https://vuejs.org"
-          target="_blank"
-        >
-          Core Docs
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://forum.vuejs.org"
-          target="_blank"
-        >
-          Forum
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://chat.vuejs.org"
-          target="_blank"
-        >
-          Community Chat
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://twitter.com/vuejs"
-          target="_blank"
-        >
-          Twitter
-        </a>
-      </li>
-      <br>
-      <li>
-        <a
-          href="http://vuejs-templates.github.io/webpack/"
-          target="_blank"
-        >
-          Docs for This Template
-        </a>
-      </li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li>
-        <a
-          href="http://router.vuejs.org/"
-          target="_blank"
-        >
-          vue-router
-        </a>
-      </li>
-      <li>
-        <a
-          href="http://vuex.vuejs.org/"
-          target="_blank"
-        >
-          vuex
-        </a>
-      </li>
-      <li>
-        <a
-          href="http://vue-loader.vuejs.org/"
-          target="_blank"
-        >
-          vue-loader
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://github.com/vuejs/awesome-vue"
-          target="_blank"
-        >
-          awesome-vue
-        </a>
-      </li>
-=======
     <p>
       For a guide and recipes on how to configure / customize this project,<br>
       check out the
@@ -108,7 +28,6 @@
       <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
       <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
       <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
->>>>>>> Stashed changes
     </ul>
   </div>
 </template>
@@ -116,29 +35,18 @@
 <script>
 export default {
   name: 'HelloWorld',
-<<<<<<< Updated upstream
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
-    }
-=======
+
   props: {
     msg: String
->>>>>>> Stashed changes
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<<<<<<< Updated upstream
-<style scoped>
-h1, h2 {
-  font-weight: normal;
-=======
+
 <style scoped lang="scss">
 h3 {
   margin: 40px 0 0;
->>>>>>> Stashed changes
 }
 ul {
   list-style-type: none;

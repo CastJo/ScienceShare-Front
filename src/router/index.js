@@ -1,20 +1,5 @@
 import Vue from 'vue'
-<<<<<<< Updated upstream
-import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
 
-Vue.use(Router)
-
-export default new Router({
-  routes: [
-    {
-      path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
-    }
-  ]
-})
-=======
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 
@@ -43,4 +28,3 @@ const router = new VueRouter({
 })
 
 export default router
->>>>>>> Stashed changes
