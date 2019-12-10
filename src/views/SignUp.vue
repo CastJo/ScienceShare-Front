@@ -1,11 +1,12 @@
 <template>
-    <div class="wrap" style="padding-top:10%;filter:alpha(opacity=92.5); -moz-opacity:0.925; opacity: 0.925;">
+    <div class="wrap" style="padding-top:10%">
         <center>
 
             <el-card class="register-card">
                 <div slot="header">
                     <span>用户注册</span>
                 </div>
+                <div class="register-card-input">
                 <el-input placeholder="请输入用户名" type="text" v-model="loginInfoVo.username"/>
 
                 <el-input placeholder="请输入6~20位密码" type="password" v-model="loginInfoVo.password"/>
@@ -13,20 +14,22 @@
                 <el-input :disabled="inputed" placeholder="请输入邮箱" type="text" v-model="loginInfoVo.emailAddress"/>
 
                 <el-row align="top" type="flex">
-                    <el-input placeholder="请输入验证码" type="text" v-model="loginInfoVo.code"></el-input>
+                    <el-input placeholder="请输入验证码" type="text" v-model="loginInfoVo.code"/>
 
                     <el-button :disabled="inputed" @click='sendPin' class="bottomControl" name='codeButton'
                                type="primary"><span v-if="inputed">{{this.auth_time}}</span>
                         <span v-else>获取验证码</span></el-button>
 
                 </el-row>
+                </div>
+                <div class="register-card-bottom">
                 <el-col :span="2" :offset="2">
                     <el-button type="primary" v-on:click="ToLogin">登录</el-button>
                 </el-col>
                 <el-col :span="2" :offset="13">
-                    <el-button type="success" v-on:click="SignUp">注册</el-button>
+                    <el-button type="success" v-on:click="register">注册</el-button>
                 </el-col>
-
+                </div>
 
 
             </el-card>
@@ -183,15 +186,15 @@
         text-align: center;
     }
 
-
+.register-card-bottom{
+    margin-top: 10px;
+}
     .register-card {
         width: 400px;
-        height: 370px;
+        padding-bottom: 10px;
     }
-
-    input {
+    .register-card input{
         display: block;
-        width: 250px;
         height: 40px;
         line-height: 40px;
         margin-bottom: 10px;
@@ -200,15 +203,22 @@
         padding: 10px;
         box-sizing: border-box;
     }
+    /*input {*/
+    /*    display: block;*/
+    /*    width: 250px;*/
+    /*    height: 40px;*/
+    /*    line-height: 40px;*/
+    /*    margin-bottom: 10px;*/
+    /*    outline: none;*/
+    /*    border: 1px solid #888;*/
+    /*    padding: 10px;*/
+    /*    box-sizing: border-box;*/
+    /*}*/
 
     .bottomControl {
         height: 40px;
         margin-left: 20px;
     }
 
-
-    span {
-        cursor: pointer;
-    }
 
 </style>

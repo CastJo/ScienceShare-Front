@@ -1,5 +1,5 @@
 <template>
-    <div class="wrap" style="padding-top:10%;filter:alpha(opacity=92.5); -moz-opacity:0.925; opacity: 0.925;">
+    <div class="wrap" style="padding-top:10%;">
 
         <center>
 
@@ -7,15 +7,18 @@
                 <div slot="header">
                     <span>用户登录</span>
                 </div>
+                <div class="login-card-input">
                 <el-input placeholder="请输入用户名" type="text" v-model="loginInfoVo.username"/>
                 <el-input placeholder="请输入密码" type="password" v-model="loginInfoVo.password"/>
+                </div>
+                <div class="login-card-bottom">
                 <el-col :span="2">
                     <el-button class="bottomControl" type="primary" v-on:click="ToRegister" >注册</el-button>
                 </el-col>
                 <el-col :span="2" :offset="13">
                     <el-button class="bottomControl" type="success" v-on:click="SignIn">登录</el-button>
                 </el-col>
-
+                </div>
             </el-card>
         </center>
     </div>
@@ -102,22 +105,19 @@
 <style>
     .wrap {
         text-align: center;
-
     }
 
     .login-card {
         width: 320px;
-        height: 270px;
-
+        padding-bottom: 10px;
     }
 
-    .bottomControl {
+    .login-card-bottom{
         margin-top: 10px;
     }
 
-    input {
+    .login-card input{
         display: block;
-        width: 250px;
         height: 40px;
         line-height: 40px;
         margin-top: 10px;
@@ -126,9 +126,21 @@
         padding: 10px;
         box-sizing: border-box;
     }
+    /*input {*/
+    /*    display: block;*/
+    /*    width: 250px;*/
+    /*    height: 40px;*/
+    /*    line-height: 40px;*/
+    /*    margin-top: 10px;*/
+    /*    outline: none;*/
+    /*    border: 1px solid #888;*/
+    /*    padding: 10px;*/
+    /*    box-sizing: border-box;*/
+    /*}*/
 
-    span {
-        cursor: pointer;
+    .bottomControl {
+        height: 40px;
+        margin-left: 20px;
     }
 
 </style>
