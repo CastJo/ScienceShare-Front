@@ -17,7 +17,7 @@
                         <span v-else>获取验证码</span></el-button>
 
                 </el-row>
-                <el-button type="primary" v-on:click="SignUp">注册</el-button>
+                <el-button type="primary" v-on:click="register">注册</el-button>
                 <div>
                     <span v-on:click="ToLogin">已有账号？马上登录</span><br/>
                 </div>
