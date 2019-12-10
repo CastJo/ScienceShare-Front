@@ -1,16 +1,21 @@
 <template>
-    <div class="wrap">
-        <div class="grid-content"><br/><br/><br/><br/><br/><br/><br/></div>
+    <div class="wrap" style="padding-top:10%;filter:alpha(opacity=92.5); -moz-opacity:0.925; opacity: 0.925;">
+
         <center>
+
             <el-card class="login-card">
+                <div slot="header">
+                    <span>用户登录</span>
+                </div>
                 <el-input placeholder="请输入用户名" type="text" v-model="loginInfoVo.username"/>
                 <el-input placeholder="请输入密码" type="password" v-model="loginInfoVo.password"/>
+                <el-col :span="2">
+                    <el-button class="bottomControl" type="primary" v-on:click="ToRegister" >注册</el-button>
+                </el-col>
+                <el-col :span="2" :offset="13">
+                    <el-button class="bottomControl" type="success" v-on:click="SignIn">登录</el-button>
+                </el-col>
 
-                <el-button class="bottomControl" type="primary" v-on:click="SignIn">登录</el-button>
-                <br/>
-                <div>
-                    <span v-on:click="ToRegister">没有账号？马上注册</span><br/>
-                </div>
             </el-card>
         </center>
     </div>
@@ -87,6 +92,7 @@
                         }
                     })
                     .catch(failResponse => {
+                        console.log(failResponse)
                     })
             }
         }
@@ -101,7 +107,7 @@
 
     .login-card {
         width: 320px;
-        height: 250px;
+        height: 270px;
 
     }
 
@@ -125,7 +131,4 @@
         cursor: pointer;
     }
 
-    span:hover {
-        color: #41b883;
-    }
 </style>
