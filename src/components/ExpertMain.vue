@@ -1,67 +1,64 @@
 <template>
-  <el-main>
-    <el-row :gutter="20">
-      <el-col :span="16">
-        <el-card
-          v-for="item in Twitters"
-          :key="item"
-          class="my-2 ml-4"
-          style="max-height:220px"
-        >
-          <div slot="header" class="mb-3">
-            <span style="float: left">{{ item.title }}</span>
-            <el-button style="float: right; padding: 3px 0" type="text"
-              >BUTTON</el-button
-            >
+  <el-row :gutter="20">
+    <el-col :span="16">
+      <el-card
+        v-for="item in Twitters"
+        :key="item.id"
+        class="my-2 ml-4"
+        style="max-height:220px"
+        shadow="hover"
+      >
+        <div slot="header" class="mb-3">
+          <span style="float: left">{{ item.title }}</span>
+          <el-button style="float: right; padding: 3px 0" type="text"
+            >BUTTON</el-button
+          >
+        </div>
+        <div>
+          <p align="left">{{ item.content }}</p>
+          <div class="bottom clearfix">
+            <time class="time">{{ currentDate }}</time>
+            <el-button type="text" class="button">操作按钮</el-button>
           </div>
+        </div>
+      </el-card>
+    </el-col>
 
-          <div>
-            <p align="left">{{ item.content }}</p>
-            <div class="bottom clearfix">
-              <time class="time">{{ currentDate }}</time>
-              <el-button type="text" class="button">操作按钮</el-button>
-            </div>
+    <el-col class="pr-4" :span="8">
+      <el-card class="my-2 mx-4" style="max-height:220px" shadow="hover">
+        <img src="@/assets/pic1.png" class="image" style="max-height:110px; " />
+        <div class="pa-2">
+          <span>晚上好, Huu.</span>
+          <div class="bottom clearfix">
+            <time class="time">{{ currentDate }}</time>
           </div>
-        </el-card>
-      </el-col>
-
-      <el-col class="pr-4" :span="8">
-        <el-card class="my-2 mx-4" style="max-height:220px ">
-          <img
-            src="@/assets/pic1.png"
-            class="image"
-            style="max-height:110px; "
-          />
-          <div class="pa-2">
-            <span>晚上好, Huu.</span>
-            <div class="bottom clearfix">
-              <time class="time">{{ currentDate }}</time>
-            </div>
-          </div>
-        </el-card>
-      </el-col>
-    </el-row>
-  </el-main>
+        </div>
+      </el-card>
+    </el-col>
+  </el-row>
 </template>
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       Twitters: [
         {
+          id: "1",
           title: "操作系统",
           content:
             "操作系统是管理计算机硬件与软件资源的计算机程序，同时也是计算机系统的内核与基石。操作系统需要处理如管理与配置内存、决定系统资源供需的优先次序、控制输入设备与输出设备、操作网络与管理文件系统等基本事务。操作系统也提供一个让用户与系统交互的操作界面。",
           likes: 9
         },
         {
+          id: "2",
           title: "操作系统",
           content:
             "操作系统是管理计算机硬件与软件资源的计算机程序，同时也是计算机系统的内核与基石。操作系统需要处理如管理与配置内存、决定系统资源供需的优先次序、控制输入设备与输出设备、操作网络与管理文件系统等基本事务。操作系统也提供一个让用户与系统交互的操作界面。",
           likes: 9
         },
         {
+          id: "3",
           title: "操作系统",
           content:
             "操作系统是管理计算机硬件与软件资源的计算机程序，同时也是计算机系统的内核与基石。操作系统需要处理如管理与配置内存、决定系统资源供需的优先次序、控制输入设备与输出设备、操作网络与管理文件系统等基本事务。操作系统也提供一个让用户与系统交互的操作界面。",
@@ -70,7 +67,6 @@ export default {
       ]
     };
   },
-  components: {},
   computed: {
     currentDate: () => {
       var date = new Date();

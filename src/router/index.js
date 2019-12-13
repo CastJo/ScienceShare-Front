@@ -1,18 +1,17 @@
 import Vue from "vue";
 
-
-import VueRouter from 'vue-router'
+import VueRouter from "vue-router";
 Vue.use(VueRouter);
 function loadView(view) {
-  return () => import(`@/views/${view}.vue`)
+  return () => import(`@/views/${view}.vue`);
+}
+function loadComponent(component) {
+  return () => import(`@/components/${component}.vue`);
 }
 const routes = [
   {
-    path: '/',
-    redirect:'/SignIn',
-
-
-
+    path: "/",
+    redirect: "/SignIn"
   },
   {
     path: "/about",
@@ -20,31 +19,51 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/About.vue")
   },
   {
-    path: '/home',
-    name: 'home',
-    component: loadView('Home')
+    path: "/home",
+    name: "home",
+    component: loadView("Home")
   },
   {
-    path: '/SignIn',
-    name: 'SignIn',
-    component: loadView('SignIn')
+    path: "/SignIn",
+    name: "SignIn",
+    component: loadView("SignIn")
   },
   {
-    path: '/SignUp',
-    name: 'SignUp',
-    component: loadView('SignUp')
+    path: "/SignUp",
+    name: "SignUp",
+    component: loadView("SignUp")
   },
-
   {
     path: "/main",
-    name: "WorkingPanel",
-    component: () => import("@/views/WorkingPanel.vue")
+    name: "ExpertHome",
+    component: loadView("ExpertHome"),
+    children: [
+      {
+        path: "/",
+        name: "ExpertMain",
+        component: loadComponent("ExpertMain")
+      },
+      {
+        path: "overview",
+        name: "Overview",
+        component: loadComponent("Overview")
+      },
+      {
+        path: "research",
+        name: "Research",
+        component: loadComponent("Research")
+      },
+      {
+        path: "information",
+        name: "Information",
+        component: loadComponent("Information")
+      }
+    ]
   }
-
 ];
 
 const router = new VueRouter({
