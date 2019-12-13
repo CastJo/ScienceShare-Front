@@ -133,10 +133,13 @@
                     });
                 } else {
                     this.$axios
-                        .post('register', {
-                            username: this.loginInfoVo.username,
-                            password: this.loginInfoVo.password,
-                            emailAddress: this.emailAddress,
+                        .get('register', {
+
+                            params: {
+                                username: this.loginInfoVo.username,
+                                password: this.loginInfoVo.password,
+                                emailAddress: this.emailAddress,
+                            }
                         })
                         .then(successResponse => {
                             this.responseResult = JSON.stringify(successResponse.data);

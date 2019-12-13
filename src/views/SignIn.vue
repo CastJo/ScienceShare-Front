@@ -8,7 +8,7 @@
                     <span>用户登录</span>
                 </div>
                 <div class="login-card-input">
-                    <el-input placeholder="请输入用户名" type="text" v-model="loginInfoVo.username"/>
+                    <el-input placeholder="请输入用户名或密码" type="text" v-model="loginInfoVo.username"/>
                     <el-input placeholder="请输入密码" type="password" v-model="loginInfoVo.password"/>
                 </div>
                     <div class="rememberMeLabel">
@@ -71,9 +71,11 @@
             },
             SignIn() {
                 this.$axios
-                    .post('/login', {
-                        username: this.loginInfoVo.username,
-                        password: this.loginInfoVo.password
+                    .get('login', {
+                        params: {
+                            username: this.loginInfoVo.username,
+                            password:this.loginInfoVo.password,
+                        }
                     })
                     .then(successResponse => {
                         this.responseResult = JSON.stringify(successResponse.data);
