@@ -13,10 +13,10 @@
                 </div>
                 <div class="login-card-bottom">
                 <el-col :span="2">
-                    <el-button class="bottomControl" type="primary" v-on:click="ToRegister" >注册</el-button>
+                    <el-button class="bottomControl" type="success" v-on:click="SignIn">登录</el-button>
                 </el-col>
                 <el-col :span="2" :offset="13">
-                    <el-button class="bottomControl" type="success" v-on:click="SignIn">登录</el-button>
+                    <el-button class="bottomControl" type="primary" v-on:click="ToRegister" >注册</el-button>
                 </el-col>
                 </div>
             </el-card>

@@ -3,8 +3,15 @@
         <center>
 
             <el-card class="register-card">
-                <div slot="header">
-                    <span>用户注册</span>
+                <div slot="header" class="register-card-header">
+                    <el-row>
+                    <div id="back">
+                        <el-button  v-on:click="ToLogin" ><span>返回</span></el-button>
+                    </div>
+                    <div id="name">
+                    <span >用户注册</span>
+                    </div>
+                    </el-row>
                 </div>
                 <div class="register-card-input">
                 <el-input placeholder="请输入用户名" type="text" v-model="loginInfoVo.username"/>
@@ -24,7 +31,7 @@
                 </div>
                 <div class="register-card-bottom">
                 <el-col :span="2" :offset="2">
-                    <el-button type="primary" v-on:click="ToLogin">登录</el-button>
+
                 </el-col>
                 <el-col :span="2" :offset="13">
                     <el-button type="success" v-on:click="register">注册</el-button>
@@ -182,6 +189,14 @@
 </script>
 
 <style>
+    .register-card-header{
+        align-content: center;
+    }
+    .register-card-header #back{
+    }
+    .register-card-header #name{
+
+    }
     .wrap {
         text-align: center;
     }
