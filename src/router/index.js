@@ -38,7 +38,11 @@ const routes = [
     name: 'SignUp',
     component: loadView('SignUp')
   },
-
+  {
+    path: '/Index',
+    name: 'Index',
+    component: loadView('Index')
+  },
   {
     path: "/main",
     name: "WorkingPanel",
