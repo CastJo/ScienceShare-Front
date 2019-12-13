@@ -1,3 +1,4 @@
+
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
@@ -9,8 +10,13 @@ Vue.use(ElementUI);
 var axios = require('axios');
 axios.defaults.baseURL = 'http://localhost:8000';
 Vue.prototype.$axios = axios;
+
 new Vue({
   router,
   store,
   render: h => h(App)
+
 }).$mount('#app');
+
+
+
