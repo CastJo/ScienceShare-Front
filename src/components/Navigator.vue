@@ -1,81 +1,56 @@
 <template>
-    <div>
-        <el-row>
-            <el-col :span="16">
-                <el-menu
-                        :default-active="activeIndex"
-                        @select="handleSelect"
-                        class="el-menu-demo pt-1"
-                        mode="horizontal"
-                >
-                    <el-menu-item index="1">我的主页</el-menu-item>
-                    <el-menu-item index="2">我的文献</el-menu-item>
-                    <el-menu-item index="3">我的关注</el-menu-item>
-                    <el-badge class="item" is-dot>
-                        <el-menu-item index="4">消息中心</el-menu-item>
-                    </el-badge>
-                        <el-menu-item index="5">注销</el-menu-item>
-
-                </el-menu>
-            </el-col>
-            <el-col :offset="2" :span="4">
-                <el-button @click="ToIndex" title="前往个人主页" type="text">
-                    <el-badge :hidden='hidBadge' :max="99" :value="notiNum" class="Badge">
-                        <el-avatar :size="50" :src="avatarUrl"></el-avatar>
-                    </el-badge>
-                </el-button>
-            </el-col>
-        </el-row>
-    </div>
+  <div>
+    <el-row>
+      <el-col :span="8" class="pt-2">
+        <img src="@/assets/pic1.png" class="image" style="max-height:60px; " />
+        <el-button type="text" class="mx-4">Home</el-button
+        ><el-button type="text" class="mx-4">Questions</el-button
+        ><el-button type="text" class="mx-4">Jobs</el-button>
+      </el-col>
+      <el-col :span="8">
+        <el-input placeholder="Search Something?" v-model="input" class="pt-3">
+          <el-button slot="append" icon="el-icon-search"></el-button>
+        </el-input>
+      </el-col>
+      <el-col :span="8">
+        <div class="pt-3" style="padding-left: 40%">
+          <el-button icon="el-icon-user-solid" circle></el-button>
+          <el-badge :is-dot="isNotified" class="item">
+            <el-button icon="el-icon-chat-dot-round" circle></el-button>
+          </el-badge>
+          <el-button class="ml-5">Logout</el-button>
+        </div>
+      </el-col>
+    </el-row>
+    <el-divider class="my-2"></el-divider>
+  </div>
 </template>
 
 <script>
-    import {delCookie} from '../assets/js/cookie.js'
-    import circle from "@/assets/logo.png";
-
-    export default {
-        name: "Navigator",
-        data() {
-            return {
-                input: '',
-                circleUrl: circle,
-                activeIndex: "1",
-                activeIndex2: "1",
-                avatarUrl: 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png',
-            };
-        },
-        methods: {
-            ToIndex() {
-
-                this.$router.push(
-                    '/index'
-                )
-
-            },
-            handleSelect(key, keyPath) {
-                console.log(key, keyPath);
-                switch (key) {
-                    case "1":
-                        console.log("yes");
-                        this.$router.push(
-                            '/main'
-                        );
-                        break;
-                    case "5":
-                        delCookie('username');
-                        this.$store.dispatch('quit');
-                        this.$router.replace('/login');
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
+import circle from "@/assets/logo.png";
+export default {
+  name: "Navigator",
+  data() {
+    return {
+      input: "",
+      isNotified: true,
+      circleUrl: circle,
+      activeIndex: "1",
+      activeIndex2: "1"
     };
+  },
+  methods: {
+    handleSelect(key, keyPath) {
+      console.log(key, keyPath);
+    },
+    logout: function() {}
+  }
+};
 </script>
 
 <style>
-    el-menu-item {
-        max-height: 30px;
-    }
+el-col {
+  padding-top: 20px;
+}
+
 </style>
