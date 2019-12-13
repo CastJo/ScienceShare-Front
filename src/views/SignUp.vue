@@ -4,14 +4,14 @@
 
             <el-card class="register-card">
                 <div slot="header" class="register-card-header">
-                    <el-row>
-                    <div id="back">
-                        <el-button  v-on:click="ToLogin" ><span>返回</span></el-button>
+
+                    <div >
+                        <el-button type="info" plain id="back" v-on:click="ToLogin" ><span>返回</span></el-button>
                     </div>
                     <div id="name">
-                    <span >用户注册</span>
+                        <span >用户注册</span>
                     </div>
-                    </el-row>
+
                 </div>
                 <div class="register-card-input">
                 <el-input placeholder="请输入用户名" type="text" v-model="loginInfoVo.username"/>
@@ -24,21 +24,12 @@
                     <el-input placeholder="请输入验证码" type="text" v-model="loginInfoVo.code"/>
 
                     <el-button :disabled="inputed" @click='sendPin' class="bottomControl" name='codeButton'
-                               type="primary"><span v-if="inputed">{{this.auth_time}}</span>
+                               type="primary" plain><span v-if="inputed">{{this.auth_time}}</span>
                         <span v-else>获取验证码</span></el-button>
 
                 </el-row>
                 </div>
-                <div class="register-card-bottom">
-                <el-col :span="2" :offset="2">
-
-                </el-col>
-                <el-col :span="2" :offset="13">
-                    <el-button type="success" v-on:click="register">注册</el-button>
-                </el-col>
-                </div>
-
-
+                <el-button v-on:click="register" class = register-bottomcontrol>注册</el-button>
             </el-card>
         </center>
 
@@ -189,13 +180,21 @@
 </script>
 
 <style>
+    .register-card-header div{
+        float: left;
+    }
     .register-card-header{
-        align-content: center;
+        height: 40px;
+
     }
     .register-card-header #back{
+        width: 50px;
+        padding: 12px 0;
     }
     .register-card-header #name{
-
+        margin-left: 73px;
+        font-size: 28px;
+        font-family: "微软雅黑";
     }
     .wrap {
         text-align: center;
@@ -206,7 +205,6 @@
 }
     .register-card {
         width: 400px;
-        padding-bottom: 10px;
     }
     .register-card input{
         display: block;
@@ -232,7 +230,14 @@
 
     .bottomControl {
         height: 40px;
-        margin-left: 20px;
+        margin-left: 10px;
+    }
+    .register-bottomcontrol{
+        background-color: #409EFF;
+        color: #FFFFFF;
+        height: 45px;
+        font-weight: bold;
+        width: 360px;
     }
 
 

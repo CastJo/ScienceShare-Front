@@ -4,20 +4,28 @@
         <center>
 
             <el-card class="login-card">
-                <div slot="header">
+                <div slot="header" id="title">
                     <span>用户登录</span>
                 </div>
                 <div class="login-card-input">
-                <el-input placeholder="请输入用户名" type="text" v-model="loginInfoVo.username"/>
-                <el-input placeholder="请输入密码" type="password" v-model="loginInfoVo.password"/>
+                    <el-input placeholder="请输入用户名" type="text" v-model="loginInfoVo.username"/>
+                    <el-input placeholder="请输入密码" type="password" v-model="loginInfoVo.password"/>
                 </div>
+                    <div class="rememberMeLabel">
+                        <div>
+                            <input type="checkbox"><span>记住我</span>
+                        </div>
+                        <div>
+                            <el-button type="text" id="forgetPaswd">忘记密码?</el-button>
+                        </div>
+                    </div>
                 <div class="login-card-bottom">
-                <el-col :span="2">
-                    <el-button class="bottomControl" type="success" v-on:click="SignIn">登录</el-button>
-                </el-col>
-                <el-col :span="2" :offset="13">
-                    <el-button class="bottomControl" type="primary" v-on:click="ToRegister" >注册</el-button>
-                </el-col>
+                    <div>
+                        <el-button id="loginBottom" type="primary" v-on:click="SignIn">登录</el-button>
+                    </div>
+                    <div>
+                        <el-button type="info" v-on:click="ToRegister" plain >没有账号?去注册</el-button>
+                    </div>
                 </div>
             </el-card>
         </center>
@@ -108,19 +116,42 @@
     }
 
     .login-card {
-        width: 320px;
+        width: 360px;
         padding-bottom: 10px;
     }
-
-    .login-card-bottom{
-        margin-top: 10px;
+    .login-card #title{
+        font-size: 28px;
+        font-family: "微软雅黑";
     }
 
-    .login-card input{
+    .login-card-bottom div{
+        float: left;
+    }
+
+    .login-card-bottom #loginBottom{
+        width: 160px;
+        margin-right: 10px;
+    }
+
+    .rememberMeLabel div{
+        float: left;
+        height: 30px;
+    }
+
+    .rememberMeLabel #forgetPaswd{
+        width: 60px;
+        font-size: 15px;
+        height: 10px;
+        padding: 0;
+        margin-left: 188px;
+    }
+
+    .login-card-input input{
         display: block;
         height: 40px;
         line-height: 40px;
-        margin-top: 10px;
+        margin-bottom: 10px;
+        width: 320px;
         outline: none;
         border: 1px solid #888;
         padding: 10px;
@@ -138,9 +169,5 @@
     /*    box-sizing: border-box;*/
     /*}*/
 
-    .bottomControl {
-        height: 40px;
-        margin-left: 20px;
-    }
 
 </style>
