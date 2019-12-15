@@ -22,7 +22,7 @@
           <el-badge :is-dot="isNotified" class="item">
             <el-button icon="el-icon-chat-dot-round" circle></el-button>
           </el-badge>
-          <el-button class="ml-5" @click="quit">Logout</el-button>
+          <el-button class="ml-5" @click="SignOut">Logout</el-button>
         </div>
       </el-col>
     </el-row>
@@ -31,7 +31,6 @@
 </template>
 
 <script>
-import { delCookie } from "../assets/js/cookie.js";
 import circle from "@/assets/logo.png";
 
 export default {
@@ -47,12 +46,11 @@ export default {
   },
   methods: {
     ToIndex() {
-      this.$router.push("/Index");
+      this.$router.push("/home");
     },
-    quit() {
-      delCookie("username");
-      this.$store.dispatch("quit");
-      this.$router.replace("/SignIN");
+    SignOut() {
+      this.$store.dispatch("SignOut");
+      this.$router.replace("/signIN");
     },
     handleSelect(key, keyPath) {
       console.log(key, keyPath);

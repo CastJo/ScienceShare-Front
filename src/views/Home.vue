@@ -8,8 +8,9 @@
           <el-avatar :size="100" :src="circleUrl"></el-avatar>
         </el-col>
           <el-col :span="16">
-            <h4>{{ user.name }}</h4>
-            <h6>emailAddress: {{ user.emailAddress}}</h6>
+            <h4>{{ user.username }}</h4>
+            <h6>邮箱: {{ user.emailAddress}}</h6>
+            <h6>注册时间: {{ formattedDate}}</h6>
           </el-col>
         </el-row>
         <el-row>
@@ -35,6 +36,7 @@
 <script>
   import Navigator from "@/components/Navigator.vue"
   import url from "@/assets/pic1.png";
+  import {dateFormat} from "../assets/js/time";
   export default {
     data () {
       return {
@@ -43,6 +45,11 @@
         circleUrl: url,
         activeIndex: "1"
       };
+    },
+    computed: {
+      formattedDate() {
+        return dateFormat(this.user.createdDate);
+      }
     },
     methods: {
       handleSelect (key, keyPath) {

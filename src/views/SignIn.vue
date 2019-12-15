@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import { getCookie, setCookie } from "../assets/js/cookie.js";
+
 
 export default {
   data() {
@@ -54,15 +54,9 @@ export default {
     };
   },
   mounted() {
-    /*页面挂载获取cookie，如果存在username的cookie，则跳转到主页，不需登录*/
-    if (getCookie("username")) {
+    if (window.sessionStorage.getItem("username")){
       this.$router.replace("/home");
     }
-    // if (localStorage.getItem('Flag')) {
-    // 	this.$router.push(
-    // 		'/forum'
-    // 	)
-    // }
   },
   methods: {
     ToMain() {
@@ -82,20 +76,19 @@ export default {
         .then(successResponse => {
           this.responseResult = JSON.stringify(successResponse.data);
           if (successResponse.data.code === 200) {
-            setCookie("username", this.loginInfoVo.username, 1000 * 60);
-            // this.$store.dispatch('setUser', true)
-            // localStorage.setItem('Flag', 'isLogin')
-            // localStorage.setItem('username', userName)
-            this.$store.dispatch("SignIn");
-            this.$axios.get(`/getUser/${this.loginInfoVo.username}`).then((response) => {
-              this.$store.dispatch("setUser",response.data);
-            });
             this.$notify({
               title: "成功",
               message: "登录成功！",
               type: "success"
             });
-            this.$router.replace("/home");
+            this.$axios.get(`getUser`, {
+              params: {
+                username: this.loginInfoVo.username,
+              }
+            }).then((response) => {
+              this.$store.dispatch("setUser",response.data);
+            });
+            this.$router.replace("home");
           } else if (successResponse.data.code === 300) {
             this.$notify.error({
               title: "错误",

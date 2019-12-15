@@ -60,7 +60,7 @@
 </template>
 
 <script>
-import { getCookie, setCookie } from "../assets/js/cookie.js";
+
 export default {
   data() {
     return {
@@ -78,9 +78,8 @@ export default {
     };
   },
   mounted() {
-    /*页面挂载获取cookie，如果存在username的cookie，则跳转到主页，不需登录*/
-    if (getCookie("username")) {
-      this.$router.push("/home");
+    if (window.sessionStorage.getItem("username")){
+      this.$router.replace("/home");
     }
   },
   methods: {
@@ -161,15 +160,18 @@ export default {
           .then(successResponse => {
             this.responseResult = JSON.stringify(successResponse.data);
             if (successResponse.data.code === 200) {
-              setCookie("username", this.loginInfoVo.username, 1000 * 60);
-              // this.$store.dispatch('setUser', true)
-              // localStorage.setItem('Flag', 'isLogin')
-              // localStorage.setItem('username', userName)
-              this.$store.dispatch("SignIn");
+              //setCookie("username", this.loginInfoVo.username, 1000 * 60);
               this.$notify({
                 title: "成功",
                 message: "注册成功！",
                 type: "success"
+              });
+              this.$axios.get(`getUser`, {
+                params: {
+                  username: this.loginInfoVo.username,
+                }
+              }).then((response) => {
+                this.$store.dispatch("setUser",response.data);
               });
               this.$router.replace("home");
             } else if (successResponse.data.code === 201) {

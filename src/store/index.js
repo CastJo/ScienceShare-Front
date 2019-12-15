@@ -8,13 +8,13 @@ export default new Vuex.Store({
     isLogin: false,
     username: "",
     user:{
-      username: "",
-      permission:"",
-      unreadNotification:"",
-      emailAddress:"",
-      prestige:"",
-      createdDate:"",
-      avatarUrl:"",
+      username: window.sessionStorage.getItem("username"),
+      permission:window.sessionStorage.getItem("permission"),
+      unreadNotification:window.sessionStorage.getItem("unreadNotification"),
+      emailAddress:window.sessionStorage.getItem("emailAddress"),
+      prestige:window.sessionStorage.getItem("prestige"),
+      createdDate:window.sessionStorage.getItem("createdDate"),
+      avatarUrl:window.sessionStorage.getItem("avatarUrl"),
     },
     expert: {
       name: "Huobin Tan",
@@ -28,9 +28,29 @@ export default new Vuex.Store({
     },
     SignOut(state) {
       state.isLogin = false;
+      window.sessionStorage.removeItem("username");
+      window.sessionStorage.removeItem("permission");
+      window.sessionStorage.removeItem("unreadNotification");
+      window.sessionStorage.removeItem("emailAddress");
+      window.sessionStorage.removeItem("prestige");
+      window.sessionStorage.removeItem("createdDate");
+      window.sessionStorage.removeItem("avatarUrl");
     },
     setUser(state,user){
-      state.user=user;
+      state.user.username=user.username;
+      state.user.permission=user.permission;
+      state.user.unreadNotification=user.unreadNotification;
+      state.user.emailAddress=user.emailAddress;
+      state.user.prestige=user.prestige;
+      state.user.createdDate=user.createdDate;
+      state.user.avatarUrl=user.avatarUrl;
+      window.sessionStorage.setItem("username",state.user.username);
+      window.sessionStorage.setItem("permission",state.user.permission);
+      window.sessionStorage.setItem("unreadNotification",state.user.unreadNotification);
+      window.sessionStorage.setItem("emailAddress",state.user.emailAddress);
+      window.sessionStorage.setItem("prestige",state.user.prestige);
+      window.sessionStorage.setItem("createdDate",state.user.createdDate);
+      window.sessionStorage.setItem("avatarUrl",state.user.avatarUrl);
     }
   },
   actions: {
