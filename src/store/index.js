@@ -7,6 +7,15 @@ export default new Vuex.Store({
   state: {
     isLogin: false,
     username: "",
+    user:{
+      username: "",
+      permission:"",
+      unreadNotification:"",
+      emailAddress:"",
+      prestige:"",
+      createdDate:"",
+      avatarUrl:"",
+    },
     expert: {
       name: "Huobin Tan",
       years: "1.7",
@@ -19,6 +28,9 @@ export default new Vuex.Store({
     },
     SignOut(state) {
       state.isLogin = false;
+    },
+    setUser(state,user){
+      state.user=user;
     }
   },
   actions: {
@@ -27,7 +39,10 @@ export default new Vuex.Store({
     },
     SignOut(context) {
       context.commit("SignOut");
-    }
+    },
+    setUser(context,user){
+      context.commit("setUser",user);
+    },
   },
   modules: {}
 });
