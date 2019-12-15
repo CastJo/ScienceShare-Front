@@ -50,7 +50,7 @@ export default {
     },
     SignOut() {
       this.$store.dispatch("SignOut");
-      this.$router.replace("/signIN");
+      this.$router.replace("/signIn");
     },
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
