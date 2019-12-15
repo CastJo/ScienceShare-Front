@@ -6,6 +6,11 @@
 <script>
 import Navigator from "@/components/Navigator.vue";
 export default {
+  data() {
+    return {
+      srcUrl: url
+    };
+  },
   components: {
     Navigator
   }

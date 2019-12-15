@@ -9,7 +9,8 @@ export default new Vuex.Store({
     username: "",
     expert: {
       name: "Huobin Tan",
-      years: "1.7",
+      follows: "3",
+      fans: "201",
       url: "@/assets/pic1.png"
     }
   },
