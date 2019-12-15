@@ -1,46 +1,53 @@
 <template>
-  <el-row :gutter="20">
-    <el-col :span="16">
-      <el-card
-        v-for="item in Twitters"
-        :key="item.id"
-        class="my-2 ml-4"
-        style="max-height:220px"
-        shadow="hover"
-      >
-        <div slot="header" class="mb-3">
-          <span style="float: left">{{ item.title }}</span>
-          <el-button style="float: right; padding: 3px 0" type="text"
-            >BUTTON</el-button
-          >
-        </div>
-        <div>
-          <p align="left">{{ item.content }}</p>
-          <div class="bottom clearfix">
-            <time class="time">{{ currentDate }}</time>
-            <el-button type="text" class="button">操作按钮</el-button>
+  <el-container>
+    <el-row :gutter="20">
+      <el-col :span="16">
+        <el-card
+          v-for="item in Twitters"
+          :key="item.id"
+          class="my-2 ml-4"
+          style="max-height:220px"
+          shadow="hover"
+        >
+          <div slot="header" class="mb-3">
+            <span style="float: left">{{ item.title }}</span>
+            <el-button style="float: right; padding: 3px 0" type="text"
+              >BUTTON</el-button
+            >
           </div>
-        </div>
-      </el-card>
-    </el-col>
+          <div>
+            <p align="left">{{ item.content }}</p>
+            <div class="bottom clearfix">
+              <time class="time">{{ currentDate }}</time>
+              <el-button type="text" class="button">操作按钮</el-button>
+            </div>
+          </div>
+        </el-card>
+      </el-col>
 
-    <el-col class="pr-4" :span="8">
-      <el-card class="my-2 mx-4" style="max-height:220px" shadow="hover">
-        <img src="@/assets/pic1.png" class="image" style="max-height:110px; " />
-        <div class="pa-2">
-          <span>晚上好, Huu.</span>
-          <div class="bottom clearfix">
-            <time class="time">{{ currentDate }}</time>
+      <el-col class="pr-4" :span="8">
+        <el-card class="my-2 mx-4" style="max-height:220px" shadow="hover">
+          <img
+            src="@/assets/pic1.png"
+            class="image"
+            style="max-height:110px; "
+          />
+          <div class="pa-2">
+            <span>晚上好, Huu.</span>
+            <div class="bottom clearfix">
+              <time class="time">{{ currentDate }}</time>
+            </div>
           </div>
-        </div>
-      </el-card>
-    </el-col>
-  </el-row>
+        </el-card>
+      </el-col>
+    </el-row>
+  </el-container>
 </template>
 
 <script>
+
 export default {
-  data() {
+  data () {
     return {
       Twitters: [
         {
@@ -83,7 +90,8 @@ export default {
       var currentdate = year + seperator1 + month + seperator1 + strDate;
       return currentdate;
     }
-  }
+  },
+
 };
 </script>
 

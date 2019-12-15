@@ -1,5 +1,6 @@
 <template>
-  <el-main>
+  <el-main style="padding-top: 0px">
+    <Navigator />
     <el-row>
       <el-card shadow="hover" style="height: 200px">
         <el-row
@@ -32,20 +33,23 @@
 </template>
 
 <script>
+import Navigator from "@/components/Navigator.vue"
 import url from "@/assets/pic1.png";
 export default {
-  data() {
+  data () {
     return {
       expert: this.$store.state.expert,
       circleUrl: url,
       activeIndex: "1"
     };
   },
-
   methods: {
-    handleSelect(key, keyPath) {
+    handleSelect (key, keyPath) {
       console.log(key, keyPath);
     }
+  },
+  components: {
+    Navigator,
   }
 };
 </script>
