@@ -1,12 +1,7 @@
 <template>
-
   <el-container id="app">
-    <el-header>
-      <Navigator />
-    </el-header>
     <router-view />
   </el-container>
-
 </template>
 <script>
 import Navigator from "@/components/Navigator.vue";

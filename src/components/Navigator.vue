@@ -30,7 +30,7 @@
 import circle from "@/assets/logo.png";
 export default {
   name: "Navigator",
-  data() {
+  data () {
     return {
       input: "",
       isNotified: true,
@@ -40,10 +40,10 @@ export default {
     };
   },
   methods: {
-    handleSelect(key, keyPath) {
+    handleSelect (key, keyPath) {
       console.log(key, keyPath);
     },
-    logout: function() {}
+    logout: function () { }
   }
 };
 </script>
