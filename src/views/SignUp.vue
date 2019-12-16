@@ -93,7 +93,7 @@ export default {
     },
     sendPin() {
       this.$axios
-        .get("sendPin", {
+        .get("usercenter/sendPin", {
           params: {
             emailAddress: this.loginInfoVo.emailAddress
           }
@@ -150,7 +150,7 @@ export default {
         });
       } else {
         this.$axios
-          .get("register", {
+          .get("usercenter/register", {
             params: {
               username: this.loginInfoVo.username,
               password: this.loginInfoVo.password,
@@ -161,7 +161,7 @@ export default {
             this.responseResult = JSON.stringify(successResponse.data);
             if (successResponse.data.code === 200) {
               //setCookie("username", this.loginInfoVo.username, 1000 * 60);
-              this.$axios.get(`getUser`, {
+              this.$axios.get(`usercenter/getUser`, {
                 params: {
                   username: this.loginInfoVo.username,
                 }

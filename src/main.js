@@ -9,7 +9,7 @@ Vue.config.productionTip = false;
 Vue.use(ElementUI);
 var axios = require('axios');
 //axios.defaults.baseURL = 'http://localhost:8000';
-axios.defaults.baseURL = 'http://111.230.166.179:8888/usercenter';
+axios.defaults.baseURL = 'http://111.230.166.179:8888';
 Vue.prototype.$axios = axios;
 // router.beforeEach((to, from, next) => {
 //     if (to.meta.requireAuth) {

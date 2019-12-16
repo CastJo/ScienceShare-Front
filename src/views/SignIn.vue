@@ -67,7 +67,7 @@ export default {
     },
     SignIn() {
       this.$axios
-        .get("login", {
+        .get("usercenter/login", {
           params: {
             username: this.loginInfoVo.username,
             password: this.loginInfoVo.password
@@ -76,7 +76,7 @@ export default {
         .then(successResponse => {
           this.responseResult = JSON.stringify(successResponse.data);
           if (successResponse.data.code === 200) {
-            this.$axios.get(`getUser`, {
+            this.$axios.get(`usercenter/getUser`, {
               params: {
                 username: this.loginInfoVo.username,
               }
