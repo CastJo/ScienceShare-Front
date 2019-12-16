@@ -11,7 +11,7 @@ function loadComponent(component) {
 const routes = [
   {
     path: "/",
-    redirect: "/SignIn"
+    redirect: "/signIn"
   },
   {
     path: "/about",
@@ -25,21 +25,24 @@ const routes = [
   {
     path: "/home",
     name: "home",
-    component: loadView("Home")
+    component: loadView("Home"),
+    // meta: {
+    //   requireAuth: true
+    // },
   },
   {
-    path: "/SignIn",
+    path: "/signIn",
     name: "SignIn",
     component: loadView("SignIn")
   },
   {
-    path: "/SignUp",
+    path: "/signUp",
     name: "SignUp",
     component: loadView("SignUp")
   },
 
   {
-    path: '/Index',
+    path: '/index',
     name: 'Index',
     component: loadView('Index')
   },

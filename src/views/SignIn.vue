@@ -1,5 +1,5 @@
 <template>
-  <div class="wrap" style="padding-top:10%;">
+  <div class="wrap" style="padding-top:10%;padding-left: 35%">
     <center>
       <el-card class="login-card">
         <div slot="header" id="title">
@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import { getCookie, setCookie } from "../assets/js/cookie.js";
+
 
 export default {
   data() {
@@ -54,26 +54,20 @@ export default {
     };
   },
   mounted() {
-    /*页面挂载获取cookie，如果存在username的cookie，则跳转到主页，不需登录*/
-    if (getCookie("username")) {
-      this.$router.replace("/forum");
+    if (this.$store.state.user.username!=null){
+      this.$router.replace("home");
     }
-    // if (localStorage.getItem('Flag')) {
-    // 	this.$router.push(
-    // 		'/forum'
-    // 	)
-    // }
   },
   methods: {
     ToMain() {
       this.$router.push("/main");
     },
     ToRegister() {
-      this.$router.push("/SignUp");
+      this.$router.push("/signUp");
     },
     SignIn() {
       this.$axios
-        .get("login", {
+        .get("usercenter/login", {
           params: {
             username: this.loginInfoVo.username,
             password: this.loginInfoVo.password
@@ -82,17 +76,20 @@ export default {
         .then(successResponse => {
           this.responseResult = JSON.stringify(successResponse.data);
           if (successResponse.data.code === 200) {
-            setCookie("username", this.loginInfoVo.username, 1000 * 60);
-            // this.$store.dispatch('setUser', true)
-            // localStorage.setItem('Flag', 'isLogin')
-            // localStorage.setItem('username', userName)
-            this.$store.dispatch("SignIn");
+            this.$axios.get(`usercenter/getUser`, {
+              params: {
+                username: this.loginInfoVo.username,
+              }
+            }).then((response) => {
+              this.$store.dispatch("setUser",response.data);
+              this.$router.push("home");
+            });
             this.$notify({
               title: "成功",
               message: "登录成功！",
               type: "success"
             });
-            this.$router.replace("/outIndex");
+
           } else if (successResponse.data.code === 300) {
             this.$notify.error({
               title: "错误",

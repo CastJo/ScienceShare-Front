@@ -1,5 +1,5 @@
 <template>
-  <div class="wrap" style="padding-top:10%">
+  <div class="wrap" style="padding-top:10%;padding-left: 35%">
     <center>
       <el-card class="register-card">
         <div slot="header" class="register-card-header">
@@ -60,7 +60,7 @@
 </template>
 
 <script>
-import { getCookie, setCookie } from "../assets/js/cookie.js";
+
 export default {
   data() {
     return {
@@ -78,9 +78,8 @@ export default {
     };
   },
   mounted() {
-    /*页面挂载获取cookie，如果存在username的cookie，则跳转到主页，不需登录*/
-    if (getCookie("username")) {
-      this.$router.push("/forum");
+    if (this.$store.state.user.username!=null){
+      this.$router.replace("home");
     }
   },
   methods: {
@@ -89,12 +88,12 @@ export default {
     },
     ToLogin() {
       this.$router.replace({
-        path: "/SignIn"
+        path: "/signIn"
       });
     },
     sendPin() {
       this.$axios
-        .get("sendPin", {
+        .get("usercenter/sendPin", {
           params: {
             emailAddress: this.loginInfoVo.emailAddress
           }
@@ -151,7 +150,7 @@ export default {
         });
       } else {
         this.$axios
-          .get("register", {
+          .get("usercenter/register", {
             params: {
               username: this.loginInfoVo.username,
               password: this.loginInfoVo.password,
@@ -161,17 +160,20 @@ export default {
           .then(successResponse => {
             this.responseResult = JSON.stringify(successResponse.data);
             if (successResponse.data.code === 200) {
-              setCookie("username", this.loginInfoVo.username, 1000 * 60);
-              // this.$store.dispatch('setUser', true)
-              // localStorage.setItem('Flag', 'isLogin')
-              // localStorage.setItem('username', userName)
-              this.$store.dispatch("SignIn");
+              //setCookie("username", this.loginInfoVo.username, 1000 * 60);
+              this.$axios.get(`usercenter/getUser`, {
+                params: {
+                  username: this.loginInfoVo.username,
+                }
+              }).then((response) => {
+                this.$store.dispatch("setUser",response.data);
+                this.$router.push("home");
+              });
               this.$notify({
                 title: "成功",
                 message: "注册成功！",
                 type: "success"
               });
-              this.$router.replace("content/5d6a2a46b1a29323a0caf9fb");
             } else if (successResponse.data.code === 201) {
               this.$notify.error({
                 title: "错误",
