@@ -51,6 +51,11 @@
         return dateFormat(this.user.createdDate);
       }
     },
+    mounted() {
+      if (this.$store.state.user.username==null){
+        this.$router.push("/");
+      }
+    },
     methods: {
       handleSelect (key, keyPath) {
         console.log(key, keyPath);

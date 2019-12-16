@@ -25,7 +25,10 @@ const routes = [
   {
     path: "/home",
     name: "home",
-    component: loadView("Home")
+    component: loadView("Home"),
+    // meta: {
+    //   requireAuth: true
+    // },
   },
   {
     path: "/signIn",

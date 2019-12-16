@@ -54,8 +54,8 @@ export default {
     };
   },
   mounted() {
-    if (window.sessionStorage.getItem("username")){
-      this.$router.replace("/home");
+    if (this.$store.state.user.username!=null){
+      this.$router.replace("home");
     }
   },
   methods: {
@@ -76,19 +76,20 @@ export default {
         .then(successResponse => {
           this.responseResult = JSON.stringify(successResponse.data);
           if (successResponse.data.code === 200) {
-            this.$notify({
-              title: "成功",
-              message: "登录成功！",
-              type: "success"
-            });
             this.$axios.get(`getUser`, {
               params: {
                 username: this.loginInfoVo.username,
               }
             }).then((response) => {
               this.$store.dispatch("setUser",response.data);
+              this.$router.push("home");
             });
-            this.$router.replace("home");
+            this.$notify({
+              title: "成功",
+              message: "登录成功！",
+              type: "success"
+            });
+
           } else if (successResponse.data.code === 300) {
             this.$notify.error({
               title: "错误",
