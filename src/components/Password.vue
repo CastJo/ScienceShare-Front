@@ -52,15 +52,10 @@
 									type: 'success'
 								});
 								this.$router.push('/index')
-							}else if (successResponse.data.code === 400) {
-								this.$notify.error({
-									title: '错误',
-									message: '密码错误'
-								});
 							}else if (successResponse.data.code === 402) {
 								this.$notify.error({
 									title: '错误',
-									message: '输入不合法'
+									message: successResponse.data.message,
 								});
 							}
 						})

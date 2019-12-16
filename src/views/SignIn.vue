@@ -95,7 +95,7 @@ export default {
               title: "错误",
               message: "该用户不存在"
             });
-          } else if (successResponse.data.code === 400) {
+          } else if (successResponse.data.code === 402) {
             this.$notify.error({
               title: "错误",
               message: "密码输入错误"
