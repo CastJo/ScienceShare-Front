@@ -29,6 +29,18 @@ const routes = [
     // meta: {
     //   requireAuth: true
     // },
+    children: [
+      {
+        path: "/",
+        name: "SelfCard",
+        component: loadComponent("SelfCard")
+      },
+      {
+        path: "password",
+        name: "Password",
+        component: loadComponent("Password")
+      },
+    ]
   },
   {
     path: "/signIn",
