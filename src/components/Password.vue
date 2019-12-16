@@ -38,7 +38,7 @@
 					this.$axios
 						.get('usercenter/changePassword', {
 							params: {
-								username: this.loginInfoVo.username,
+								username: this.$store.state.user.username,
 								oldPassword: this.loginInfoVo.password0,
 								newPassword: this.loginInfoVo.password1,
 							}
