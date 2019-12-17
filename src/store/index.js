@@ -6,7 +6,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     isLogin: false,
-    username: "",
+    username: "Leon",
     user: {
       username: window.sessionStorage.getItem("username"),
       permission: window.sessionStorage.getItem("permission"),
@@ -21,6 +21,7 @@ export default new Vuex.Store({
       follows: "3",
       fans: "201",
       url: "@/assets/pic1.png",
+      department: "Beihang University(BUAA)",
       info: {
         introduce: "",
         tags: [

@@ -22,7 +22,6 @@
             class="el-menu-demo"
             mode="horizontal"
           >
-            <el-menu-item index="/main/">Home</el-menu-item>
             <el-menu-item index="/main/overview">Overview</el-menu-item>
             <el-menu-item index="/main/research">Research</el-menu-item>
             <el-menu-item index="/main/information">Info</el-menu-item>
@@ -45,7 +44,6 @@ export default {
       formLabelWidth: "60px",
       circleUrl: url,
       activeIndex: "1",
-      uploadDialog: false,
 
     };
   },

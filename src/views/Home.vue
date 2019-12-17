@@ -13,7 +13,7 @@
             >
               <el-menu-item index="/home">信息</el-menu-item>
               <el-menu-item index="/home/password">修改密码</el-menu-item>
-              <el-menu-item index="/main">我的专家主页</el-menu-item>
+              <el-menu-item index="/main/overview">我的专家主页</el-menu-item>
             </el-menu>
           </el-row>
           <router-view />

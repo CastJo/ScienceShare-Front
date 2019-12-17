@@ -96,7 +96,7 @@
             <span style="float: left"><b>Research</b></span>
             <el-button
               type="text"
-              style="padding: 3px 0px; padding-left: 80%"
+              style="padding: 3px 0px; padding-left: 83%"
               @click="goResearch"
               >View All</el-button
             >
@@ -109,6 +109,18 @@
           </el-col>
         </el-card>
       </el-col>
+      <el-col class="pr-4" :span="8">
+        <el-card class="my-2 mx-3" style="max-height:220px" shadow="hover">
+          <div slot="header">
+            <b>
+              Current affiliation
+            </b>
+          </div>
+          <div style="font-size: 90%">
+            {{ this.expert.department }}
+          </div>
+        </el-card>
+      </el-col>
     </el-row>
   </div>
 </template>
@@ -117,6 +129,7 @@
 export default {
   data () {
     return {
+      expert: this.$store.state.expert,
       dialogVisible: false,
       hasPermission: true,
       info: this.$store.state.expert.info,
@@ -163,7 +176,8 @@ export default {
     },
     nTags () {
       return this.info.tags.length;
-    }
+    },
+
   },
   methods: {
     querySearch (queryString, cb) {
@@ -245,6 +259,7 @@ export default {
     }
 
   },
+
 
 };
 </script>
