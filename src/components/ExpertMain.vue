@@ -33,7 +33,9 @@
             style="max-height:110px; "
           />
           <div class="pa-2">
-            <span>晚上好, Huu.</span>
+            <span
+              >{{ this.currentTimeGreetings }}, {{ this.expert.name }}.</span
+            >
             <div class="bottom clearfix">
               <time class="time">{{ currentDate }}</time>
             </div>
@@ -45,10 +47,10 @@
 </template>
 
 <script>
-
 export default {
-  data () {
+  data() {
     return {
+      expert: this.$store.state.expert,
       Twitters: [
         {
           id: "1",
@@ -74,6 +76,30 @@ export default {
       ]
     };
   },
+  mounted() {
+    this.$axios
+      .get("ExpertRepo", {
+        params: {
+          name: this.$store.state.expert.name
+        }
+      })
+      .then(successResponse => {
+        var responseResult = JSON.parse(
+          JSON.stringify(successResponse.data.data)
+        );
+        if (successResponse.data.code === 200) {
+          this.Twitters = responseResult;
+        } else {
+          this.$notify.error({
+            title: "错误",
+            message: "加载错误"
+          });
+        }
+      })
+      .catch(failResponse => {
+        console.log(failResponse);
+      });
+  },
   computed: {
     currentDate: () => {
       var date = new Date();
@@ -89,9 +115,16 @@ export default {
       }
       var currentdate = year + seperator1 + month + seperator1 + strDate;
       return currentdate;
+    },
+    currentTimeGreetings: () => {
+      const h = new Date().getHours();
+      if (h < 5) return "夜深了";
+      if (h < 11) return "上午好";
+      if (h < 13) return "中午好";
+      if (h < 18) return "下午好";
+      return "晚上好";
     }
-  },
-
+  }
 };
 </script>
 

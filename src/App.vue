@@ -4,11 +4,12 @@
   </el-container>
 </template>
 <script>
-import Navigator from "@/components/Navigator.vue";
 export default {
-  components: {
-    Navigator
-  }
+  data () {
+    return {
+
+    };
+  },
 };
 </script>
 >
