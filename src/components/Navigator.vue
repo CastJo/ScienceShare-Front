@@ -3,7 +3,6 @@
     <el-row>
       <el-col :span="8" class="pt-2">
         <img src="@/assets/pic1.png" class="image" style="max-height:60px; " />
-        <el-button type="text" class="mx-4">Home </el-button>
         <el-button type="text" class="mx-4">Questions </el-button>
         <el-button type="text" class="mx-4">Jobs</el-button>
       </el-col>
@@ -35,7 +34,7 @@ import circle from "@/assets/logo.png";
 
 export default {
   name: "Navigator",
-  data() {
+  data () {
     return {
       input: "",
       isNotified: true,
@@ -45,17 +44,13 @@ export default {
     };
   },
   methods: {
-    ToIndex() {
+    ToIndex () {
       this.$router.push("/home");
     },
-    SignOut() {
+    SignOut () {
       this.$store.dispatch("SignOut");
       window.location.reload();
     },
-    handleSelect(key, keyPath) {
-      console.log(key, keyPath);
-    },
-    logout: function() {}
   }
 };
 </script>

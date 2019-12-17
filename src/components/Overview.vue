@@ -13,7 +13,7 @@
               >Edit<i class="el-icon-edit"></i
             ></el-button>
             <br />
-            <div v-if="info.introduce == ''">
+            <div v-if="info.introduce === ''">
               <el-button
                 v-if="hasPermission"
                 @click="dialogVisible = true"
@@ -31,17 +31,17 @@
               {{ info.introduce }}
             </p>
           </div>
-          <el-drawer
+          <el-dialog
+            title="Edit your info"
+            top="20px"
             :visible.sync="dialogVisible"
-            direction="ltr"
-            size="50%"
             :modal-append-to-body="false"
           >
             <el-input
               type="textarea"
               :autosize="{ minRows: 5, maxRows: 8 }"
               placeholder="介绍一下你自己吧。"
-              v-model="info.introduce"
+              v-model="newInfo.introduce"
               class="px-5"
             >
             </el-input>
@@ -57,24 +57,23 @@
             >
             <div class="px-5">
               <el-tag
-                v-for="tag in info.tags"
-                :key="tag.label"
+                v-for="tag in newInfo.tags"
+                class="pt-1"
                 closable
+                :key="tag.label"
                 :disable-transitions="false"
                 @close="handleClose(tag)"
               >
                 {{ tag.label }}
               </el-tag>
             </div>
-            <div class="demo-drawer__footer mx-5" style="margin-top:20%">
-              <el-button @click="dialogVisible = false" style="margin-left: 70%"
+            <div class="demo-drawer__footer mx-5" style="margin-top:15%">
+              <el-button @click="dialogVisible = false" style="margin-left: 60%"
                 >取 消</el-button
               >
-              <el-button type="primary" @click="dialogVisible = false"
-                >提 交</el-button
-              >
+              <el-button type="primary" @click="submit">提 交</el-button>
             </div>
-          </el-drawer>
+          </el-dialog>
           <div>
             <p>
               <b>Skills and expertise({{ nTags }})</b>
@@ -91,6 +90,24 @@
             </div>
           </div>
         </el-card>
+        <el-divider class="ml-2"></el-divider>
+        <el-card class="my-2 ml-4" shadow="hover">
+          <div slot="header">
+            <span style="float: left"><b>Research</b></span>
+            <el-button
+              type="text"
+              style="padding: 3px 0px; padding-left: 80%"
+              @click="goResearch"
+              >View All</el-button
+            >
+          </div>
+          <el-col :span="6" v-for="item in nResearch" :key="item.name"
+            ><el-card class="mb-4">
+              <p>{{ item.name }}</p>
+              <h2>{{ item.value }}</h2>
+            </el-card>
+          </el-col>
+        </el-card>
       </el-col>
     </el-row>
   </div>
@@ -102,16 +119,42 @@ export default {
     return {
       dialogVisible: false,
       hasPermission: true,
-      inputVisible: false,
       info: this.$store.state.expert.info,
+      newInfo: {
+        tags: "",
+        introduce: "",
+      },
+      isChanged: false,
       tagText: "",
       textarea: "",
-      msg: "overview",
       constTags: [],
+
+      nResearch: [
+        {
+          name: "Research items",
+          value: "2",
+        },
+        {
+          name: "Projects",
+          value: "3",
+        },
+        {
+          name: "Questions",
+          value: "4",
+        },
+        {
+          name: "Answers",
+          value: "0",
+        }
+
+      ],
     };
   },
   mounted () {
     this.constTags = this.loadAll();
+    // 判断 hasPermission
+    this.newInfo.tags = this.info.tags
+
   },
   computed: {
     anyType () {
@@ -147,7 +190,6 @@ export default {
     handleClose (tag) {
       this.info.tags.splice(this.info.tags.indexOf(tag), 1);
     },
-
     throwNotice: function (title, content) {
       const h = this.$createElement;
       this.$notify({
@@ -155,7 +197,6 @@ export default {
         message: h('i', { style: 'color: teal' }, content)
       });
     },
-
     addTag () {
       var tag = {
         label: this.tagText
@@ -170,7 +211,39 @@ export default {
         this.info.tags.push(tag)
       }
       this.tagText = ""
+    },
+    submit () {
+      const loading = this.$loading({
+        lock: true,
+        text: 'Loading',
+        spinner: 'el-icon-loading',
+        background: 'rgba(0, 0, 0, 0.7)'
+      });
+      this.$axios
+        .post("expert/info", {
+          params: {
+            info: this.info,
+          }
+        })
+        .then(successResponse => {
+          var responseResult = JSON.stringify(successResponse.data);
+          if (successResponse.data.code === 200) {
+            this.$store.state.info = responseResult
+            this.throwNotice("成功", "已更新")
+          } else {
+            this.throwNotice("错误", "某个错误")
+          }
+        })
+        .catch(failResponse => {
+          console.log(failResponse);
+        });
+      loading.close();
+      this.dialogVisible = false
+    },
+    goResearch () {
+      this.$router.push("/main/research")
     }
+
   },
 
 };

@@ -44,7 +44,7 @@
 
 
 export default {
-  data() {
+  data () {
     return {
       loginInfoVo: {
         username: "",
@@ -53,19 +53,19 @@ export default {
       responseResult: []
     };
   },
-  mounted() {
-    if (this.$store.state.user.username!=null){
+  mounted () {
+    if (this.$store.state.user.username != null) {
       this.$router.replace("home");
     }
   },
   methods: {
-    ToMain() {
+    ToMain () {
       this.$router.push("/main");
     },
-    ToRegister() {
+    ToRegister () {
       this.$router.push("/signUp");
     },
-    SignIn() {
+    SignIn () {
       this.$axios
         .get("usercenter/login", {
           params: {
@@ -81,7 +81,7 @@ export default {
                 username: this.loginInfoVo.username,
               }
             }).then((response) => {
-              this.$store.dispatch("setUser",response.data);
+              this.$store.dispatch("setUser", response.data);
               this.$router.push("home");
             });
             this.$notify({
@@ -89,7 +89,6 @@ export default {
               message: "登录成功！",
               type: "success"
             });
-
           } else if (successResponse.data.code === 300) {
             this.$notify.error({
               title: "错误",
