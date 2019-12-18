@@ -14,7 +14,9 @@ export default new Vuex.Store({
       emailAddress: window.sessionStorage.getItem("emailAddress"),
       prestige: window.sessionStorage.getItem("prestige"),
       createdDate: window.sessionStorage.getItem("createdDate"),
-      avatarUrl: window.sessionStorage.getItem("avatarUrl")
+      avatarUrl: window.sessionStorage.getItem("avatarUrl"),
+      following:[],
+      followers:[],
     },
     expert: {
       name: "Huobin Tan2",
@@ -50,6 +52,8 @@ export default new Vuex.Store({
       window.sessionStorage.removeItem("prestige");
       window.sessionStorage.removeItem("createdDate");
       window.sessionStorage.removeItem("avatarUrl");
+      window.sessionStorage.removeItem("following");
+      window.sessionStorage.removeItem("followers");
     },
     setUser(state, user) {
       state.user.username = user.username;
@@ -59,6 +63,8 @@ export default new Vuex.Store({
       state.user.prestige = user.prestige;
       state.user.createdDate = user.createdDate;
       state.user.avatarUrl = user.avatarUrl;
+      state.user.following = user.following;
+      state.user.followers = user.followers;
       window.sessionStorage.setItem("username", state.user.username);
       window.sessionStorage.setItem("permission", state.user.permission);
       window.sessionStorage.setItem(
@@ -69,6 +75,8 @@ export default new Vuex.Store({
       window.sessionStorage.setItem("prestige", state.user.prestige);
       window.sessionStorage.setItem("createdDate", state.user.createdDate);
       window.sessionStorage.setItem("avatarUrl", state.user.avatarUrl);
+      window.sessionStorage.setItem("following",state.user.following);
+      window.sessionStorage.setItem("followers",state.user.followers);
     }
   },
   actions: {

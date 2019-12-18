@@ -1,26 +1,30 @@
 <template>
     <div class="wrap">
 
-            <el-row>
-                <div class="self-avatar">
-<!--                <el-col :span="4">-->
-                    <el-tooltip class="item" effect="dark" content="点击修改头像" placement="top">
-                        <el-upload class="avatar-uploader" action="http://114.116.176.3:8000/uploadFile"
-                                   :show-file-list="false" :on-success="handleAvatarSuccess"
-                                   :before-upload="beforeAvatarUpload">
-                            <img v-if="this.user.avatarUrl" :src="this.user.avatarUrl" class="avatar">
-                        </el-upload>
-                    </el-tooltip>
-<!--                </el-col>-->
-                </div>
-                <div class="self-info">
-<!--                <el-col :span="20">-->
-                    <h4>{{ user.username }}</h4>
-                    <h6>邮箱: {{ user.emailAddress}}</h6>
-                    <h6>注册时间: {{ formattedDate}}</h6>
-<!--                </el-col>-->
-                </div>
-            </el-row>
+        <el-row>
+            <div class="self-avatar">
+                <!--                <el-col :span="4">-->
+                <el-tooltip class="item" effect="dark" content="点击修改头像" placement="top">
+                    <el-upload class="avatar-uploader" action="http://114.116.176.3:8000/uploadFile"
+                               :show-file-list="false" :on-success="handleAvatarSuccess"
+                               :before-upload="beforeAvatarUpload">
+                        <img v-if="this.user.avatarUrl" :src="this.user.avatarUrl" class="avatar">
+                    </el-upload>
+                </el-tooltip>
+                <!--                </el-col>-->
+            </div>
+            <div class="self-info">
+                <!--                <el-col :span="20">-->
+                <h4>{{ user.username }}</h4>
+                <h6>邮箱: {{ user.emailAddress}}</h6>
+                <h6>注册时间: {{ formattedDate}}</h6>
+                <!--                </el-col>-->
+            </div>
+            <div>
+                <el-button @click="visible=true"><span>申请专家认证</span></el-button>
+            </div>
+            <certification :visible.sync="visible"/>
+        </el-row>
 
     </div>
 </template>
@@ -28,14 +32,18 @@
 <script>
     import url from "@/assets/pic1.png";
     import {dateFormat} from "../assets/js/time";
+    import Certification from "./Certification";
+
     export default {
         name: "SelfCard",
-        data () {
+        components: {Certification},
+        data() {
             return {
                 expert: this.$store.state.expert,
-                user:this.$store.state.user,
+                user: this.$store.state.user,
                 circleUrl: url,
-                activeIndex: "1"
+                activeIndex: "1",
+                visible: false,
             };
         },
         computed: {
