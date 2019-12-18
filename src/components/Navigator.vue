@@ -4,7 +4,7 @@
       <el-col :span="8" class="pt-2">
         <img src="@/assets/pic1.png" class="image" style="max-height:60px; " />
         <el-link :underline="false" type="primary" class="ml-3">
-          {{ this.currentTimeGreetings }}, {{ this.$store.state.username }}
+          {{ this.currentTimeGreetings }}, {{ this.$store.state.user.username }}
         </el-link>
       </el-col>
       <el-col :span="8">

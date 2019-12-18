@@ -13,7 +13,7 @@
               >Edit<i class="el-icon-edit"></i
             ></el-button>
             <br />
-            <div v-if="info.introduce === ''">
+            <div v-if="expertPage.introduce === ''">
               <el-button
                 v-if="hasPermission"
                 @click="dialogVisible = true"
@@ -28,7 +28,7 @@
               </p>
             </div>
             <p v-else class="mt-4">
-              {{ info.introduce }}
+              {{ this.expertPage.introduce }}
             </p>
           </div>
           <el-dialog
@@ -47,7 +47,7 @@
             </el-input>
             <el-autocomplete
               class="inline-input px-5"
-              v-model="tagText"
+              v-model="newTag"
               :fetch-suggestions="querySearch"
               placeholder="为自己加个标签吧。"
               :trigger-on-focus="false"
@@ -57,14 +57,14 @@
             >
             <div class="px-5">
               <el-tag
-                v-for="tag in newInfo.tags"
+                v-for="tag in newInfo.skills"
                 class="pt-1"
                 closable
-                :key="tag.label"
+                :key="tag"
                 :disable-transitions="false"
                 @close="handleClose(tag)"
               >
-                {{ tag.label }}
+                {{ tag }}
               </el-tag>
             </div>
             <div class="demo-drawer__footer mx-5" style="margin-top:15%">
@@ -83,9 +83,9 @@
                 size="large"
                 class="mx-1"
                 :type="anyType"
-                v-for="tag in info.tags"
-                :key="tag.label"
-                >{{ tag.label }}</el-tag
+                v-for="tag in expertPage.skills"
+                :key="tag"
+                >{{ tag }}</el-tag
               >
             </div>
           </div>
@@ -117,7 +117,7 @@
             </b>
           </div>
           <div style="font-size: 90%">
-            {{ this.expert.department }}
+            {{ this.expertPage.institution }}
           </div>
         </el-card>
       </el-col>
@@ -129,19 +129,14 @@
 export default {
   data () {
     return {
-      expert: this.$store.state.expert,
       dialogVisible: false,
-      hasPermission: true,
-      info: this.$store.state.expert.info,
       newInfo: {
-        tags: "",
         introduce: "",
+        skills: [],
       },
       isChanged: false,
-      tagText: "",
-      textarea: "",
+      newTag: "",
       constTags: [],
-
       nResearch: [
         {
           name: "Research items",
@@ -166,8 +161,7 @@ export default {
   mounted () {
     this.constTags = this.loadAll();
     // 判断 hasPermission
-    this.newInfo.tags = this.info.tags
-
+    this.newInfo.skills = this.expertPage.skills
   },
   computed: {
     anyType () {
@@ -175,9 +169,18 @@ export default {
       return type[Math.ceil(Math.random() * 5) - 1];
     },
     nTags () {
-      return this.info.tags.length;
+      return this.expertPage.skills.length;
     },
-
+    expertPage: {
+      get () {
+        return this.$store.state.expertPage
+      }
+    },
+    hasPermission: {
+      get () {
+        return this.$store.state.hasPermission
+      }
+    }
   },
   methods: {
     querySearch (queryString, cb) {
@@ -202,7 +205,7 @@ export default {
       ];
     },
     handleClose (tag) {
-      this.info.tags.splice(this.info.tags.indexOf(tag), 1);
+      this.newInfo.skills.splice(this.newInfo.tags.indexOf(tag), 1);
     },
     throwNotice: function (title, content) {
       const h = this.$createElement;
@@ -212,19 +215,17 @@ export default {
       });
     },
     addTag () {
-      var tag = {
-        label: this.tagText
-      }
-      if (this.tagText === '')
+      var tag = this.newTag
+      if (tag === '')
         this.throwNotice('请求被拒绝', '请输入字符')
-      if (this.info.tags.find(res => res.label === this.tagText) !== undefined) {
+      if (this.expertPage.skills.find(res => res === tag) !== undefined) {
         this.throwNotice('请求被拒绝', '请已存在标签')
-      } else if (this.constTags.find(res => res.value === this.tagText) === undefined) {
+      } else if (this.constTags.find(res => res.value === tag) === undefined) {
         this.throwNotice('请求被拒绝', '没有此标签')
       } else {
-        this.info.tags.push(tag)
+        this.newInfo.skills.push(tag)
       }
-      this.tagText = ""
+      this.newTag = ""
     },
     submit () {
       const loading = this.$loading({
@@ -236,13 +237,14 @@ export default {
       this.$axios
         .post("expert/info", {
           params: {
-            info: this.info,
+            introduction: this.newInfo.introduce,
+            skills: this.newInfo.tags,
           }
         })
         .then(successResponse => {
-          var responseResult = JSON.stringify(successResponse.data);
           if (successResponse.data.code === 200) {
-            this.$store.state.info = responseResult
+            var value = this.newInfo
+            this.$store.commit("updateInfo", value)
             this.throwNotice("成功", "已更新")
           } else {
             this.throwNotice("错误", "某个错误")

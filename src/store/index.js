@@ -6,6 +6,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     isLogin: false,
+    hasPermission: false,
     username: "Leon",
     user: {
       username: window.sessionStorage.getItem("username"),
@@ -16,26 +17,19 @@ export default new Vuex.Store({
       createdDate: window.sessionStorage.getItem("createdDate"),
       avatarUrl: window.sessionStorage.getItem("avatarUrl")
     },
-    expert: {
-      name: "Huobin Tan2",
+    expertPage: {
+      expertName: "Huobin Tan2",
       follows: "3",
       fans: "201",
-      url: "@/assets/pic1.png",
-      department: "Beihang University(BUAA)",
-      info: {
-        introduce: "",
-        tags: [
-          {
-            label: "c++"
-          },
-          {
-            label: "java"
-          },
-          {
-            label: "helloworld"
-          }
-        ]
-      }
+      introduce: "",
+      skills: ["c++", "html", "java"],
+      researchList: [],
+      institution: "",
+      degree: "",
+      webSiteUrl: "",
+      phone: "",
+      email: "",
+      url: "@/assets/pic1.png"
     }
   },
   mutations: {
@@ -70,6 +64,16 @@ export default new Vuex.Store({
       window.sessionStorage.setItem("prestige", state.user.prestige);
       window.sessionStorage.setItem("createdDate", state.user.createdDate);
       window.sessionStorage.setItem("avatarUrl", state.user.avatarUrl);
+    },
+    setExpertPage(state, expertPage) {
+      state.expertPage = expertPage;
+    },
+    setHasPermission(state, value) {
+      state.hasPermission = value;
+    },
+    updateInfo(state, value) {
+      state.expertPage.skills = value.skills;
+      state.expertPage.introduce = value.introduce;
     }
   },
   actions: {

@@ -10,9 +10,11 @@
             <el-avatar :size="100" :src="circleUrl"></el-avatar>
           </el-col>
           <el-col :span="10">
-            <h4>{{ expert.name }}</h4>
-            <h6>Follows: {{ expert.follows }}</h6>
-            <h6>Fans: {{ expert.fans }}</h6>
+            <h4>{{ expertPage.expertName }}</h4>
+            <h6>
+              Follows: {{ expertPage.follows === "" ? 0 : expertPage.follows }}
+            </h6>
+            <h6>Fans: {{ expertPage.fans === "" ? 0 : expertPage.fans }}</h6>
           </el-col>
         </el-row>
         <el-row>
@@ -39,13 +41,18 @@ import url from "@/assets/pic1.png";
 export default {
   data () {
     return {
-      expert: this.$store.state.expert,
       fullscreenLoading: false,
       formLabelWidth: "60px",
       circleUrl: url,
       activeIndex: "1",
-
     };
+  },
+  computed: {
+    expertPage: {
+      get () {
+        return this.$store.state.expertPage
+      },
+    },
   },
   mounted () {
 

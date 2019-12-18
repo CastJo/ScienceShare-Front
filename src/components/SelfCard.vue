@@ -16,11 +16,7 @@
             :on-success="handleAvatarSuccess"
             :before-upload="beforeAvatarUpload"
           >
-            <img
-              v-if="this.user.avatarUrl"
-              :src="this.user.avatarUrl"
-              class="avatar"
-            />
+            <img v-if="user.avatarUrl" :src="user.avatarUrl" class="avatar" />
           </el-upload>
         </el-tooltip>
         <!--                </el-col>-->
@@ -43,8 +39,6 @@ export default {
   name: "SelfCard",
   data () {
     return {
-      expert: this.$store.state.expert,
-      user: this.$store.state.user,
       circleUrl: url,
       activeIndex: "1"
     };
@@ -52,10 +46,15 @@ export default {
   computed: {
     formattedDate () {
       return dateFormat(this.user.createdDate);
+    },
+    user: {
+      get () {
+        return this.$store.state.user
+      }
     }
   },
   methods: {
-    handleAvatarSuccess (res, file) {
+    handleAvatarSuccess (res) {
       if (res.code === 200) {
         this.url = res.message;
         this.user.avatarUrl = this.url;
