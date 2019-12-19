@@ -5,7 +5,7 @@
             <el-row>
                 <ul class="infinite-list"  style="overflow:auto;list-style: none;padding: 0 0 0 0">
                     <li v-for="i in following" class="infinite-list-item" :key="i.username">
-                        <el-avatar :src="i.avatarUrl" class="avatar" :size="50"/>{{ i.username }}</li>
+                        <FollowPart :part="i"/></li>
                 </ul>
             </el-row>
             <el-divider/>
@@ -13,7 +13,7 @@
             <el-row>
                 <ul class="infinite-list"  style="overflow:auto;list-style: none;padding: 0 0 0 0">
                     <li v-for="i in followers" class="infinite-list-item" :key="i.username">
-                        <el-avatar :src="i.avatarUrl" class="avatar" :size="50"/>{{ i.username }}</li>
+                        <FollowPart :part="i"/></li>
                 </ul>
             </el-row>
         </el-card>
@@ -23,8 +23,10 @@
 
 
 <script>
+    import FollowPart from "./FollowPart";
     export default {
         name: "Follow",
+        components: {FollowPart},
         data() {
             return {
                 following:[],
