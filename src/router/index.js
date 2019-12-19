@@ -8,6 +8,12 @@ function loadView(view) {
 function loadComponent(component) {
   return () => import(`@/components/${component}.vue`);
 }
+
+const originalPush = VueRouter.prototype.push;
+VueRouter.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err);
+};
+
 const routes = [
   {
     path: "/",
@@ -23,9 +29,9 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/About.vue")
   },
   {
-    path: '/index/:username',
-    name: 'Index',
-    component: loadView("Index"),
+    path: "/index/:username",
+    name: "Index",
+    component: loadView("Index")
   },
   {
     path: "/home",
@@ -54,7 +60,7 @@ const routes = [
         path: "changeMail",
         name: "ChangeMail",
         component: loadComponent("changeMail")
-      },
+      }
     ]
   },
   {
@@ -67,7 +73,6 @@ const routes = [
     name: "SignUp",
     component: loadView("SignUp")
   },
-
 
   {
     path: "/main",
