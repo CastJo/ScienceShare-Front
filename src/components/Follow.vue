@@ -63,6 +63,7 @@ export default {
   methods: {
     handleClickAvatar(val) {
       this.$router.push(`/index/${val}`);
+      window.location.reload();
     },
     getFollowing() {
       this.$axios
