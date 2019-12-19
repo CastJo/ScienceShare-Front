@@ -4,7 +4,7 @@ function resolve(dir) {
 }
 
 module.exports = {
-  publicPath: process.env.NODE_ENV === "production" ? "./" : "/",
+  publicPath: process.env.NODE_ENV === "production" ? "/ss/" : "/",
   outputDir: "dist",
   assetsDir: "static",
   filenameHashing: true,
@@ -89,8 +89,8 @@ module.exports = {
   // https://webpack.js.org/configuration/dev-server/
   devServer: {
     open: true,
-    host: "127.0.0.1",
-    port: 3000,
+    // host: "127.0.0.1",
+    port: 8080,
     https: false,
     hotOnly: false,
     proxy: null,
