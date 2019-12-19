@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <div >
         <div>
-        <el-avatar :src="this.part.avatarUrl" class="avatar" :size="50"/>
+        <el-avatar :src="this.part.avatarUrl" class="avatar" :size="50" @click.stop.native="handleClickAvatar"/>
         </div>
         <div>
         <span>{{ this.part.username }}</span>
@@ -21,6 +21,9 @@
             return {}
         },
         methods:{
+            handleClickAvatar() {
+                this.$emit('click-avatar', this.part.username)
+            },
           follow(){
               this.$axios.get(`usercenter/follow`, {
                   params: {

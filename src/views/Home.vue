@@ -25,7 +25,7 @@
             </el-card>
         </div>
 
-        <div class = "followDiv"><Follow/></div>
+        <div class = "followDiv"><Follow :user="this.user"/></div>
         </div>
     </el-main>
 
@@ -38,6 +38,7 @@
     import {dateFormat} from "../assets/js/time";
 
     export default {
+        name: "Home",
         data() {
             return {
                 expert: this.$store.state.expert,
