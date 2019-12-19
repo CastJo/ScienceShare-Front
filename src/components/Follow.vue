@@ -35,6 +35,7 @@
             }
         },
         created() {
+            console.log(this.username);
             this.getFollowing();
             this.getFollowers();
         },
@@ -46,7 +47,7 @@
                 this.$axios
                     .get('usercenter/allFollowing', {
                         params: {
-                            username: this.user.username,
+                            username: this.username,
                         }
                     })
                     .then(res => {
@@ -62,7 +63,7 @@
                 this.$axios
                     .get('usercenter/allFollowers', {
                         params: {
-                            username: this.user.username,
+                            username: this.username,
                         }
                     })
                     .then(res => {
@@ -76,7 +77,7 @@
                     })
             },
         },
-        props:['user',],
+        props:['username',],
     }
 </script>
 

@@ -25,7 +25,7 @@
             </el-card>
         </div>
 
-        <div class = "followDiv"><Follow :user="this.user"/></div>
+        <div class = "followDiv"><Follow :username="this.user.username"/></div>
         </div>
     </el-main>
 
