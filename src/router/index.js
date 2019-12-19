@@ -40,6 +40,16 @@ const routes = [
         name: "Password",
         component: loadComponent("Password")
       },
+      {
+        path: "changeName",
+        name: "ChangeName",
+        component: loadComponent("changeName")
+      },
+      {
+        path: "changeMail",
+        name: "ChangeMail",
+        component: loadComponent("changeMail")
+      },
     ]
   },
   {

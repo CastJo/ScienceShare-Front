@@ -1,4 +1,4 @@
-<template>
+npm <template>
     <div>
         <el-dialog :before-close="handleClose" :visible.sync="this.dialogVisible" title="专家认证">
             专家：<el-select v-model="value1" clearable filterable placeholder="请选择" >

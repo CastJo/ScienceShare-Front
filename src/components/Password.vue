@@ -8,7 +8,7 @@
 				<el-input type="password" v-model="loginInfoVo.password1" placeholder="请输入新密码"/></div><br/>
 			<div>
 				<el-input type="password" v-model="loginInfoVo.password2" placeholder="请确认新密码"/></div><br/>
-			<el-button plain @click="change">修改密码</el-button>
+			<el-button type="primary" @click="change">修改密码</el-button>
 
 	</div>
 </template>
@@ -29,7 +29,7 @@
 		},
 		methods: {
 			change() {
-				if (this.loginInfoVo.password1 != this.loginInfoVo.password2) {
+				if (this.loginInfoVo.password1 !== this.loginInfoVo.password2) {
 					this.$notify.error({
 						title: '错误',
 						message: '两次输入密码不同'
@@ -72,16 +72,16 @@
 <style>
 	.password {
 		text-align: center;
+		padding: 40px 120px;
 	}
 
 	.password input {
 		display: block;
-		height: 40px;
+		height: 45px;
+		width: 360px;
 		line-height: 40px;
-		margin-bottom: 10px;
 		outline: none;
 		border: 1px solid #888;
-		padding: 10px;
 		box-sizing: border-box;
 	}
 

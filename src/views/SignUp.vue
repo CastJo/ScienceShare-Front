@@ -74,7 +74,8 @@ export default {
       code: "",
       emailAddress: "",
       inputed: false,
-      auth_time: ""
+      auth_time: "",
+      valid_time: ""
     };
   },
   mounted() {
@@ -99,17 +100,17 @@ export default {
           }
         })
         .then(response => {
-          if (response.data.code == 305) {
+          if (response.data.code === 305) {
             this.$notify.error({
               title: "错误",
               message: "邮箱不合法"
             });
-          } else if (response.data.code == 306) {
+          } else if (response.data.code === 306) {
             this.$notify.error({
               title: "错误",
               message: "邮箱已被注册"
             });
-          } else if (response.data.code == 200) {
+          } else if (response.data.code === 200) {
             this.code = response.data.message;
             this.emailAddress = this.loginInfoVo.emailAddress;
             this.inputed = true;
@@ -119,10 +120,15 @@ export default {
               type: "success"
             });
             this.auth_time = 60;
+            this.valid_time = 300;
             var auth_timetimer = setInterval(() => {
               this.auth_time--;
+              this.valid_time--;
               if (this.auth_time <= 0) {
                 this.inputed = false;
+              }
+              if(this.valid_time <= 0){
+                this.code = "";
                 clearInterval(auth_timetimer);
               }
             }, 1000);
@@ -133,17 +139,17 @@ export default {
         });
     },
     register() {
-      if (this.code != this.loginInfoVo.code) {
+      if (this.code !== this.loginInfoVo.code) {
         this.$notify.error({
           title: "错误",
           message: "验证码有误或已过期"
         });
-      } else if (this.loginInfoVo.emailAddress == "") {
+      } else if (this.loginInfoVo.emailAddress === "") {
         this.$notify.error({
           title: "错误",
           message: "请输入邮箱"
         });
-      } else if (this.inputed == false) {
+      } else if (this.inputed === false) {
         this.$notify.error({
           title: "提示",
           message: "请重新获取验证码"

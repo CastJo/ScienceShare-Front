@@ -1,11 +1,10 @@
 <template>
     <div class="wrap">
 
-        <el-row>
-            <div class="self-avatar">
+            <div>
                 <!--                <el-col :span="4">-->
                 <el-tooltip class="item" effect="dark" content="点击修改头像" placement="top">
-                    <el-upload class="avatar-uploader" action="http://114.116.176.3:8000/uploadFile"
+                    <el-upload class="avatar-uploader" action="http://111.230.166.179:8888/usercenter/uploadFile"
                                :show-file-list="false" :on-success="handleAvatarSuccess"
                                :before-upload="beforeAvatarUpload">
                         <img v-if="this.user.avatarUrl" :src="this.user.avatarUrl" class="avatar">
@@ -15,16 +14,24 @@
             </div>
             <div class="self-info">
                 <!--                <el-col :span="20">-->
-                <h4>{{ user.username }}</h4>
-                <h6>邮箱: {{ user.emailAddress}}</h6>
-                <h6>注册时间: {{ formattedDate}}</h6>
+                <div >
+                    <span><h1>{{ user.username }}</h1></span>
+                    <span><h5>北京航空航天大学</h5></span>
+                    <a class = "application" @click="visible=true">申请专家认证</a>
+<!--                    <el-button @click="visible=true"><span>申请专家认证</span></el-button>-->
+                </div>
                 <!--                </el-col>-->
+                <div class="emailEnTime">
+                    <span><h6>邮箱: {{ user.emailAddress}}</h6></span>
+                    <span><h6>注册时间: {{ formattedDate}}</h6></span>
+                </div>
             </div>
+
             <div>
-                <el-button @click="visible=true"><span>申请专家认证</span></el-button>
+
             </div>
             <certification :visible.sync="visible"/>
-        </el-row>
+
 
     </div>
 </template>
@@ -88,8 +95,47 @@
 </script>
 
 <style scoped>
+    .avatar{
+        height: 220px;
+        width: 220px;
+    }
     .wrap {
         text-align: center;
+        padding: 50px 40px 40px 40px;
+    }
+    .self-info{
+        text-align: left;
+        margin-left: 30px;
+        margin-top: 0px;
+    }
+    .wrap div{
+        float: left;;
+    }
+    .emailEnTime{
+        margin-top: 70px;
+    }
+    .self-info div{
+        float: none;
+    }
+
+    .application{
+        margin-top: -10px;
+        color: #e7cfcf;
+        background: #ffffff;
+        text-decoration: none;
+        font-family: sans-serif;
+        font-size: 15px;
+        display: block;
+        width: 90px;
+        height: 30px;
+        line-height: 30px;
+        border-radius: 8px;
+        text-align: center;
+        -webkit-transition: color 5.5s linear, background 0.5s ease-in-out;
+        transition: color 5.5s linear, background 0.5s ease-in-out;
+    }
+    .application:hover{
+        color: #409EFF;
     }
 
 </style>
