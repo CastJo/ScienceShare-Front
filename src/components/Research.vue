@@ -1,32 +1,35 @@
 <template>
-  <div style="padding: 0px 30px">
+  <div style="padding: 10px 30px">
     <ResearchItem
       v-for="item in researchList"
-      :key="item.title"
+      :key="item.id"
       :title="item.title"
-      :date="item.date"
+      :date="item.year"
       :venue="item.venue"
-      :expertsName="item.expertsName"
+      :authors="item.authors"
     />
   </div>
 </template>
 
 <script>
-import ResearchItem from "@/components/ResearchItem.vue"
+import ResearchItem from "@/components/ResearchItem.vue";
 export default {
-  data () {
-    return {
-    }
+  data() {
+    return {};
+  },
+  mounted() {
+    console.log("expertPage : ");
+    console.log(this.$store.state.expertPage);
   },
   computed: {
     researchList: {
-      get () {
-        return this.$store.state.expertPage.researchList
+      get() {
+        return this.$store.state.expertPage.researchList;
       }
     }
   },
   components: {
-    ResearchItem,
+    ResearchItem
   }
-}
-  </script>
+};
+</script>

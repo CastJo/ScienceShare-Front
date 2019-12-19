@@ -31,7 +31,8 @@
           ><h1>{{ user.username }}</h1></span
         >
         <span><h5>北京航空航天大学</h5></span>
-        <a @click="visible = true">申请专家认证></a>
+        <a v-if="user.identity == 2" @click="visible = true">申请专家认证></a>
+        <a v-else @click="goExpertPage">我的专家主页></a>
         <!--                    <el-button @click="visible=true"><span>申请专家认证</span></el-button>-->
       </div>
       <!--                </el-col>-->
@@ -65,6 +66,9 @@ export default {
       visible: false
     };
   },
+  mounted() {
+    console.log(this.user);
+  },
   computed: {
     formattedDate() {
       return dateFormat(this.user.createdDate);
@@ -82,11 +86,11 @@ export default {
         this.user.avatarUrl = this.url;
         console.log(this.url);
         this.$axios
-          .get("usercenter/uploadAvatar",{
-                  params:{
-                        username: this.user.username  ,
-                        avatarUrl: this.url[0],
-                  }
+          .get("usercenter/uploadAvatar", {
+            params: {
+              username: this.user.username,
+              avatarUrl: this.url[0]
+            }
           })
           .then(response => {
             console.log(response);
@@ -110,6 +114,14 @@ export default {
         this.$message.error("上传头像图片大小不能超过 2MB!");
       }
       return (isPNG || isJPG) && isLt2M;
+    },
+    goExpertPage() {
+      var value = {
+        hasPermission: true,
+        name: this.user.username
+      };
+      this.$store.commit("setPrework", value);
+      this.$router.push("/main/overview");
     }
   }
 };
@@ -122,7 +134,7 @@ export default {
 }
 .wrap {
   text-align: center;
-  padding: 50px 40px 40px 40px;
+  padding: 45px 40px 40px 40px;
 }
 .self-info {
   text-align: left;

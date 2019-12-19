@@ -1,15 +1,22 @@
 <template>
   <el-main style="padding-top: 0;">
     <Navigator />
-    <div class="totalDiv">
-      <div class="infoCardDiv">
-        <el-card shadow="hover" style="height: 400px;width: 640px">
-          <OthersCard :user="this.user" />
-        </el-card>
+    <el-row :gutter="20">
+      <div class="totalDiv">
+        <el-col :span="15">
+          <div class="infoCardDiv">
+            <el-card shadow="hover" style="height: 400px;width: 700px">
+              <OthersCard :user="this.user" />
+            </el-card>
+          </div>
+        </el-col>
+        <el-col :span="9">
+          <div class="followDiv">
+            <Follow :username="this.$route.params.username" />
+          </div>
+        </el-col>
       </div>
-
-      <div class="followDiv"><Follow :username="this.$route.params.username" /></div>
-    </div>
+    </el-row>
   </el-main>
 </template>
 
@@ -78,7 +85,5 @@ export default {
 }
 .followDiv {
   float: left;
-  margin-left: 100px;
-  margin-top: 50px;
 }
 </style>

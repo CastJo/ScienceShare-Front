@@ -59,9 +59,6 @@ export default {
     }
   },
   methods: {
-    ToMain () {
-      this.$router.push("/main");
-    },
     ToRegister () {
       this.$router.push("/signUp");
     },
@@ -82,7 +79,12 @@ export default {
               }
             }).then((response) => {
               this.$store.dispatch("setUser", response.data);
-              this.$router.push("home");
+              if (response.data.identity===3){
+                this.$router.push("manage");
+              }else {
+                this.$router.push("home");
+              }
+
             });
             this.$notify({
               title: "成功",

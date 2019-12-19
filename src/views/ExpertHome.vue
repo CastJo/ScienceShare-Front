@@ -39,39 +39,46 @@
 import Navigator from "@/components/Navigator.vue";
 import url from "@/assets/pic1.png";
 export default {
-  data () {
+  data() {
     return {
       fullscreenLoading: false,
       formLabelWidth: "60px",
       circleUrl: url,
-      activeIndex: "1",
+      activeIndex: "1"
     };
   },
   computed: {
     expertPage: {
-      get () {
-        return this.$store.state.expertPage
-      },
-    },
+      get() {
+        return this.$store.state.expertPage;
+      }
+    }
   },
-  mounted () {
+  mounted() {
+    console.log("111");
     if (this.$store.state.user.isLogin === null) {
       this.$router.push("/");
-      return
+      return;
     }
+    console.log("222");
+    var theID = "1000019749";
     this.$axios
       .get("homepage/home/loadHomePage", {
         params: {
-          expertName: this.expertPage.expertName,
+          // expertID: this.$store.state.expertID
+          id: theID
         }
-      }).then(successResponse => {
+      })
+      .then(successResponse => {
         var responseResult = JSON.parse(
           JSON.stringify(successResponse.data.data)
         );
+        console.log("responseResult ");
+        console.log(responseResult);
         if (successResponse.data.code === 200) {
-          console.log(responseResult)
-          this.$store.commit("setExpertPage", responseResult)
-          this.$router.push("/main/overview")
+          console.log("123" + responseResult);
+          this.$store.commit("setExpertPage", responseResult);
+          this.$router.push("/main/overview");
         } else {
           this.$notify.error({
             title: "请求被拒绝",
@@ -82,15 +89,15 @@ export default {
       .catch(failResponse => {
         console.log(failResponse);
       });
-
+    console.log("44");
   },
   methods: {
-    uploadFile () {
+    uploadFile() {
       const loading = this.$loading({
         lock: true,
-        text: 'Loading',
-        spinner: 'el-icon-loading',
-        background: 'rgba(0, 0, 0, 0.7)'
+        text: "Loading",
+        spinner: "el-icon-loading",
+        background: "rgba(0, 0, 0, 0.7)"
       });
 
       loading.close();

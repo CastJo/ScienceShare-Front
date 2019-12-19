@@ -6,6 +6,7 @@
         class="avatar"
         :size="50"
         @click.stop.native="handleClickAvatar"
+        style="cursor: pointer"
       />
     </div>
     <div class="nameEnCollege">
@@ -13,14 +14,20 @@
         <h5>{{ this.part.username }}</h5>
       </div>
 
-            <div><span>{{ this.part.college }}</span></div>
-        </div>
-        <div class="followBotton">
-            <el-checkbox v-if=!checked v-model="checked" @change="follow">关注</el-checkbox>
-            <el-checkbox v-if=checked v-model="checked" @change="unFollow">已关注</el-checkbox>
-        </div>
-        <el-divider style="margin: 12px"/>
+      <div>
+        <span>{{ this.part.college }}</span>
+      </div>
     </div>
+    <div class="followBotton">
+      <el-checkbox v-if="!checked" v-model="checked" @change="follow"
+        >关注</el-checkbox
+      >
+      <el-checkbox v-if="checked" v-model="checked" @change="unFollow"
+        >已关注</el-checkbox
+      >
+    </div>
+    <el-divider style="margin: 12px" />
+  </div>
 </template>
 
 <script>
@@ -109,18 +116,19 @@ export default {
 </script>
 
 <style scoped>
-    .userInfoDiv{
-        width: 300px;
-        height: 60px;
-    }
-    .userInfoDiv div{
-        float: left;
-    }
-    .nameEnCollege{
-        margin-left: 10px;
-        width: 170px;
-        height: 60px;
-    }
+.userInfoDiv {
+  height: 60px;
+}
+
+.userInfoDiv div {
+  float: left;
+}
+
+.nameEnCollege {
+  margin-left: 10px;
+  width: 170px;
+  height: 60px;
+}
 
 .nameEnCollege div {
   float: none;

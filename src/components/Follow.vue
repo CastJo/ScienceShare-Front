@@ -1,11 +1,12 @@
 <template>
   <div>
-    <el-card shadow="hover" style="height: 900px;width: 360px">
-      <h4>关注者</h4>
+    <el-card shadow="hover" class="mt-5">
+      <span>关注者</span>
       <div class="followingPart">
         <ul
           class="infinite-list"
-          style="overflow:auto;list-style: none;padding: 0 0 0 0; max-height: 400px">
+          style="overflow:auto;list-style: none;padding: 0 0 0 0; max-height: 400px"
+        >
           <li
             v-for="i in following"
             class="infinite-list-item"
@@ -15,8 +16,7 @@
           </li>
         </ul>
       </div>
-      <el-divider class="hotpostDivider" />
-      <h4>粉丝</h4>
+      <span>粉丝</span>
       <div class="followingPart">
         <ul
           class="infinite-list"
@@ -63,7 +63,10 @@ export default {
   methods: {
     handleClickAvatar(val) {
       this.$router.push(`/index/${val}`);
-      window.location.reload();
+      if (this.username !== this.$store.state.user.username) {
+        window.location.reload();
+        window.location.reload();
+      }
     },
     getFollowing() {
       this.$axios
@@ -108,7 +111,7 @@ export default {
 
 <style scoped>
 .followingPart {
-  height: 400px;
+  /* height: 500px; */
   padding-top: 10px;
 }
 

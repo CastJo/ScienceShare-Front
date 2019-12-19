@@ -34,6 +34,7 @@ import url from "@/assets/pic1.png";
 import { dateFormat } from "../assets/js/time";
 import Certification from "./Certification";
 
+
 export default {
   name: "OthersCard",
   components: { Certification },
@@ -50,7 +51,7 @@ export default {
     }
   },
   methods: {
-    handleAvatarSuccess(res, file) {
+    handleAvatarSuccess(res) {
       if (res.code === 200) {
         this.url = res.message;
         this.user.avatarUrl = this.url;
