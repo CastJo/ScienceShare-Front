@@ -1,17 +1,12 @@
 <template>
-  <div class="userInfoDiv">
-    <div>
-      <el-avatar
-        :src="this.part.avatarUrl"
-        class="avatar"
-        :size="50"
-        @click.stop.native="handleClickAvatar"
-      />
-    </div>
-    <div class="nameEnCollege">
-      <div>
-        <h5>{{ this.part.username }}</h5>
-      </div>
+    <div class="userInfoDiv">
+        <div>
+            <el-avatar :src="this.part.avatarUrl" class="avatar" :size="50" @click.stop.native="handleClickAvatar" style="cursor: pointer"/>
+        </div>
+        <div class="nameEnCollege">
+            <div>
+                <h5>{{ this.part.username }}</h5>
+            </div>
 
             <div><span>{{ this.part.college }}</span></div>
         </div>
@@ -24,110 +19,112 @@
 </template>
 
 <script>
-export default {
-  name: "FollowPart",
-  data() {
-    return {
-      checked: ""
+    export default {
+        name: "FollowPart",
+        data() {
+            return {
+                checked: ""
+            };
+        },
+        created() {
+            if (this.part.isFollowing === 0) this.checked = false;
+            else if (this.part.isFollowing === 1) this.checked = true;
+        },
+        methods: {
+            handleClickAvatar() {
+                this.$emit("click-avatar", this.part.username);
+            },
+            follow() {
+                this.$axios
+                    .get(`usercenter/follow`, {
+                        params: {
+                            followUserName: this.part.username,
+                            myUserName: this.$store.state.user.username
+                        }
+                    })
+                    .then(response => {
+                        switch (response.data.code) {
+                            case 404:
+                                this.$notify.error({
+                                    title: "错误",
+                                    message: response.data.message
+                                });
+                                break;
+                            case 201:
+                                this.$notify.error({
+                                    title: "错误",
+                                    message: response.data.message
+                                });
+                                break;
+                            case 200:
+                                this.$notify({
+                                    title: "成功",
+                                    message: response.data.message,
+                                    type: "success"
+                                });
+                                break;
+                        }
+                    });
+            },
+            unFollow() {
+                this.$axios
+                    .get(`usercenter/unFollow`, {
+                        params: {
+                            followUserName: this.part.username,
+                            myUserName: this.$store.state.user.username
+                        }
+                    })
+                    .then(response => {
+                        switch (response.data.code) {
+                            case 404:
+                                this.$notify.error({
+                                    title: "错误",
+                                    message: response.data.message
+                                });
+                                break;
+                            case 300:
+                                this.$notify.error({
+                                    title: "错误",
+                                    message: response.data.message
+                                });
+                                break;
+                            case 200:
+                                this.$notify({
+                                    title: "成功",
+                                    message: response.data.message,
+                                    type: "success"
+                                });
+                                break;
+                        }
+                    });
+            }
+        },
+        props: ["part"]
     };
-  },
-  created() {
-    if (this.part.isFollowing === 0) this.checked = false;
-    else if (this.part.isFollowing === 1) this.checked = true;
-  },
-  methods: {
-    handleClickAvatar() {
-      this.$emit("click-avatar", this.part.username);
-    },
-    follow() {
-      this.$axios
-        .get(`usercenter/follow`, {
-          params: {
-            followUserName: this.part.username,
-            myUserName: this.$store.state.user.username
-          }
-        })
-        .then(response => {
-          switch (response.data.code) {
-            case 404:
-              this.$notify.error({
-                title: "错误",
-                message: response.data.message
-              });
-              break;
-            case 201:
-              this.$notify.error({
-                title: "错误",
-                message: response.data.message
-              });
-              break;
-            case 200:
-              this.$notify({
-                title: "成功",
-                message: response.data.message,
-                type: "success"
-              });
-              break;
-          }
-        });
-    },
-    unFollow() {
-      this.$axios
-        .get(`usercenter/unFollow`, {
-          params: {
-            followUserName: this.part.username,
-            myUserName: this.$store.state.user.username
-          }
-        })
-        .then(response => {
-          switch (response.data.code) {
-            case 404:
-              this.$notify.error({
-                title: "错误",
-                message: response.data.message
-              });
-              break;
-            case 300:
-              this.$notify.error({
-                title: "错误",
-                message: response.data.message
-              });
-              break;
-            case 200:
-              this.$notify({
-                title: "成功",
-                message: response.data.message,
-                type: "success"
-              });
-              break;
-          }
-        });
-    }
-  },
-  props: ["part"]
-};
 </script>
 
 <style scoped>
-    .userInfoDiv{
+    .userInfoDiv {
         width: 300px;
         height: 60px;
     }
-    .userInfoDiv div{
+
+    .userInfoDiv div {
         float: left;
     }
-    .nameEnCollege{
+
+    .nameEnCollege {
         margin-left: 10px;
         width: 170px;
         height: 60px;
     }
 
-.nameEnCollege div {
-  float: none;
-}
+    .nameEnCollege div {
+        float: none;
+    }
 
-.followBotton {
-  padding-top: 15px;
-  height: 60px;
-}
+    .followBotton {
+        padding-top: 15px;
+        height: 60px;
+    }
 </style>

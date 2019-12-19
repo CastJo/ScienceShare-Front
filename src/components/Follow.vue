@@ -63,7 +63,9 @@ export default {
   methods: {
     handleClickAvatar(val) {
       this.$router.push(`/index/${val}`);
-      window.location.reload();
+      if (this.username!==this.$store.state.user.username){
+        window.location.reload();window.location.reload();
+      }
     },
     getFollowing() {
       this.$axios

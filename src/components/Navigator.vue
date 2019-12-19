@@ -14,11 +14,16 @@
       </el-col>
       <el-col :span="8">
         <div class="pt-3" style="padding-left: 40%">
-          <el-button
-            icon="el-icon-user-solid"
-            circle
-            @click="ToIndex"
-          ></el-button>
+<!--          <el-button-->
+<!--            icon="el-icon-user-solid"-->
+<!--            circle-->
+<!--            @click="ToIndex"-->
+<!--          ></el-button>-->
+          <el-button type="text" @click="ToIndex" title="前往个人主页">
+            <el-badge :value="notiNum" class="Badge" :max="99" :hidden='hidBadge'>
+              <el-avatar :src="this.$store.state.user.avatarUrl" :size="40"></el-avatar>
+            </el-badge>
+          </el-button>
           <el-badge :is-dot="isNotified" class="item">
             <el-button icon="el-icon-chat-dot-round" circle></el-button>
           </el-badge>
@@ -41,7 +46,9 @@ export default {
       isNotified: true,
       circleUrl: circle,
       activeIndex: "1",
-      activeIndex2: "1"
+      activeIndex2: "1",
+        notiNum:0,
+        hidBadge:true,
     };
   },
   methods: {
