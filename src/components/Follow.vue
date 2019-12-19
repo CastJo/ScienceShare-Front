@@ -47,6 +47,7 @@
                     .get('usercenter/allFollowing', {
                         params: {
                             username: this.user.username,
+                            myUsername: this.user.username,
                         }
                     })
                     .then(res => {
@@ -63,6 +64,7 @@
                     .get('usercenter/allFollowers', {
                         params: {
                             username: this.user.username,
+                            myUsername: this.user.username,
                         }
                     })
                     .then(res => {

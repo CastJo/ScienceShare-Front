@@ -125,7 +125,7 @@
 							message: "邮箱修改成功！",
 							type: "success"
 						});
-						this.$router.push('/index')
+						this.$router.push('/')
 					}
 				})
 

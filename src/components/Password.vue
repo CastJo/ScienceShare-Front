@@ -51,7 +51,7 @@
 									message: '修改成功！',
 									type: 'success'
 								});
-								this.$router.push('/index')
+								this.$router.push('/')
 							}else if (successResponse.data.code === 402) {
 								this.$notify.error({
 									title: '错误',
