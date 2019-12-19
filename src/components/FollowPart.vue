@@ -6,6 +6,7 @@
         class="avatar"
         :size="50"
         @click.stop.native="handleClickAvatar"
+        style="cursor: pointer"
       />
     </div>
     <div class="nameEnCollege">
@@ -25,6 +26,7 @@
         >已关注</el-checkbox
       >
     </div>
+    <el-divider style="margin: 12px" />
   </div>
 </template>
 
@@ -115,15 +117,16 @@ export default {
 
 <style scoped>
 .userInfoDiv {
-  width: 315px;
   height: 60px;
 }
+
 .userInfoDiv div {
   float: left;
 }
+
 .nameEnCollege {
   margin-left: 10px;
-  width: 150px;
+  width: 170px;
   height: 60px;
 }
 

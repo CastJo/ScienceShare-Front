@@ -1,10 +1,10 @@
 <template>
-  <div style="padding: 0px 30px">
+  <div style="padding: 10px 30px">
     <ResearchItem
       v-for="item in researchList"
       :key="item.id"
       :title="item.title"
-      :date="item.date"
+      :date="item.year"
       :venue="item.venue"
       :authors="item.authors"
     />
@@ -18,6 +18,7 @@ export default {
     return {};
   },
   mounted() {
+    console.log("expertPage : ");
     console.log(this.$store.state.expertPage);
   },
   computed: {

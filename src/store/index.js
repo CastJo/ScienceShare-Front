@@ -7,6 +7,7 @@ export default new Vuex.Store({
   state: {
     username: "Leon",
     hasPermission: false,
+    expertID: "",
     user: {
       isLogin: window.sessionStorage.getItem("isLogin"),
       identity: window.sessionStorage.getItem("identity"),

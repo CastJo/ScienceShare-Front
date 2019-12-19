@@ -31,6 +31,7 @@
 						}
 					})
 					.then(successResponse => {
+						console.log(successResponse)
 						this.responseResult = JSON.stringify(successResponse.data);
 						if (successResponse.data.code === 200) {
 							window.sessionStorage.setItem("username", this.changeNameVo.NewUsername);

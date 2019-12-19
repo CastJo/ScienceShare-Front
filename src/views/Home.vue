@@ -2,28 +2,33 @@
   <el-main style="padding-top: 0;">
     <Navigator />
     <div class="totalDiv">
-      <div class="infoCardDiv">
-        <el-card shadow="hover" style="height: 400px;width: 640px">
-          <el-menu
-            router
-            :default-active="activeIndex"
-            class="el-menu-demo"
-            mode="horizontal"
-            @select="handleSelect"
-          >
-            <el-menu-item index="/home">信息</el-menu-item>
-            <el-menu-item index="/home/changeName">修改用户名</el-menu-item>
-            <el-menu-item index="/home/changeMail">修改邮箱</el-menu-item>
-            <el-menu-item index="/home/password">修改密码</el-menu-item>
-            <el-menu-item index="/main" v-if="isAuthor"
-              >我的专家主页</el-menu-item
-            >
-          </el-menu>
-          <router-view />
-        </el-card>
-      </div>
-
-      <div class="followDiv"><Follow :username="user.username" /></div>
+      <el-row :gutter="20">
+        <el-col :span="15">
+          <div class="infoCardDiv">
+            <el-card shadow="hover" style="height: 400px;width: 700px">
+              <el-menu
+                router
+                :default-active="activeIndex"
+                class="el-menu-demo"
+                mode="horizontal"
+                @select="handleSelect"
+              >
+                <el-menu-item index="/home">信息</el-menu-item>
+                <el-menu-item index="/home/changeName">修改用户名</el-menu-item>
+                <el-menu-item index="/home/changeMail">修改邮箱</el-menu-item>
+                <el-menu-item index="/home/password">修改密码</el-menu-item>
+                <el-menu-item index="/main" v-if="isAuthor"
+                  >我的专家主页</el-menu-item
+                >
+              </el-menu>
+              <router-view />
+            </el-card>
+          </div>
+        </el-col>
+        <el-col :span="9">
+          <Follow :username="user.username" />
+        </el-col>
+      </el-row>
     </div>
   </el-main>
 </template>
@@ -85,11 +90,11 @@ export default {
 }
 .infoCardDiv {
   float: left;
-  margin-top: 50px;
+  margin-top: 40px;
 }
 .followDiv {
   float: left;
   margin-left: 100px;
-  margin-top: 50px;
+  margin-top: 40px;
 }
 </style>

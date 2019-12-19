@@ -55,23 +55,28 @@ export default {
     }
   },
   mounted() {
+    console.log("111");
     if (this.$store.state.user.isLogin === null) {
       this.$router.push("/");
       return;
     }
+    console.log("222");
+    var theID = "1000019749";
     this.$axios
       .get("homepage/home/loadHomePage", {
         params: {
-          // expertName: this.expertPage.expertName,
-          expertName: "Danielle Gai Tavares-Rixon"
+          // expertID: this.$store.state.expertID
+          id: theID
         }
       })
       .then(successResponse => {
         var responseResult = JSON.parse(
           JSON.stringify(successResponse.data.data)
         );
+        console.log("responseResult ");
+        console.log(responseResult);
         if (successResponse.data.code === 200) {
-          console.log(responseResult);
+          console.log("123" + responseResult);
           this.$store.commit("setExpertPage", responseResult);
           this.$router.push("/main/overview");
         } else {
@@ -84,6 +89,7 @@ export default {
       .catch(failResponse => {
         console.log(failResponse);
       });
+    console.log("44");
   },
   methods: {
     uploadFile() {

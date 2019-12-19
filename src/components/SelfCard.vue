@@ -10,7 +10,7 @@
       >
         <el-upload
           class="avatar-uploader"
-          action="http://111.230.166.179:8888/usercenter/uploadFile"
+          action="http://111.230.166.179:8888/homepage/uploadFile"
           :show-file-list="false"
           :on-success="handleAvatarSuccess"
           :before-upload="beforeAvatarUpload"
@@ -82,13 +82,15 @@ export default {
   methods: {
     handleAvatarSuccess(res) {
       if (res.code === 200) {
-        this.url = res.message;
+        this.url = res.data;
         this.user.avatarUrl = this.url;
-        this.$store.dispatch("changeAvatar");
+        console.log(this.url);
         this.$axios
-          .post("/uploadAvatar", {
-            username: this.name,
-            avatarUrl: this.url
+          .get("usercenter/uploadAvatar", {
+            params: {
+              username: this.user.username,
+              avatarUrl: this.url[0]
+            }
           })
           .then(response => {
             console.log(response);
@@ -98,7 +100,7 @@ export default {
       } else if (res.code === 400) {
         console.log("fail");
       }
-      location.reload();
+      //location.reload();
     },
     beforeAvatarUpload(file) {
       const isJPG = file.type === "image/jpeg";
@@ -132,7 +134,7 @@ export default {
 }
 .wrap {
   text-align: center;
-  padding: 50px 40px 40px 40px;
+  padding: 45px 40px 40px 40px;
 }
 .self-info {
   text-align: left;

@@ -1,24 +1,37 @@
 <template>
   <div>
     <el-row>
-      <el-col :span="8" class="pt-2">
+      <el-col :span="8" class="pt-3">
         <img src="@/assets/pic1.png" class="image" style="max-height:60px; " />
         <el-link :underline="false" type="primary" class="ml-3">
           {{ this.currentTimeGreetings }}, {{ this.$store.state.user.username }}
         </el-link>
       </el-col>
       <el-col :span="8">
-        <el-input placeholder="Search Something?" v-model="input" class="pt-3">
+        <el-input placeholder="Search Something?" v-model="input" class="pt-4">
           <el-button slot="append" icon="el-icon-search"></el-button>
         </el-input>
       </el-col>
       <el-col :span="8">
         <div class="pt-3" style="padding-left: 40%">
-          <el-button
-            icon="el-icon-user-solid"
-            circle
-            @click="ToIndex"
-          ></el-button>
+          <!--          <el-button-->
+          <!--            icon="el-icon-user-solid"-->
+          <!--            circle-->
+          <!--            @click="ToIndex"-->
+          <!--          ></el-button>-->
+          <el-button type="text" @click="ToIndex" title="前往个人主页">
+            <el-badge
+              :value="notiNum"
+              class="Badge"
+              :max="99"
+              :hidden="hidBadge"
+            >
+              <el-avatar
+                :src="this.$store.state.user.avatarUrl"
+                :size="40"
+              ></el-avatar>
+            </el-badge>
+          </el-button>
           <el-badge :is-dot="isNotified" class="item">
             <el-button icon="el-icon-chat-dot-round" circle></el-button>
           </el-badge>
@@ -35,23 +48,25 @@ import circle from "@/assets/logo.png";
 
 export default {
   name: "Navigator",
-  data () {
+  data() {
     return {
       input: "",
       isNotified: true,
       circleUrl: circle,
       activeIndex: "1",
-      activeIndex2: "1"
+      activeIndex2: "1",
+      notiNum: 0,
+      hidBadge: true
     };
   },
   methods: {
-    ToIndex () {
+    ToIndex() {
       this.$router.push("/home");
     },
-    SignOut () {
+    SignOut() {
       this.$store.dispatch("SignOut");
       window.location.reload();
-    },
+    }
   },
   computed: {
     currentTimeGreetings: () => {

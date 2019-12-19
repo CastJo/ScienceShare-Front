@@ -159,11 +159,8 @@ export default {
     this.constTags = this.loadAll();
     // 判断 hasPermission
     if (this.expertPage.skills != null) {
-      console.log("iam:" + this.expertPage.skills);
-      console.log(this.expertPage.skills);
       this.newInfo.skills = this.expertPage.skills;
     }
-    console.log(this.newInfo);
   },
   computed: {
     anyType() {
