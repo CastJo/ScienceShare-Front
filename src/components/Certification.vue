@@ -65,7 +65,6 @@ npm <template>
         },
         methods: {
             getSchool(){
-                console.log(this.options2);
                 this.$axios.get('usercenter/getCollegeByKeyword', {
                     params: {
                         keyword: this.value2,

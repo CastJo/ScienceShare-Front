@@ -1,65 +1,36 @@
 <template>
-    <div>
-        <div class="selfNotiAndPost">
-            <el-row type="flex" align="top">
-                <el-card class="self-card">
-                    <div slot="header" class="clearfix">
-                        <center><span>你好!</span></center>
-                    </div>
-                    <div>
+    <el-main style="padding-top: 0;">
+        <Navigator/>
+        <div class="totalDiv">
+            <div class = "infoCardDiv">
+                <el-card shadow="hover" style="height: 400px;width: 640px">
 
-                        <el-tooltip class="item" effect="dark" content="点击修改头像" placement="top">
-                            <el-upload class="avatar-uploader" action="http://114.116.176.3:8000/uploadFile"
-                                       :show-file-list="false" :on-success="handleAvatarSuccess"
-                                       :before-upload="beforeAvatarUpload">
-                                <img v-if="this.user.avatarUrl" :src="this.user.avatarUrl" class="avatar">
-                            </el-upload>
-                        </el-tooltip>
-                    </div>
-                    <div><br/>
-                        <span>用户名 : {{this.user.username}}</span><br/><br/>
-                        <span>声望 : {{this.user.prestige}}</span><br/><br/>
-                        <span>注册邮箱 : {{this.user.emailAddress}}</span><br/><br/>
-                        <span>注册日期 : {{formattedDate}}</span>
-
-                    </div>
-
-                    <br/><br/>
-                    <div>
-                        <el-button plain @click="ToChange">修改密码</el-button>
-                        <el-button plain @click="quit">注销</el-button>
-                    </div>
+                    <OthersCard :user="this.user"/>
                 </el-card>
-            </el-row>
-        </div>
+            </div>
 
-    </div>
+            <div class = "followDiv"><Follow :user="this.user"/></div>
+        </div>
+    </el-main>
+
 </template>
 
 <script>
-    /*引入公共方法*/
-    import {
-        getCookie,
-        delCookie
-    } from '../assets/js/cookie.js'
-    import {
-        dateFormat
-    } from "../assets/js/time.js";
+    import Navigator from "@/components/Navigator.vue";
+    import Follow from "../components/Follow";
+    import url from "@/assets/pic1.png";
+    import {dateFormat} from "../assets/js/time";
+    import OthersCard from "../components/OthersCard";
 
     export default {
+        name: "Index",
         data() {
             return {
-                file: '',
-                url: '',
-                notiData: [],
-                posts: [],
-                read: '',
                 user: '',
-                reports: [],
-                users: [],
-                adm: false,
-                other: false
-            }
+                circleUrl: url,
+                activeIndex: "1",
+                isAuthor:false,
+            };
         },
         computed: {
             formattedDate() {
@@ -67,173 +38,44 @@
             }
         },
         created() {
-            /*页面挂载获取保存的cookie值，渲染到页面上*/
-            let uname = getCookie('username');
-            this.name = uname;
-            /*如果cookie不存在，则跳转到登录页*/
-            if (uname == "") {
-                this.$router.replace('/SignIn')
-            }
-            this.$axios.get(`/getUser/${this.name}`).then((response) => {
+            if (this.$route.params.username === this.$store.state.user.username)
+                this.$router.push('/home');
+            this.$axios.get(`usercenter/getUser`,{
+                params: {
+                    username: this.$route.params.username,
+                }
+            }).then((response) => {
                 this.user = response.data;
-                if (this.user.notiData == null) {
-                    this.user.notiData = []
-                }
-                if (this.user.permission >= 2) {
-                    this.adm = true
-                }
             });
-            this.$axios.get('getAllReports').then((res) => {
-                this.reports = res.data || []
-            });
-            this.$axios.get('allMutedUser').then((res1) => {
-                this.users = res1.data || []
-            });
-            this.getLatestPosts(this.name)
+        },
+        mounted() {
+            if (this.$store.state.user.username == null) {
+                this.$router.push("/");
+            }
         },
         methods: {
-            ToChange() {
-                this.$router.push(
-                    '/changePassword'
-                )
+            handleSelect(key, keyPath) {
+                console.log(key, keyPath);
             },
-            quit() {
-                /*删除cookie*/
-                delCookie('username');
-                // localStorage.removeItem('Flag')
-                // localStorage.removeItem('username')
-                this.$store.dispatch('quit');
-                this.$router.replace('/login')
-            },
-            handleAvatarSuccess(res, file) {
-                if (res.code === 200) {
-                    this.url = res.message;
-                    this.user.avatarUrl = this.url;
-                    this.$store.dispatch('changeAvatar');
-                    this.$axios.post('/uploadAvatar', {
-                        username: this.name,
-                        avatarUrl: this.url,
-                    }).then((response) => {
-                        console.log(response)
-                    })
-                } else if (res.code === 300) {
-                    console.log("not exist")
-                } else if (res.code === 400) {
-                    console.log("fail")
-                }
-                location.reload();
-            },
-            beforeAvatarUpload(file) {
-                const isJPG = file.type === 'image/jpeg';
-                const isPNG = file.type === 'image/png';
-                const isLt2M = file.size / 1024 / 1024 < 2;
-
-                if (!isJPG && !isPNG) {
-                    this.$message.error('上传头像图片只能是 JPG或PNG格式!');
-                }
-                if (!isLt2M) {
-                    this.$message.error('上传头像图片大小不能超过 2MB!');
-                }
-                return (isPNG || isJPG) && isLt2M;
-            },
-            getLatestPosts() {
-                this.$axios
-                    .get(`findLatestPostsByAuthor`, {
-                        params: {
-                            author: this.name
-                        }
-                    })
-                    .then(res => {
-                        this.posts = res.data || [];
-                    })
-                    .catch(function (err) {
-                        console.log(err)
-                    })
-
-            }
         },
-    }
+        components: {
+            OthersCard,
+            Follow,
+            Navigator,
+        }
+    };
 </script>
-
-
 <style>
-    .avatar-uploader .el-upload {
-        border: 1px dashed #d9d9d9;
-        border-radius: 6px;
-        cursor: pointer;
-        position: relative;
-        overflow: hidden;
-    }
+    .totalDiv{
 
-    .avatar-uploader .el-upload:hover {
-        border-color: #409EFF;
     }
-
-    .avatar-uploader-icon {
-        font-size: 28px;
-        color: #8c939d;
-        width: 178px;
-        height: 178px;
-        line-height: 178px;
-        text-align: center;
+    .infoCardDiv{
+        float: left;
+        margin-top: 50px;
     }
-
-    .avatar {
-        width: 178px;
-        height: 178px;
-        display: block;
-        object-fit: cover;
-    }
-
-    .text {
-        font-size: 14px;
-    }
-
-    .item {
-        margin-bottom: 18px;
-    }
-
-    .clearfix:before,
-    .clearfix:after {
-        display: table;
-        content: "";
-    }
-
-    .clearfix:after {
-        clear: both
-    }
-
-    .self-card {
-        margin-top: 0px;
-        min-width: 380px;
-        height: 570px;
-    }
-
-    .selfNotiAndPost {
-        width: 1210px;
-        height: 570px;
-        margin: 0 auto;
-    }
-
-    .notiAndPost {
-        margin-left: 40px;
-    }
-
-    .wrap {
-        text-align: center;
-    }
-
-    span {
-        cursor: pointer;
-    }
-
-    span:hover {
-        color: #41b883;
-    }
-
-    .muteAndReport {
-        width: 1210px;
-        height: 340px;
-        margin: 0 auto;
+    .followDiv{
+        float: left;
+        margin-left: 100px;
+        margin-top: 50px;
     }
 </style>

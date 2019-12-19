@@ -5,8 +5,8 @@
             <span>关注者</span>
             <div class="followingPart">
                 <ul class="infinite-list"  style="overflow:auto;list-style: none;padding: 0 0 0 0">
-                    <li v-for="i in following" class="infinite-list-item" :key="i.username">
-                        <FollowPart :part="i"/></li>
+                    <li v-for="i in following" class="infinite-list-item" :key="i.username" >
+                        <FollowPart :part="i" @click-avatar="handleClickAvatar"/></li>
                 </ul>
             </div>
             <el-divider class = "hotpostDivider"/>
@@ -14,7 +14,7 @@
             <div class="followingPart">
                 <ul class="infinite-list"  style="overflow:auto;list-style: none;padding: 0 0 0 0">
                     <li v-for="i in followers" class="infinite-list-item" :key="i.username">
-                        <FollowPart :part="i"/></li>
+                        <FollowPart :part="i" @click-avatar="handleClickAvatar"/></li>
                 </ul>
             </div>
         </el-card>
@@ -39,19 +39,20 @@
             this.getFollowers();
         },
         methods: {
+            handleClickAvatar(val) {
+                this.$router.push(`/index/${val}`)
+            },
             getFollowing(){
                 this.$axios
                     .get('usercenter/allFollowing', {
                         params: {
-                            username: this.$store.state.user.username,
+                            username: this.user.username,
                         }
                     })
                     .then(res => {
                         if (res.data!=null){
                             this.following = res.data
                         }
-
-                        console.log(this.following);
                     })
                     .catch(function(err) {
                         console.log(err)
@@ -61,7 +62,7 @@
                 this.$axios
                     .get('usercenter/allFollowers', {
                         params: {
-                            username: this.$store.state.user.username,
+                            username: this.user.username,
                         }
                     })
                     .then(res => {
@@ -74,11 +75,8 @@
                         console.log(err)
                     })
             },
-            handleRowClick(row) {
-                console.log(row.id);
-                this.$router.push(`content/${row.id}`)
-            }
-        }
+        },
+        props:['user',],
     }
 </script>
 

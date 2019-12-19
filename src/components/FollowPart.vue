@@ -1,7 +1,7 @@
 <template>
     <div class = "userInfoDiv">
         <div>
-            <el-avatar :src="this.part.avatarUrl" class="avatar" :size="50"/>
+        <el-avatar :src="this.part.avatarUrl" class="avatar" :size="50" @click.stop.native="handleClickAvatar"/>
         </div>
         <div class="nameEnCollege">
             <div><h5>{{ this.part.username }}</h5></div>
@@ -30,6 +30,9 @@
                 this.checked = true;
         },
         methods:{
+            handleClickAvatar() {
+                this.$emit('click-avatar', this.part.username)
+            },
           follow(){
               this.$axios.get(`usercenter/follow`, {
                   params: {
