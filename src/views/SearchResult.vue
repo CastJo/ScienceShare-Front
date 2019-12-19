@@ -1,5 +1,5 @@
 <template>
-    <el-main style="background: aliceblue;">
+    <el-main style="">
         <Navigator/>
 
         <el-row style="min-height: 150px;margin-top: 100px;">
@@ -29,6 +29,9 @@
                         <el-card class="mid-center" style="max-width: 1000px;margin:auto;">
                         <router-view></router-view>
                     </el-card></el-tab-pane>
+                    <el-tab-pane label="Users" name="userresult">
+                        <router-view></router-view>
+                    </el-tab-pane>
                 </el-tabs>
 
             </el-col>

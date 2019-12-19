@@ -8,7 +8,7 @@
             width="550">
     </el-table-column>
     <el-table-column
-            prop="author"
+            prop="authors[0].name"
             label="Authors"
             width="150">
     </el-table-column>
@@ -43,31 +43,34 @@
         data() {
             return {
                 searchresults:[],
-                pageNumber:'1',
+                pageNum:'1',
                 max:''
             }
         },
         mounted(){
             console.log(this.$route.params.keyword);
+            var num = this.pageNum;
             this.$axios
-                .get("litcenter/getLITsByPaging", {
+                .get("litcenter/getTop100LITsByPaging", {
                     params: {
                         title: this.$route.params.keyword,
-                        pageNumber: this.pageNumber
+                        pageNumber: num
                     }
                 })
                 .then(successResponse => {
-                    console.log(successResponse.data)
+
                     this.max = successResponse.data.totalPage;
-                    // this.searchresults = successResponse.data.lits;
-                    // this.searchresults.author = successResponse.data.lits.author[1].name;
-                    this.searchresults = successResponse.data.lits.map(item => {
-                        return{
-                            title: item.title,
-                            author: item.author[1].name,
-                            n_citation: item.n_citation
-                        }
-                    })
+                    this.searchresults = successResponse.data.lits;
+                    console.log(this.searchresults.id);
+                    //this.searchresults.author = successResponse.data.lits.map(item => item.author[1].name);
+
+                    // this.searchresults = successResponse.data.lits.map(item => {
+                    //     return{
+                    //         title: item.title,
+                    //         author: item.author[1].name,
+                    //         n_citation: item.n_citation
+                    //     }
+                    // })
                 })
                 .catch(failResponse => {
                     console.log(failResponse);

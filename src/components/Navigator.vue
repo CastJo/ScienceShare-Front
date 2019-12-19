@@ -3,9 +3,9 @@
     <el-row>
       <el-col :span="8" class="pt-2">
         <img src="@/assets/pic1.png" class="image" style="max-height:60px; " />
-<!--        <el-button type="text" class="mx-4">Home </el-button>-->
-<!--        <el-button type="text" class="mx-4">Questions </el-button>-->
-<!--        <el-button type="text" class="mx-4">Jobs</el-button>-->
+        <el-link :underline="false" type="primary" class="ml-3">
+          {{ this.currentTimeGreetings }}, {{ this.$store.state.user.username }}
+        </el-link>
       </el-col>
       <el-col :span="8">
         <el-autocomplete
@@ -19,18 +19,24 @@
         >
           <el-button slot="append" icon="el-icon-search" @click="search"></el-button>
         </el-autocomplete>
+          <span style="color: white">Search Something?</span>
       </el-col>
       <el-col :span="8">
         <div class="pt-3" style="padding-left: 40%">
-          <el-button
-            icon="el-icon-user-solid"
-            circle
-            @click="ToIndex"
-          ></el-button>
+<!--          <el-button-->
+<!--            icon="el-icon-user-solid"-->
+<!--            circle-->
+<!--            @click="ToIndex"-->
+<!--          ></el-button>-->
+          <el-button type="text" @click="ToIndex" title="前往个人主页">
+            <el-badge :value="notiNum" class="Badge" :max="99" :hidden='hidBadge'>
+              <el-avatar :src="this.$store.state.user.avatarUrl" :size="40"></el-avatar>
+            </el-badge>
+          </el-button>
           <el-badge :is-dot="isNotified" class="item">
             <el-button icon="el-icon-chat-dot-round" circle></el-button>
           </el-badge>
-          <el-button class="ml-5" @click="SignOut">Logout</el-button>
+          <el-button class="ml-3" @click="SignOut">Logout</el-button>
         </div>
       </el-col>
     </el-row>
@@ -51,7 +57,8 @@ export default {
       circleUrl: circle,
       activeIndex: "1",
       activeIndex2: "1",
-      visible:false
+        notiNum:0,
+        hidBadge:true,
     };
   },
   mounted(){
@@ -59,19 +66,14 @@ export default {
       this.isSearch = false;
     }
   },
-
   methods: {
-    ToIndex() {
+    ToIndex () {
       this.$router.push("/home");
     },
-    SignOut() {
+    SignOut () {
       this.$store.dispatch("SignOut");
       window.location.reload();
     },
-    handleSelect(key, keyPath) {
-      console.log(key, keyPath);
-    },
-    logout: function() {},
     querySearch(queryString, cb){
       var results = queryString;
       cb(results);
@@ -90,9 +92,17 @@ export default {
       })
     },
 
+  },
+  computed: {
+    currentTimeGreetings: () => {
+      const h = new Date().getHours();
+      if (h < 5) return "夜深了";
+      if (h < 11) return "上午好";
+      if (h < 13) return "中午好";
+      if (h < 18) return "下午好";
+      return "晚上好";
+    }
   }
-
-
 };
 </script>
 
