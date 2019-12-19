@@ -8,7 +8,7 @@
         </el-card>
       </div>
 
-      <div class="followDiv"><Follow :username="this.user.username" /></div>
+      <div class="followDiv"><Follow :username="this.$route.params.username" /></div>
     </div>
   </el-main>
 </template>
@@ -52,6 +52,9 @@ export default {
   mounted() {
     if (this.$store.state.user.username == null) {
       this.$router.push("/");
+    }
+    if (this.$store.state.user.username === this.$route.params.username) {
+      this.$router.push("/home");
     }
   },
   methods: {

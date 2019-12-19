@@ -5,8 +5,7 @@
       <div class="followingPart">
         <ul
           class="infinite-list"
-          style="overflow:auto;list-style: none;padding: 0 0 0 0; max-height: 400px""
-        >
+          style="overflow:auto;list-style: none;padding: 0 0 0 0; max-height: 400px">
           <li
             v-for="i in following"
             class="infinite-list-item"
@@ -21,7 +20,7 @@
       <div class="followingPart">
         <ul
           class="infinite-list"
-          style="overflow:auto;list-style: none;padding: 0 0 0 0; max-height: 400px""
+          style="overflow:auto;list-style: none;padding: 0 0 0 0; max-height: 400px"
         >
           <li
             v-for="i in followers"

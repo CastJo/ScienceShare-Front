@@ -21,7 +21,6 @@
         </div>
         <el-divider style="margin: 12px"/>
     </div>
-  </div>
 </template>
 
 <script>
