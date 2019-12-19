@@ -1,6 +1,6 @@
 <template>
     <div>
-        <el-card shadow="hover" style="height: 400px;width: 360px">
+        <el-card shadow="hover" style="height: 900px;width: 360px">
 
             <span>关注者</span>
             <div class="followingPart">
@@ -82,19 +82,10 @@
 
 <style scoped>
     .followingPart{
-        height: 150px;
+        height: 400px;
         padding-top: 10px;
     }
 
-    .hotPostDiv{
-        margin-top: 13px;
-        height: 400px;
-        width: 300px;
-    }
-    .hotPostCard{
-        height: 400px;
-        width: 300px;
-    }
 
     .hotpostDivider{
         height: 3px;

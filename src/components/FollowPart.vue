@@ -102,6 +102,7 @@
 <style scoped>
     .userInfoDiv{
         width: 315px;
+        height: 60px;
     }
     .userInfoDiv div{
         float: left;
@@ -109,6 +110,7 @@
     .nameEnCollege{
         margin-left: 10px;
         width: 185px;
+        height: 60px;
     }
 
     .nameEnCollege div{
@@ -117,6 +119,7 @@
 
     .followBotton{
         padding-top: 15px;
+        height: 60px;
     }
 
 </style>
