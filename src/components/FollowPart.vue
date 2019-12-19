@@ -1,15 +1,16 @@
 <template>
-    <div>
+    <div class = "userInfoDiv">
         <div>
-        <el-avatar :src="this.part.avatarUrl" class="avatar" :size="50"/>
+            <el-avatar :src="this.part.avatarUrl" class="avatar" :size="50"/>
         </div>
-        <div>
-        <span>{{ this.part.username }}</span>
-        <span>{{ this.part.college }}</span>
+        <div class="nameEnCollege">
+            <div><h5>{{ this.part.username }}</h5></div>
+
+            <div><span>{{ this.part.college }}</span></div>
         </div>
-        <div>
-        <el-button @click="follow">关注</el-button>
-            <el-button @click="unFollow">取关</el-button>
+        <div class="followBotton">
+            <el-checkbox v-if=!checked v-model="checked" @change="follow">关注</el-checkbox>
+            <el-checkbox v-if=checked v-model="checked" @change="unFollow">已关注</el-checkbox>
         </div>
     </div>
 </template>
@@ -18,7 +19,15 @@
     export default {
         name: "FollowPart",
         data() {
-            return {}
+            return {
+                checked:"",
+            }
+        },
+        created() {
+            if(this.part.isFollowing === 0)
+                this.checked = false;
+            else if(this.part.isFollowing === 1)
+                this.checked = true;
         },
         methods:{
           follow(){
@@ -88,5 +97,23 @@
 </script>
 
 <style scoped>
+    .userInfoDiv{
+        width: 315px;
+    }
+    .userInfoDiv div{
+        float: left;
+    }
+    .nameEnCollege{
+        margin-left: 10px;
+        width: 185px;
+    }
+
+    .nameEnCollege div{
+        float: none;
+    }
+
+    .followBotton{
+        padding-top: 15px;
+    }
 
 </style>

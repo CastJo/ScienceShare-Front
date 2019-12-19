@@ -1,21 +1,22 @@
 <template>
     <div>
-        <el-card shadow="hover" class="hotPostCard">
-            <el-row>关注者</el-row>
-            <el-row>
+        <el-card shadow="hover" style="height: 400px;width: 360px">
+
+            <span>关注者</span>
+            <div class="followingPart">
                 <ul class="infinite-list"  style="overflow:auto;list-style: none;padding: 0 0 0 0">
                     <li v-for="i in following" class="infinite-list-item" :key="i.username">
                         <FollowPart :part="i"/></li>
                 </ul>
-            </el-row>
-            <el-divider/>
-            <el-row>粉丝</el-row>
-            <el-row>
+            </div>
+            <el-divider class = "hotpostDivider"/>
+            <span>粉丝</span>
+            <div class="followingPart">
                 <ul class="infinite-list"  style="overflow:auto;list-style: none;padding: 0 0 0 0">
                     <li v-for="i in followers" class="infinite-list-item" :key="i.username">
                         <FollowPart :part="i"/></li>
                 </ul>
-            </el-row>
+            </div>
         </el-card>
     </div>
 
@@ -64,7 +65,7 @@
                         }
                     })
                     .then(res => {
-                        if (res.data!=""){
+                        if (res.data!==""){
                             this.followers  = res.data
                         }
 
@@ -82,13 +83,11 @@
 </script>
 
 <style scoped>
-
-    .el-row {
-        margin-bottom: 20px;
-        &:last-child {
-            margin-bottom: 0;
-        }
+    .followingPart{
+        height: 150px;
+        padding-top: 10px;
     }
+
     .hotPostDiv{
         margin-top: 13px;
         height: 400px;

@@ -14,10 +14,10 @@
             </div>
             <div class="self-info">
                 <!--                <el-col :span="20">-->
-                <div >
+                <div class="nameDiv">
                     <span><h1>{{ user.username }}</h1></span>
                     <span><h5>北京航空航天大学</h5></span>
-                    <a @click="visible=true">申请专家认证</a>
+                    <a @click="visible=true">申请专家认证></a>
 <!--                    <el-button @click="visible=true"><span>申请专家认证</span></el-button>-->
                 </div>
                 <!--                </el-col>-->
@@ -112,15 +112,20 @@
         float: left;;
     }
     .emailEnTime{
-        margin-top: 65px;
+        width: 230px;
+        height: 45px;
     }
     .self-info div{
         float: none;
     }
+    .nameDiv{
+        height: 175px;
+        width: 230px;
+    }
 
     .self-info a{
         margin-top: -5px;
-        color: #2c3e50;
+        color: #8c939d;
         background: #ffffff;
         text-decoration: none;
         font-family: sans-serif;
@@ -138,18 +143,7 @@
         cursor: pointer;
     }
     .self-info a:hover{
-        padding-left: 10px;
-        background: rgba(0, 0, 0, 0.1);
-    }
-    .self-info a:hover::after{
-        right: 79.68%
-    }
-    .self-info a::after{
-        content: '>';
-        position: absolute;
-        right: 74%;
-        -webkit-transition: all 0.5s;
-        transition: all 0.5s;
+        background: rgba(0, 0, 0, 0);
     }
 
 </style>

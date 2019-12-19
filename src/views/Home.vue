@@ -79,7 +79,6 @@
 </script>
 <style>
     .totalDiv{
-
     }
     .infoCardDiv{
         float: left;
