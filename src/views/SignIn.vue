@@ -54,7 +54,7 @@ export default {
     };
   },
   mounted () {
-    if (this.$store.state.user.username != null) {
+    if (this.$store.state.user.isLogin === true) {
       this.$router.replace("home");
     }
   },

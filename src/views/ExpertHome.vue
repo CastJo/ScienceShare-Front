@@ -55,6 +55,33 @@ export default {
     },
   },
   mounted () {
+    if (this.$store.state.user.isLogin === null) {
+      this.$router.push("/");
+      return
+    }
+    this.$axios
+      .get("home/loadHomePage", {
+        params: {
+          expertName: this.expertPage.expertName,
+        }
+      }).then(successResponse => {
+        var responseResult = JSON.parse(
+          JSON.stringify(successResponse.data.data)
+        );
+        if (successResponse.data.code === 200) {
+          console.log(responseResult)
+          this.$store.commit("setExpertPage", responseResult)
+          this.$router.push("/main/overview")
+        } else {
+          this.$notify.error({
+            title: "请求被拒绝",
+            message: successResponse.data.message
+          });
+        }
+      })
+      .catch(failResponse => {
+        console.log(failResponse);
+      });
 
   },
   methods: {

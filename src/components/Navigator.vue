@@ -22,7 +22,7 @@
           <el-badge :is-dot="isNotified" class="item">
             <el-button icon="el-icon-chat-dot-round" circle></el-button>
           </el-badge>
-          <el-button class="ml-5" @click="SignOut">Logout</el-button>
+          <el-button class="ml-3" @click="SignOut">Logout</el-button>
         </div>
       </el-col>
     </el-row>

@@ -55,7 +55,7 @@
             <el-button round type="primary" class="ml-4 my-5" @click="addTag"
               >ADD</el-button
             >
-            <div class="px-5">
+            <div class="px-5" v-if="newInfo.skills != null">
               <el-tag
                 v-for="tag in newInfo.skills"
                 class="pt-1"
@@ -78,14 +78,14 @@
             <p>
               <b>Skills and expertise({{ nTags }})</b>
             </p>
-            <div class="bottom clearfix">
+            <div v-if="expertPage.skills !== null">
               <el-tag
                 size="large"
                 class="mx-1"
                 :type="anyType"
-                v-for="tag in expertPage.skills"
-                :key="tag"
-                >{{ tag }}</el-tag
+                v-for="skill in expertPage.skills"
+                :key="skill"
+                >{{ skill }}</el-tag
               >
             </div>
           </div>
@@ -132,7 +132,7 @@ export default {
       dialogVisible: false,
       newInfo: {
         introduce: "",
-        skills: [],
+        skills: []
       },
       isChanged: false,
       newTag: "",
@@ -140,128 +140,142 @@ export default {
       nResearch: [
         {
           name: "Research items",
-          value: "2",
+          value: "2"
         },
         {
           name: "Projects",
-          value: "3",
+          value: "3"
         },
         {
           name: "Questions",
-          value: "4",
+          value: "4"
         },
         {
           name: "Answers",
-          value: "0",
+          value: "0"
         }
-
-      ],
+      ]
     };
   },
   mounted () {
     this.constTags = this.loadAll();
     // 判断 hasPermission
-    this.newInfo.skills = this.expertPage.skills
+    if (this.expertPage.skills != null) {
+      console.log(this.expertPage.skills)
+      this.newInfo.skills = this.expertPage.skills;
+    }
+    console.log(this.newInfo)
+
   },
   computed: {
     anyType () {
-      const type = ["", "success", "info", "danger", "warning"]
+      const type = ["", "success", "info", "danger", "warning"];
       return type[Math.ceil(Math.random() * 5) - 1];
     },
     nTags () {
-      return this.expertPage.skills.length;
+      if (this.expertPage.skills === null) return 0;
+      else return this.expertPage.skills.length;
     },
     expertPage: {
       get () {
-        return this.$store.state.expertPage
+        return this.$store.state.expertPage;
       }
     },
     hasPermission: {
       get () {
-        return this.$store.state.hasPermission
+        return this.$store.state.user.username === this.$store.state.expertPage.expertName;
       }
     }
   },
   methods: {
     querySearch (queryString, cb) {
       var tags = this.constTags;
-      var results = queryString ? tags.filter(this.createFilter(queryString)) : tags;
+      var results = queryString
+        ? tags.filter(this.createFilter(queryString))
+        : tags;
       // 调用 callback 返回建议列表的数据
       cb(results);
     },
     createFilter (queryString) {
-      return (tags) => {
-        return (tags.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
+      return tags => {
+        return (
+          tags.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0
+        );
       };
     },
     loadAll () {
       return [
-        { "value": "java", },
-        { "value": "c++", },
-        { "value": "html", },
-        { "value": "python", },
-        { "value": "c#", },
-        { "value": "buaa", },
+        { value: "java" },
+        { value: "c++" },
+        { value: "html" },
+        { value: "python" },
+        { value: "c#" },
+        { value: "buaa" }
       ];
     },
     handleClose (tag) {
-      this.newInfo.skills.splice(this.newInfo.tags.indexOf(tag), 1);
+      this.newInfo.skills.splice(this.newInfo.skills.indexOf(tag), 1);
     },
     throwNotice: function (title, content) {
       const h = this.$createElement;
       this.$notify({
         title: title,
-        message: h('i', { style: 'color: teal' }, content)
+        message: h("i", { style: "color: teal" }, content)
       });
     },
     addTag () {
-      var tag = this.newTag
-      if (tag === '')
-        this.throwNotice('请求被拒绝', '请输入字符')
-      if (this.expertPage.skills.find(res => res === tag) !== undefined) {
-        this.throwNotice('请求被拒绝', '请已存在标签')
-      } else if (this.constTags.find(res => res.value === tag) === undefined) {
-        this.throwNotice('请求被拒绝', '没有此标签')
-      } else {
-        this.newInfo.skills.push(tag)
+      var tag = this.newTag;
+      if (tag === "") {
+        this.throwNotice("请求被拒绝", "请输入字符");
+        return
       }
-      this.newTag = ""
+      if (
+        this.expertPage.skills != null &&
+        this.expertPage.skills.find(res => res === tag) !== undefined
+      ) {
+        this.throwNotice("请求被拒绝", "请已存在标签");
+      } else if (
+
+        this.constTags.find(res => res.value === tag) === undefined
+      ) {
+        this.throwNotice("请求被拒绝", "没有此标签");
+      } else {
+        this.newInfo.skills.push(tag);
+      }
+      this.newTag = "";
     },
     submit () {
       const loading = this.$loading({
         lock: true,
-        text: 'Loading',
-        spinner: 'el-icon-loading',
-        background: 'rgba(0, 0, 0, 0.7)'
+        text: "Loading",
+        spinner: "el-icon-loading",
+        background: "rgba(0, 0, 0, 0.7)"
       });
       this.$axios
         .post("expert/info", {
           params: {
             introduction: this.newInfo.introduce,
-            skills: this.newInfo.tags,
+            skills: this.newInfo.tags
           }
         })
         .then(successResponse => {
           if (successResponse.data.code === 200) {
-            var value = this.newInfo
-            this.$store.commit("updateInfo", value)
-            this.throwNotice("成功", "已更新")
+            var value = this.newInfo;
+            this.$store.commit("updateInfo", value);
+            this.throwNotice("成功", "已更新");
           } else {
-            this.throwNotice("错误", "某个错误")
+            this.throwNotice("错误", "某个错误");
           }
         })
         .catch(failResponse => {
           console.log(failResponse);
         });
       loading.close();
-      this.dialogVisible = false
+      this.dialogVisible = false;
     },
     goResearch () {
-      this.$router.push("/main/research")
+      this.$router.push("/main/research");
     }
-
-  },
-
-
+  }
 };
 </script>

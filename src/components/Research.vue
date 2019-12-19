@@ -1,14 +1,18 @@
 <template>
   <div style="padding: 0px 30px">
-    <el-table :data="tableData">
-      <el-table-column prop="date" label="日期" width="180"> </el-table-column>
-      <el-table-column prop="name" label="姓名" width="180"> </el-table-column>
-      <el-table-column prop="address" label="地址"> </el-table-column>
-    </el-table>
+    <ResearchItem
+      v-for="item in researchList"
+      :key="item.title"
+      :title="item.title"
+      :date="item.date"
+      :venue="item.venue"
+      :expertsName="item.expertsName"
+    />
   </div>
 </template>
 
 <script>
+import ResearchItem from "@/components/ResearchItem.vue"
 export default {
   data () {
     return {
@@ -20,6 +24,9 @@ export default {
         return this.$store.state.expertPage.researchList
       }
     }
+  },
+  components: {
+    ResearchItem,
   }
 }
   </script>

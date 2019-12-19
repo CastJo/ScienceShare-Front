@@ -50,34 +50,20 @@ export default {
     }
   },
   mounted () {
-    if (this.$store.state.user.username == null) {
+    console.log("home isLog = " + this.$store.state.user.isLogin)
+    if (this.$store.state.user.isLogin === null) {
       this.$router.push("/");
     }
 
   },
   methods: {
     goExpertPage () {
-      this.$axios
-        .get("home/loadHomePage", {
-          params: {
-            expertName: this.user.username,
-          }
-        }).then(successResponse => {
-          var responseResult = JSON.stringify(successResponse.data);
-          if (successResponse.data.code === 200) {
-            this.$store.commit("setExpertPage", responseResult)
-            this.$store.commit("setHasPermission", true)
-            this.$router.push("/main/overview")
-          } else {
-            this.$notify.error({
-              title: "请求被拒绝",
-              message: successResponse.data.message
-            });
-          }
-        })
-        .catch(failResponse => {
-          console.log(failResponse);
-        });
+      var value = {
+        hasPermission: true,
+        name: this.user.username,
+      }
+      this.$store.commit("setPrework", value)
+      this.$router.push("/main/overview")
     }
   },
   components: {
