@@ -79,13 +79,13 @@ export default {
     handleAvatarSuccess(res) {
       if (res.code === 200) {
         this.url = res.data;
-        console.log(res.data);
         this.user.avatarUrl = this.url;
+        console.log(this.url);
         this.$axios
           .get("usercenter/uploadAvatar",{
                   params:{
                         username: this.user.username  ,
-                        avatarUrl: this.url,
+                        avatarUrl: this.url[0],
                   }
           })
           .then(response => {
