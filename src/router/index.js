@@ -34,6 +34,11 @@ const routes = [
     component: loadView("Index")
   },
   {
+    path: "/manage",
+    name: "Manage",
+    component: loadView("Manage")
+  },
+  {
     path: "/home",
     name: "home",
     component: loadView("Home"),

@@ -34,6 +34,7 @@ import url from "@/assets/pic1.png";
 import { dateFormat } from "../assets/js/time";
 import Certification from "./Certification";
 
+
 export default {
   name: "OthersCard",
   components: { Certification },
