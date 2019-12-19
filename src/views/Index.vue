@@ -5,7 +5,7 @@
       <div class="totalDiv">
         <el-col :span="15">
           <div class="infoCardDiv">
-            <el-card shadow="hover" style="height: 400px;width: 640px">
+            <el-card shadow="hover" style="height: 400px;width: 700px">
               <OthersCard :user="this.user" />
             </el-card>
           </div>
