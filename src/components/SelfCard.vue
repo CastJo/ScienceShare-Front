@@ -17,7 +17,7 @@
                 <div >
                     <span><h1>{{ user.username }}</h1></span>
                     <span><h5>北京航空航天大学</h5></span>
-                    <a class = "application" @click="visible=true">申请专家认证</a>
+                    <a @click="visible=true">申请专家认证</a>
 <!--                    <el-button @click="visible=true"><span>申请专家认证</span></el-button>-->
                 </div>
                 <!--                </el-col>-->
@@ -112,30 +112,44 @@
         float: left;;
     }
     .emailEnTime{
-        margin-top: 70px;
+        margin-top: 65px;
     }
     .self-info div{
         float: none;
     }
 
-    .application{
-        margin-top: -10px;
-        color: #e7cfcf;
+    .self-info a{
+        margin-top: -5px;
+        color: #2c3e50;
         background: #ffffff;
         text-decoration: none;
         font-family: sans-serif;
         font-size: 15px;
         display: block;
-        width: 90px;
+        width: 105px;
         height: 30px;
         line-height: 30px;
         border-radius: 8px;
-        text-align: center;
-        -webkit-transition: color 5.5s linear, background 0.5s ease-in-out;
-        transition: color 5.5s linear, background 0.5s ease-in-out;
+        -webkit-transition: color 0.5s linear, background 0.5s ease-in-out 1s;
+        transition: color 0.5s linear, background 0.5s ease-in-out 1s;
     }
-    .application:hover{
-        color: #409EFF;
+    .self-info a:hover{
+        color: #409EFF;;
+        cursor: pointer;
+    }
+    .self-info a:hover{
+        padding-left: 10px;
+        background: rgba(0, 0, 0, 0.1);
+    }
+    .self-info a:hover::after{
+        right: 79.68%
+    }
+    .self-info a::after{
+        content: '>';
+        position: absolute;
+        right: 74%;
+        -webkit-transition: all 0.5s;
+        transition: all 0.5s;
     }
 
 </style>
