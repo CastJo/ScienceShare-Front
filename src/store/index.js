@@ -6,8 +6,10 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     username: "Leon",
+    hasPermission: false,
     user: {
       isLogin: window.sessionStorage.getItem("isLogin"),
+      identity: window.sessionStorage.getItem("identity"),
       username: window.sessionStorage.getItem("username"),
       permission: window.sessionStorage.getItem("permission"),
       unreadNotification: window.sessionStorage.getItem("unreadNotification"),
@@ -19,7 +21,7 @@ export default new Vuex.Store({
       followers: []
     },
     expertPage: {
-      expertName: window.sessionStorage.getItem("expertName"),
+      realName: window.sessionStorage.getItem("expertName"),
       follows: window.sessionStorage.getItem("follows"),
       fans: window.sessionStorage.getItem("fans"),
       introduction: window.sessionStorage.getItem("introduction"),
@@ -57,6 +59,7 @@ export default new Vuex.Store({
       state.user.avatarUrl = user.avatarUrl;
       state.user.following = user.following;
       state.user.followers = user.followers;
+      state.user.identity = user.identity;
       state.user.isLogin = true;
       window.sessionStorage.setItem("isLogin", state.user.isLogin);
       window.sessionStorage.setItem("username", state.user.username);
@@ -71,6 +74,7 @@ export default new Vuex.Store({
       window.sessionStorage.setItem("avatarUrl", state.user.avatarUrl);
       window.sessionStorage.setItem("following", state.user.following);
       window.sessionStorage.setItem("followers", state.user.followers);
+      window.sessionStorage.setItem("identity", state.user.identity);
     },
     setExpertPage(state, expertPage) {
       if (expertPage.skills == null) expertPage.skills = [];
@@ -96,6 +100,24 @@ export default new Vuex.Store({
     updateInfo(state, value) {
       state.expertPage.skills = value.skills;
       state.expertPage.introduce = value.introduce;
+      /*
+      window.sessionStorage.setItem("skills", value.skills);
+      window.sessionStorage.setItem("introduce", value.introduce);
+      */
+    },
+    updateExpertInfo(state, value) {
+      state.expertPage.institution = value.institution;
+      state.expertPage.degree = value.degree;
+      state.expertPage.webSiteUrl = value.webSiteUrl;
+      state.expertPage.phone = value.phone;
+      state.expertPage.email = value.email;
+      /*
+      window.sessionStorage.setItem("institution", value.institution);
+      window.sessionStorage.setItem("degree", value.degree);
+      window.sessionStorage.setItem("webSiteUrl", value.webSiteUrl);
+      window.sessionStorage.setItem("phone", value.phone);
+      window.sessionStorage.setItem("email", value.email);
+      */
     }
   },
   actions: {

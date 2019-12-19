@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-row :gutter="20">
-      <el-col :span="16">
+      <el-col :span="15">
         <el-card class="my-2 ml-4" shadow="hover">
           <div slot="header" class="mb-3">
             <span style="float: left"><b>Introduction</b></span>
@@ -96,12 +96,12 @@
             <span style="float: left"><b>Research</b></span>
             <el-button
               type="text"
-              style="padding: 3px 0px; padding-left: 83%"
+              style="padding: 3px 0px; padding-left: 80%"
               @click="goResearch"
               >View All</el-button
             >
           </div>
-          <el-col :span="6" v-for="item in nResearch" :key="item.name"
+          <el-col :span="7" v-for="item in nResearch" :key="item.name"
             ><el-card class="mb-4">
               <p>{{ item.name }}</p>
               <h2>{{ item.value }}</h2>
@@ -109,7 +109,7 @@
           </el-col>
         </el-card>
       </el-col>
-      <el-col class="pr-4" :span="8">
+      <el-col class="pr-4" :span="9">
         <el-card class="my-2 mx-3" style="max-height:220px" shadow="hover">
           <div slot="header">
             <b>
@@ -120,14 +120,16 @@
             {{ this.expertPage.institution }}
           </div>
         </el-card>
+        <Follow class="mx-3" :username="this.expertPage.expertName" />
       </el-col>
     </el-row>
   </div>
 </template>
 
 <script>
+import Follow from "@/components/Follow.vue";
 export default {
-  data () {
+  data() {
     return {
       dialogVisible: false,
       newInfo: {
@@ -149,46 +151,45 @@ export default {
         {
           name: "Questions",
           value: "4"
-        },
-        {
-          name: "Answers",
-          value: "0"
         }
       ]
     };
   },
-  mounted () {
+  mounted() {
     this.constTags = this.loadAll();
     // 判断 hasPermission
     if (this.expertPage.skills != null) {
-      console.log(this.expertPage.skills)
+      console.log("iam:" + this.expertPage.skills);
+      console.log(this.expertPage.skills);
       this.newInfo.skills = this.expertPage.skills;
     }
-    console.log(this.newInfo)
-
+    console.log(this.newInfo);
   },
   computed: {
-    anyType () {
+    anyType() {
       const type = ["", "success", "info", "danger", "warning"];
       return type[Math.ceil(Math.random() * 5) - 1];
     },
-    nTags () {
+    nTags() {
       if (this.expertPage.skills === null) return 0;
       else return this.expertPage.skills.length;
     },
     expertPage: {
-      get () {
+      get() {
         return this.$store.state.expertPage;
       }
     },
     hasPermission: {
-      get () {
-        return this.$store.state.user.username === this.$store.state.expertPage.expertName;
+      get() {
+        return (
+          this.$store.state.user.username ===
+          this.$store.state.expertPage.expertName
+        );
       }
     }
   },
   methods: {
-    querySearch (queryString, cb) {
+    querySearch(queryString, cb) {
       var tags = this.constTags;
       var results = queryString
         ? tags.filter(this.createFilter(queryString))
@@ -196,14 +197,14 @@ export default {
       // 调用 callback 返回建议列表的数据
       cb(results);
     },
-    createFilter (queryString) {
+    createFilter(queryString) {
       return tags => {
         return (
           tags.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0
         );
       };
     },
-    loadAll () {
+    loadAll() {
       return [
         { value: "java" },
         { value: "c++" },
@@ -213,38 +214,35 @@ export default {
         { value: "buaa" }
       ];
     },
-    handleClose (tag) {
+    handleClose(tag) {
       this.newInfo.skills.splice(this.newInfo.skills.indexOf(tag), 1);
     },
-    throwNotice: function (title, content) {
+    throwNotice: function(title, content) {
       const h = this.$createElement;
       this.$notify({
         title: title,
         message: h("i", { style: "color: teal" }, content)
       });
     },
-    addTag () {
+    addTag() {
       var tag = this.newTag;
       if (tag === "") {
         this.throwNotice("请求被拒绝", "请输入字符");
-        return
+        return;
       }
       if (
         this.expertPage.skills != null &&
         this.expertPage.skills.find(res => res === tag) !== undefined
       ) {
         this.throwNotice("请求被拒绝", "请已存在标签");
-      } else if (
-
-        this.constTags.find(res => res.value === tag) === undefined
-      ) {
+      } else if (this.constTags.find(res => res.value === tag) === undefined) {
         this.throwNotice("请求被拒绝", "没有此标签");
       } else {
         this.newInfo.skills.push(tag);
       }
       this.newTag = "";
     },
-    submit () {
+    submit() {
       const loading = this.$loading({
         lock: true,
         text: "Loading",
@@ -273,9 +271,12 @@ export default {
       loading.close();
       this.dialogVisible = false;
     },
-    goResearch () {
+    goResearch() {
       this.$router.push("/main/research");
     }
+  },
+  components: {
+    Follow
   }
 };
 </script>

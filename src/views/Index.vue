@@ -7,7 +7,6 @@
           <OthersCard :user="this.user" />
         </el-card>
       </div>
-
       <div class="followDiv"><Follow :username="this.user.username" /></div>
     </div>
   </el-main>

@@ -19,54 +19,56 @@
             >
               <div>
                 <h5 class="px-2">
-                  Institution:
+                  Institution :
                   <el-input
-                    placeholder="Edit Your institution"
-                    style="width: 450px"
+                    placeholder="Edit Your Institution"
+                    style="width: 456px; padding-left: 6px"
                     v-model="newInfo.institution"
                     class="py-2"
                   />
                 </h5>
               </div>
               <div>
-                <h5 class="px-2">
-                  Degree:
-                  <el-input
-                    placeholder="Edit Your Degree"
-                    style="width: 450px"
-                    v-model="newInfo.degree"
-                    class="pr-2 py-2"
-                  />
-                </h5>
+                <div class="px-2">
+                  <h5>
+                    Degree :
+                    <el-input
+                      placeholder="Edit Your Degree"
+                      style="width: 476px; padding-left: 26px"
+                      v-model="newInfo.degree"
+                      class=" py-2"
+                    />
+                  </h5>
+                </div>
               </div>
               <div>
                 <h5 class="px-2">
-                  Website:
+                  Website :
                   <el-input
                     placeholder="Edit Your Website"
-                    style="width: 450px"
+                    style="width: 470px; padding-left: 20px"
                     v-model="newInfo.webSiteUrl"
-                    class="pr-2 py-2"
+                    class="py-2"
                   />
                 </h5>
               </div>
               <div>
                 <h5 class="px-2">
-                  Phone:
+                  Phone :
                   <el-input
-                    placeholder="Edit Your phone"
-                    style="width: 450px"
+                    placeholder="Edit Your Phone"
+                    style="width: 484px; padding-left: 34px"
                     v-model="newInfo.phone"
-                    class="pr-2 py-2"
+                    class="py-2"
                   />
                 </h5>
               </div>
               <div>
                 <h5 class="px-2">
-                  Email:
+                  Email :
                   <el-input
                     placeholder="Edit Your Email"
-                    style="width: 450px"
+                    style="width: 500px; padding-left: 40px"
                     v-model="newInfo.email"
                     class="pr-2 py-2"
                   />
@@ -95,7 +97,7 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       dialogVisible: false,
       newInfo: {
@@ -103,23 +105,60 @@ export default {
         degree: "",
         webSiteUrl: "",
         phone: "",
-        email: "",
-      },
+        email: ""
+      }
     };
   },
-  mounted () {
-    console.log(this.$store.state.expertPage)
+  mounted() {
+    console.log(this.$store.state.expertPage);
   },
   computed: {
     expertPage: {
-      get () {
-        return this.$store.state.expertPage
+      get() {
+        return this.$store.state.expertPage;
       }
     },
     hasPermission: {
-      get () {
-        return this.$store.state.expertPage.expertName === this.$store.state.user.username
+      get() {
+        return (
+          this.$store.state.expertPage.expertName ===
+          this.$store.state.user.username
+        );
       }
+    }
+  },
+  methods: {
+    submit() {
+      const loading = this.$loading({
+        lock: true,
+        text: "Loading",
+        spinner: "el-icon-loading",
+        background: "rgba(0, 0, 0, 0.7)"
+      });
+      this.$axios
+        .post("expert/info", {
+          params: {
+            institution: this.newInfo.institution,
+            degree: this.newInfo.degree,
+            webSiteUrl: this.newInfo.webSiteUrl,
+            phone: this.newInfo.phone,
+            email: this.newInfo.email
+          }
+        })
+        .then(successResponse => {
+          if (successResponse.data.code === 200) {
+            var value = this.newInfo;
+            this.$store.commit("updateExpertInfo", value);
+            this.throwNotice("成功", "已更新");
+          } else {
+            this.throwNotice("错误", "某个错误");
+          }
+        })
+        .catch(failResponse => {
+          console.log(failResponse);
+        });
+      loading.close();
+      this.dialogVisible = false;
     }
   }
 };

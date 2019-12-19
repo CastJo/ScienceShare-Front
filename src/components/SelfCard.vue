@@ -31,7 +31,8 @@
           ><h1>{{ user.username }}</h1></span
         >
         <span><h5>北京航空航天大学</h5></span>
-        <a @click="visible = true">申请专家认证></a>
+        <a v-if="user.identity == 2" @click="visible = true">申请专家认证></a>
+        <a v-else @click="goExpertPage">我的专家主页></a>
         <!--                    <el-button @click="visible=true"><span>申请专家认证</span></el-button>-->
       </div>
       <!--                </el-col>-->
@@ -64,6 +65,9 @@ export default {
       activeIndex: "1",
       visible: false
     };
+  },
+  mounted() {
+    console.log(this.user);
   },
   computed: {
     formattedDate() {
@@ -108,6 +112,14 @@ export default {
         this.$message.error("上传头像图片大小不能超过 2MB!");
       }
       return (isPNG || isJPG) && isLt2M;
+    },
+    goExpertPage() {
+      var value = {
+        hasPermission: true,
+        name: this.user.username
+      };
+      this.$store.commit("setPrework", value);
+      this.$router.push("/main/overview");
     }
   }
 };

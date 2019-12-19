@@ -39,39 +39,41 @@
 import Navigator from "@/components/Navigator.vue";
 import url from "@/assets/pic1.png";
 export default {
-  data () {
+  data() {
     return {
       fullscreenLoading: false,
       formLabelWidth: "60px",
       circleUrl: url,
-      activeIndex: "1",
+      activeIndex: "1"
     };
   },
   computed: {
     expertPage: {
-      get () {
-        return this.$store.state.expertPage
-      },
-    },
+      get() {
+        return this.$store.state.expertPage;
+      }
+    }
   },
-  mounted () {
+  mounted() {
     if (this.$store.state.user.isLogin === null) {
       this.$router.push("/");
-      return
+      return;
     }
     this.$axios
       .get("homepage/home/loadHomePage", {
         params: {
-          expertName: this.expertPage.expertName,
+          // expertName: this.expertPage.expertName,
+          expertName: "Danielle Gai Tavares-Rixon"
         }
-      }).then(successResponse => {
+      })
+      .then(successResponse => {
         var responseResult = JSON.parse(
           JSON.stringify(successResponse.data.data)
         );
         if (successResponse.data.code === 200) {
-          console.log(responseResult)
-          this.$store.commit("setExpertPage", responseResult)
-          this.$router.push("/main/overview")
+          console.log(responseResult);
+          this.$store.commit("setExpertPage", responseResult);
+          this.$router.push("/main/overview");
         } else {
           this.$notify.error({
             title: "请求被拒绝",
@@ -82,15 +84,14 @@ export default {
       .catch(failResponse => {
         console.log(failResponse);
       });
-
   },
   methods: {
-    uploadFile () {
+    uploadFile() {
       const loading = this.$loading({
         lock: true,
-        text: 'Loading',
-        spinner: 'el-icon-loading',
-        background: 'rgba(0, 0, 0, 0.7)'
+        text: "Loading",
+        spinner: "el-icon-loading",
+        background: "rgba(0, 0, 0, 0.7)"
       });
 
       loading.close();

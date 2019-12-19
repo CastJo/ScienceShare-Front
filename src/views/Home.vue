@@ -19,7 +19,6 @@
               >我的专家主页</el-menu-item
             >
           </el-menu>
-
           <router-view />
         </el-card>
       </div>
@@ -73,14 +72,6 @@ export default {
   methods: {
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
-    },
-    goExpertPage() {
-      var value = {
-        hasPermission: true,
-        name: this.user.username
-      };
-      this.$store.commit("setPrework", value);
-      this.$router.push("/main/overview");
     }
   },
   components: {

@@ -123,7 +123,7 @@ export default {
 }
 .nameEnCollege {
   margin-left: 10px;
-  width: 185px;
+  width: 150px;
   height: 60px;
 }
 

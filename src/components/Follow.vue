@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-card shadow="hover" style="height: 900px;width: 360px">
+    <el-card shadow="hover">
       <span>关注者</span>
       <div class="followingPart">
         <ul
@@ -16,7 +16,7 @@
           </li>
         </ul>
       </div>
-      <el-divider class="hotpostDivider" />
+      <el-divider />
       <span>粉丝</span>
       <div class="followingPart">
         <ul
@@ -108,7 +108,7 @@ export default {
 
 <style scoped>
 .followingPart {
-  height: 400px;
+  height: 200px;
   padding-top: 10px;
 }
 

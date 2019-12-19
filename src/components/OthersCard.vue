@@ -50,7 +50,7 @@ export default {
     }
   },
   methods: {
-    handleAvatarSuccess(res, file) {
+    handleAvatarSuccess(res) {
       if (res.code === 200) {
         this.url = res.message;
         this.user.avatarUrl = this.url;
