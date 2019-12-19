@@ -2,17 +2,17 @@
     <div>
         <el-card shadow="hover" style="height: 900px;width: 360px">
 
-            <span>关注者</span>
+            <h4>关注者</h4>
             <div class="followingPart">
-                <ul class="infinite-list"  style="overflow:auto;list-style: none;padding: 0 0 0 0">
+                <ul class=""  style="overflow:auto;list-style: none;padding: 0 0 0 0; max-height: 400px">
                     <li v-for="i in following" class="infinite-list-item" :key="i.username" >
                         <FollowPart :part="i" @click-avatar="handleClickAvatar"/></li>
                 </ul>
             </div>
             <el-divider class = "hotpostDivider"/>
-            <span>粉丝</span>
+            <h4>粉丝</h4>
             <div class="followingPart">
-                <ul class="infinite-list"  style="overflow:auto;list-style: none;padding: 0 0 0 0">
+                <ul class=""  style="overflow:auto;list-style: none;padding: 0 0 0 0; max-height: 400px">
                     <li v-for="i in followers" class="infinite-list-item" :key="i.username">
                         <FollowPart :part="i" @click-avatar="handleClickAvatar"/></li>
                 </ul>
@@ -47,8 +47,8 @@
                 this.$axios
                     .get('usercenter/allFollowing', {
                         params: {
-                            username: this.user.username,
-                            myUsername: this.user.username,
+                            username: this.username,
+                            myUsername: this.username,
                         }
                     })
                     .then(res => {
@@ -64,8 +64,8 @@
                 this.$axios
                     .get('usercenter/allFollowers', {
                         params: {
-                            username: this.user.username,
-                            myUsername: this.user.username,
+                            username: this.username,
+                            myUsername: this.username,
                         }
                     })
                     .then(res => {

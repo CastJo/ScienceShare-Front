@@ -4,7 +4,7 @@
             <div>
                 <!--                <el-col :span="4">-->
                 <el-tooltip class="item" effect="dark" content="点击修改头像" placement="top">
-                    <el-upload class="avatar-uploader" action="http://111.230.166.179:8888/usercenter/uploadFile"
+                    <el-upload class="avatar-uploader" action="http://111.230.166.179:8888/homepage/uploadFile"
                                :show-file-list="false" :on-success="handleAvatarSuccess"
                                :before-upload="beforeAvatarUpload">
                         <img v-if="this.user.avatarUrl" :src="this.user.avatarUrl" class="avatar">
@@ -59,13 +59,13 @@
             }
         },
         methods: {
-            handleAvatarSuccess(res, file) {
+            handleAvatarSuccess(res) {
                 if (res.code === 200) {
-                    this.url = res.message;
+                    this.url = res.data;
+                    console.log(this.url);
                     this.user.avatarUrl = this.url;
-                    this.$store.dispatch('changeAvatar');
-                    this.$axios.post('/uploadAvatar', {
-                        username: this.name,
+                    this.$axios.get('/usercenter/uploadAvatar', {
+                        username: this.user.name,
                         avatarUrl: this.url,
                     }).then((response) => {
                         console.log(response)
@@ -75,7 +75,7 @@
                 } else if (res.code === 400) {
                     console.log("fail")
                 }
-                location.reload();
+                // location.reload();
             },
             beforeAvatarUpload(file) {
                 const isJPG = file.type === 'image/jpeg';
