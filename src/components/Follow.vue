@@ -35,6 +35,7 @@
             }
         },
         created() {
+            console.log(this.username);
             this.getFollowing();
             this.getFollowers();
         },
@@ -78,7 +79,7 @@
                     })
             },
         },
-        props:['user',],
+        props:['username',],
     }
 </script>
 
