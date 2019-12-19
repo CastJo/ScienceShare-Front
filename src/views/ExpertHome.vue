@@ -60,7 +60,7 @@ export default {
       return
     }
     this.$axios
-      .get("home/loadHomePage", {
+      .get("homepage/home/loadHomePage", {
         params: {
           expertName: this.expertPage.expertName,
         }

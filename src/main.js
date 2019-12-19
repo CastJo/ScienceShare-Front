@@ -9,8 +9,8 @@ Vue.config.productionTip = false;
 Vue.use(ElementUI);
 var axios = require("axios");
 // axios.defaults.baseURL = "http://localhost:8005";
-// axios.defaults.baseURL = "http://111.230.166.179:8888";
-axios.defaults.baseURL = "http://193.112.150.103:8005";
+axios.defaults.baseURL = "http://111.230.166.179:8888";
+
 Vue.prototype.$axios = axios;
 // router.beforeEach((to, from, next) => {
 //     if (to.meta.requireAuth) {

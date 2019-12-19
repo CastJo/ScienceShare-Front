@@ -17,6 +17,69 @@
               :visible.sync="dialogVisible"
               :modal-append-to-body="false"
             >
+              <div>
+                <h5 class="px-2">
+                  Institution:
+                  <el-input
+                    placeholder="Edit Your institution"
+                    style="width: 450px"
+                    v-model="newInfo.institution"
+                    class="py-2"
+                  />
+                </h5>
+              </div>
+              <div>
+                <h5 class="px-2">
+                  Degree:
+                  <el-input
+                    placeholder="Edit Your Degree"
+                    style="width: 450px"
+                    v-model="newInfo.degree"
+                    class="pr-2 py-2"
+                  />
+                </h5>
+              </div>
+              <div>
+                <h5 class="px-2">
+                  Website:
+                  <el-input
+                    placeholder="Edit Your Website"
+                    style="width: 450px"
+                    v-model="newInfo.webSiteUrl"
+                    class="pr-2 py-2"
+                  />
+                </h5>
+              </div>
+              <div>
+                <h5 class="px-2">
+                  Phone:
+                  <el-input
+                    placeholder="Edit Your phone"
+                    style="width: 450px"
+                    v-model="newInfo.phone"
+                    class="pr-2 py-2"
+                  />
+                </h5>
+              </div>
+              <div>
+                <h5 class="px-2">
+                  Email:
+                  <el-input
+                    placeholder="Edit Your Email"
+                    style="width: 450px"
+                    v-model="newInfo.email"
+                    class="pr-2 py-2"
+                  />
+                </h5>
+              </div>
+              <div class="demo-drawer__footer mx-5" style="margin-top:15%">
+                <el-button
+                  @click="dialogVisible = false"
+                  style="margin-left: 60%"
+                  >取 消</el-button
+                >
+                <el-button type="primary" @click="submit">提 交</el-button>
+              </div>
             </el-dialog>
           </div>
           <div>Institution: {{ this.expertPage.institution }}</div>
@@ -35,7 +98,13 @@ export default {
   data () {
     return {
       dialogVisible: false,
-      newInfo: "",
+      newInfo: {
+        institution: "",
+        degree: "",
+        webSiteUrl: "",
+        phone: "",
+        email: "",
+      },
     };
   },
   mounted () {
