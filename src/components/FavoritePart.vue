@@ -20,7 +20,8 @@
 
 <style scoped>
     .userInfoDiv {
-        height: 120px;
+        margin-top: 20px;
+        height: 80px;
     }
 
     .userInfoDiv div {
