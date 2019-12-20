@@ -163,6 +163,7 @@ export default {
     if (this.expertPage.skills != null) {
       this.newInfo.skills = this.expertPage.skills;
     }
+    console.log(this.expertPage)
   },
   computed: {
     anyType() {

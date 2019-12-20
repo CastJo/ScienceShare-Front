@@ -59,8 +59,6 @@ export default {
       this.$router.push("/");
       return;
     }
-    console.log("before call");
-    console.log(this.$store.state.expertID);
     this.$axios
       .get("/homepage/loadHomePage", {
         params: {
@@ -71,8 +69,6 @@ export default {
         var responseResult = JSON.parse(
           JSON.stringify(successResponse.data.data)
         );
-        console.log("responseResult ");
-        console.log(responseResult);
         if (successResponse.data.code === 200) {
           this.$store.commit("setExpertPage", responseResult);
           this.$router.push("/main/overview");
