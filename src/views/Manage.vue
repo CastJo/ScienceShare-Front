@@ -1,15 +1,22 @@
 <template>
   <el-main style="padding-top: 0;">
     <Navigator />
-    <div class="totalDiv">
-      <div class="infoCardDiv">
-        <el-card shadow="hover" style="height: 400px;width: 740px">
-          <OthersCard :user="this.user" />
-        </el-card>
-      </div>
-
-      <div class="followDiv"></div>
-    </div>
+      <el-row :gutter="20">
+          <div class="totalDiv">
+              <el-col :span="15">
+                  <div class="infoCardDiv">
+                      <el-card shadow="hover" style="height: 400px;width: 700px">
+                          <OthersCard :user="this.user" />
+                      </el-card>
+                  </div>
+              </el-col>
+              <el-col :span="9">
+                  <div class="followDiv">
+                      <CheckApply/>
+                  </div>
+              </el-col>
+          </div>
+      </el-row>
   </el-main>
 </template>
 
@@ -17,7 +24,8 @@
 import Navigator from "@/components/Navigator.vue";
 import url from "@/assets/pic1.png";
 import { dateFormat } from "../assets/js/time";
-
+import OthersCard from "../components/OthersCard";
+import CheckApply from "../components/CheckApply";
 export default {
   name: "Manage",
   data() {
@@ -59,6 +67,8 @@ export default {
     }
   },
   components: {
+      CheckApply,
+      OthersCard,
     Navigator
   }
 };

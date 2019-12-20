@@ -159,77 +159,8 @@ npm <template>
             }
         },
         props: ['visible',
-        ]
-    }
-    /*
-    value2(val) {
-      console.log(this.value2);
-    }
-    */
-  },
-  methods: {
-    getSchool() {
-      this.$axios
-        .get("usercenter/getCollegeByKeyword", {
-          params: {
-            keyword: this.value2
-          }
-        })
-        .then(res => {
-          this.options2 = res.data;
-        });
-    },
-    handleClose() {
-      this.$confirm("确认关闭？")
-        .then(() => {
-          this.closeDialog();
-        })
-        .catch(() => {});
-    },
-    closeDialog() {
-      this.dialogVisible = false;
-    },
-    addReply() {
-      if (this.form.content == "") this.$alert("内容不能为空");
-      else {
-        this.$confirm("是否发布回复?", "", {
-          confirmButtonText: "确定",
-          cancelButtonText: "取消"
-        })
-          .then(() => {
-            this.postToBackEnd();
-          })
-          .catch(() => {});
-      }
-    },
-    remoteMethodE(query) {
-      if (query !== "") {
-        this.expert.loading = true;
-        setTimeout(() => {
-          this.expert.loading = false;
-          this.expert.options = this.expert.list.filter(item => {
-            return item.label.toLowerCase().indexOf(query.toLowerCase()) > -1;
-          });
-        }, 200);
-      } else {
-        this.expert.options = [];
-      }
-    },
-    remoteMethodS(query) {
-      if (query !== "") {
-        this.school.loading = true;
-        setTimeout(() => {
-          this.school.loading = false;
-          this.school.options = this.school.list.filter(item => {
-            return item.label.toLowerCase().indexOf(query.toLowerCase()) > -1;
-          });
-        }, 200);
-      } else {
-        this.school.options = [];
-      }
-    }
-  },
-  props: ["visible"]
+        ],
+
 };
 </script>
 <style scoped></style>
