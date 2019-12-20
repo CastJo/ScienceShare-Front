@@ -8,9 +8,10 @@
         <el-row
           ><el-col :span="4" class="px-5">
             <el-avatar :size="100" :src="circleUrl"></el-avatar>
+<!--          <avatar username="expertPage.realName" :size="100"/>-->
           </el-col>
           <el-col :span="10">
-            <h4>{{ expertPage.expertName }}</h4>
+            <h4>{{ expertPage.realName }}</h4>
             <h6>
               Follows: {{ expertPage.follows === "" ? 0 : expertPage.follows }}
             </h6>
@@ -98,7 +99,7 @@ export default {
 
   },
   components: {
-    Navigator
+    Navigator,
   }
 };
 </script>
