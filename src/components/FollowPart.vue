@@ -26,7 +26,7 @@
         >已关注</el-checkbox
       >
     </div>
-    <el-divider style="margin: 12px" />
+    <el-divider style="margin: 12px 0" />
   </div>
 </template>
 
@@ -118,6 +118,7 @@ export default {
 <style scoped>
 .userInfoDiv {
   height: 60px;
+  float: none;
 }
 
 .userInfoDiv div {

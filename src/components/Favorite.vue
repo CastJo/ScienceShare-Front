@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <el-card>
+    <div class="favoriteDiv">
+        <el-card style="height: 400px; width: 100%">
 
         </el-card>
     </div>
@@ -13,5 +13,8 @@
 </script>
 
 <style scoped>
-
+    .favoriteDiv{
+        width: 100%;
+        height: 400px;
+    }
 </style>
