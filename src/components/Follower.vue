@@ -1,6 +1,6 @@
 <template>
     <div class="followerDiv" style="float: right">
-        <el-card shadow="hover" style="width: 90%;height: 400px;">
+        <el-card shadow="hover" style="width: 90%;height: 400px;padding-right: 0">
             <span>粉丝</span><br/>
             <div class="followingPart">
                 <ul

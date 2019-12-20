@@ -1,5 +1,5 @@
 <template>
-    <div class="followingDiv" style="float:right;">
+    <div class="followingDiv" style="float:right">
         <el-card shadow="hover" style="width: 100%; height: 400px;">
             <span>关注</span><br/>
             <div class="followingPart">
