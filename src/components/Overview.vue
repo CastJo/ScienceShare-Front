@@ -13,7 +13,7 @@
               >Edit<i class="el-icon-edit"></i
             ></el-button>
             <br />
-            <div v-if="expertPage.introduce === ''">
+            <div v-if="expertPage.introduction === ''">
               <el-button
                 v-if="hasPermission"
                 @click="dialogVisible = true"
@@ -28,7 +28,7 @@
               </p>
             </div>
             <p v-else class="mt-4">
-              {{ this.expertPage.introduce }}
+              {{ this.expertPage.introduction }}
             </p>
           </div>
           <el-dialog
@@ -179,8 +179,8 @@ export default {
     hasPermission: {
       get() {
         return (
-          this.$store.state.user.username ===
-          this.$store.state.expertPage.expertName
+          this.$store.state.user.expertID ===
+          this.$store.state.expertPage.expertID
         );
       }
     }
@@ -246,11 +246,13 @@ export default {
         spinner: "el-icon-loading",
         background: "rgba(0, 0, 0, 0.7)"
       });
+      console.log(this.newInfo);
       this.$axios
-        .post("expert/info", {
+        .get("homepage/updateIntroduction", {
           params: {
+            expertId: this.expertPage.expertID,
             introduction: this.newInfo.introduce,
-            skills: this.newInfo.tags
+            skills: "iamtag"
           }
         })
         .then(successResponse => {
@@ -267,6 +269,8 @@ export default {
         });
       loading.close();
       this.dialogVisible = false;
+      console.log("after submit")
+      console.log(this.expertPage)
     },
     goResearch() {
       this.$router.push("/main/research");

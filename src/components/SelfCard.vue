@@ -116,8 +116,9 @@ export default {
       return (isPNG || isJPG) && isLt2M;
     },
     goExpertPage() {
-
       this.$store.commit("setPrework", this.user.expertID);
+      console.log("before into");
+      console.log(this.user);
       this.$router.push("/main/overview");
     }
   }

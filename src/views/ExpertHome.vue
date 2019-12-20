@@ -59,11 +59,12 @@ export default {
       this.$router.push("/");
       return;
     }
+    console.log("before call");
+    console.log(this.$store.state.expertID);
     this.$axios
-      .get("homepage/home/loadHomePage", {
+      .get("/homepage/loadHomePage", {
         params: {
-          // expertID: this.$store.state.expertID
-          id: this.$store.state.expertID,
+          id: this.$store.state.expertID
         }
       })
       .then(successResponse => {
@@ -73,7 +74,6 @@ export default {
         console.log("responseResult ");
         console.log(responseResult);
         if (successResponse.data.code === 200) {
-          console.log("123" + responseResult);
           this.$store.commit("setExpertPage", responseResult);
           this.$router.push("/main/overview");
         } else {
