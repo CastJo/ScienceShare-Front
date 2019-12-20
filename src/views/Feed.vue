@@ -1,6 +1,6 @@
 <template>
-    <div style="width: 100%">
-        <navigator></navigator>
+    <el-main style="padding-top: 0;">
+        <navigator/>
         <div class="feedzone">
             <news-card v-for="feed in feeds"
                        class="mt-3"
@@ -19,7 +19,7 @@
                     prev-text="上一页" next-text="下一页">
             </el-pagination>
         </div>
-    </div>
+    </el-main>
 </template>
 
 <script>
