@@ -119,6 +119,7 @@ export default {
 .userInfoDiv {
   height: 60px;
   float: none;
+  width: 320px;
 }
 
 .userInfoDiv div {
