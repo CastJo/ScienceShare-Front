@@ -34,7 +34,7 @@
                 >
                 </news-card>
                 <el-pagination
-                        class="mt-3"
+                        class="mt-3 mb-5"
                         @current-change="handleCurrentChange"
                         :current-page.sync="currentPage"
                         :page-size="10" layout="prev, next"
