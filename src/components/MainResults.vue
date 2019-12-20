@@ -23,7 +23,7 @@
             <el-table-column
                     prop="n_citation"
                     label="Citation"
-                    width="100"
+                    width="70"
                     sortable
                     style="float: right;">
             </el-table-column>
