@@ -19,7 +19,7 @@
             <mavon-editor :boxShadow="false" defaultOpen="edit" placeholder="请添加申请材料" v-model="content">
             </mavon-editor><br/>
             <el-select
-                    style="width: 800px"
+                    style="width:100%"
                     v-model="value3"
                     multiple
                     filterable

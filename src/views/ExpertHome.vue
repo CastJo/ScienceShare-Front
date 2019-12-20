@@ -7,7 +7,9 @@
       <el-card shadow="hover" style="height: 200px">
         <el-row
           ><el-col :span="4" class="px-5">
-            <el-avatar :size="100" :src="circleUrl"></el-avatar>
+          <el-button type="text"  @click="GoBack">
+            <el-avatar :size="100" >{{expertPage.realName}}</el-avatar>
+          </el-button>
 <!--          <avatar username="expertPage.realName" :size="100"/>-->
           </el-col>
           <el-col :span="10">
@@ -86,6 +88,10 @@ export default {
     console.log("44");
   },
   methods: {
+    GoBack(){
+      console.log("back")
+      window.history.back();
+    },
     uploadFile() {
       const loading = this.$loading({
         lock: true,

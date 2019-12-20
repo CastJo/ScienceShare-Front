@@ -11,8 +11,7 @@
                             <div style="font-weight: lighter;color: dimgrey;margin-top: 45px"> {{item.college}}</div>
                         </el-col>
                         <el-col :span="4" style="text-align: right;">
-                            <div class="block"><el-avatar :size="80" :src="item.avatarUrl"></el-avatar></div>
-                            <el-button type="primary" size="mini" icon="el-icon-plus" style="margin-bottom: 5px; margin-left:3px;">关注</el-button>
+                            <div class="block" ><el-button type="text" @click="ToIndex(item)"><el-avatar :size="80" :src="item.avatarUrl"></el-avatar></el-button></div>
                         </el-col>
                     </el-row>
                 </el-card>
@@ -62,6 +61,9 @@
                 });
         },
         methods:{
+            ToIndex(Item){
+                this.$router.push(`/index/${Item.username}`);
+            },
             handleCurrentChange(val){
                 this.$axios
                     .get("litcenter/getUsersByPaging", {
