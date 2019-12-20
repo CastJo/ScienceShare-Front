@@ -5,7 +5,7 @@
             <div class="checkApply">
                 <ul
                         class="infinite-list"
-                        style="overflow:auto;list-style: none;padding: 0 0 0 0; max-height: 400px"
+                        style="overflow:auto;list-style: none;padding: 0 0 0 0; height:500px;max-height: 500px"
                 >
                     <li
                             v-for="i in favorites"
@@ -62,5 +62,10 @@
     .favoriteDiv{
         width: 100%;
         height: 400px;
+    }
+    .checkApply{
+        padding-right: 10px;
+        padding-left: 10px;
+        height: 500px;
     }
 </style>

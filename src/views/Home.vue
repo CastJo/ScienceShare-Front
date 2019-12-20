@@ -25,11 +25,11 @@
             </div>
             <div class="favEnFollow">
                 <div class="favDiv">
-                    <Favorite :username="this.user.username"/>
+                    <Favorite :username="this.$store.state.user.username"/>
                 </div>
                 <div class="followDiv">
-                    <Follow :username="this.user.username"/>
-                    <Follower :username="this.user.username"/>
+                    <Follow :username="this.$store.state.user.username"/>
+                    <Follower :username="this.$store.state.user.username"/>
                 </div>
             </div>
         </div>
