@@ -95,8 +95,8 @@ export default new Vuex.Store({
       window.sessionStorage.setItem("email", expertPage.email);
     },
     setPrework(state, value) {
-      state.hasPermission = value.hasPermission;
-      state.expertPage.expertName = value.name;
+
+      state.expertID = value;
     },
     updateInfo(state, value) {
       state.expertPage.skills = value.skills;
@@ -127,6 +127,9 @@ export default new Vuex.Store({
     },
     setUser(context, user) {
       context.commit("setUser", user);
+    },
+    setPrework(context,expertID){
+      context.commit("setPrework",expertID);
     }
   },
   modules: {}

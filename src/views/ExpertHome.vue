@@ -55,18 +55,15 @@ export default {
     }
   },
   mounted() {
-    console.log("111");
     if (this.$store.state.user.isLogin === null) {
       this.$router.push("/");
       return;
     }
-    console.log("222");
-    var theID = "1000019749";
     this.$axios
       .get("homepage/home/loadHomePage", {
         params: {
           // expertID: this.$store.state.expertID
-          id: theID
+          id: this.$store.state.expertID,
         }
       })
       .then(successResponse => {
