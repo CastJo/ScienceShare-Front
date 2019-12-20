@@ -137,6 +137,7 @@
 
 <style>
 	.newMailZone{
+
 		padding: 80px 120px;
 	}
 	.newMailZone div{
@@ -192,8 +193,8 @@
 	}
 
 	.changeMailBottonZone{
-		text-align: center;
 		margin-top: 20px;
+		margin-left: 130px;
 	}
 
 </style>

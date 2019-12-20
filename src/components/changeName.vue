@@ -5,7 +5,7 @@
 			<div>
 				<el-input type="text" v-model="changeNameVo.NewUsername" placeholder="请输入新的用户名"/></div><br/>
 
-			<el-button type="primary" @click="change">确认修改</el-button>
+			<el-button class="changeNameBottom" type="primary" @click="change">确认修改</el-button>
 
 	</div>
 </template>
@@ -61,6 +61,7 @@
 	.changeName {
 		text-align: center;
 		padding: 100px 120px;
+		width: 600px;
 	}
 
 	.changeName input {
@@ -71,6 +72,10 @@
 		outline: none;
 		border: 1px solid #888;
 		box-sizing: border-box;
+	}
+
+	.changeNameBottom{
+
 	}
 
 </style>
