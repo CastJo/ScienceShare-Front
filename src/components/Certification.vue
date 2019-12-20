@@ -1,4 +1,4 @@
-npm <template>
+<template>
     <div>
         <el-dialog :before-close="handleClose" :visible.sync="this.dialogVisible" title="专家认证">
             您的姓名：
@@ -25,6 +25,7 @@ npm <template>
                     filterable
                     allow-create
                     default-first-option
+                    @change="handleS"
                     @select="handleS"
                     placeholder="请选择属于您的文章">
                 <el-option

@@ -50,7 +50,6 @@
                 this.$router.push(`/index/${val}`);
                 if (this.username !== this.$store.state.user.username) {
                     window.location.reload();
-                    window.location.reload();
                 }
             },
             getFollowing() {
