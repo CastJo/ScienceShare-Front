@@ -44,7 +44,7 @@
         },
         methods: {
             handleClickAvatar() {
-                this.$emit("click-avatar", this.part.username);
+                this.$emit("click-avatar", this.part);
             },
             follow() {
                 this.$axios

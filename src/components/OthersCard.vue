@@ -12,7 +12,7 @@
         <span
         ><h1>{{ this.user.username }}</h1></span
         >
-                <span><h5>北京航空航天大学</h5></span>
+                <span><h5>{{ this.user.college }}</h5></span>
             </div>
             <div class="emailEnTime">
         <span
