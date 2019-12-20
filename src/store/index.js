@@ -24,7 +24,7 @@ export default new Vuex.Store({
     },
     expertPage: {
       expertID: window.sessionStorage.getItem("expertID"),
-      realName: window.sessionStorage.getItem("expertName"),
+      realName: window.sessionStorage.getItem("realName"),
       follows: window.sessionStorage.getItem("follows"),
       fans: window.sessionStorage.getItem("fans"),
       introduction: window.sessionStorage.getItem("introduction"),
@@ -86,9 +86,7 @@ export default new Vuex.Store({
       if (expertPage.skills == null) expertPage.skills = [];
       if (expertPage.introduction == null) expertPage.introduction = "";
       state.expertPage = expertPage;
-      console.log("in setfunction");
-      console.log(expertPage);
-      window.sessionStorage.setItem("expertName", expertPage.expertName);
+      window.sessionStorage.setItem("realName", expertPage.realName);
       window.sessionStorage.setItem("expertID", expertPage.expertID);
       window.sessionStorage.setItem("follows", expertPage.follows);
       window.sessionStorage.setItem("fans", expertPage.fans);

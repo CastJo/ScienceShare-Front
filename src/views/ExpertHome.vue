@@ -8,9 +8,10 @@
         <el-row
           ><el-col :span="4" class="px-5">
             <el-avatar :size="100" :src="circleUrl"></el-avatar>
+<!--          <avatar username="expertPage.realName" :size="100"/>-->
           </el-col>
           <el-col :span="10">
-            <h4>{{ expertPage.expertName }}</h4>
+            <h4>{{ expertPage.realName }}</h4>
             <h6>
               Follows: {{ expertPage.follows === "" ? 0 : expertPage.follows }}
             </h6>
@@ -59,8 +60,6 @@ export default {
       this.$router.push("/");
       return;
     }
-    console.log("before call");
-    console.log(this.$store.state.expertID);
     this.$axios
       .get("/homepage/loadHomePage", {
         params: {
@@ -71,8 +70,6 @@ export default {
         var responseResult = JSON.parse(
           JSON.stringify(successResponse.data.data)
         );
-        console.log("responseResult ");
-        console.log(responseResult);
         if (successResponse.data.code === 200) {
           this.$store.commit("setExpertPage", responseResult);
           this.$router.push("/main/overview");
@@ -102,7 +99,7 @@ export default {
 
   },
   components: {
-    Navigator
+    Navigator,
   }
 };
 </script>

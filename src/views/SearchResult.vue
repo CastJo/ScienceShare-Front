@@ -1,5 +1,5 @@
 <template>
-    <el-main style="">
+    <el-main style="padding-top: 0;">
         <Navigator/>
 
         <el-row style="min-height: 150px;margin-top: 100px;">

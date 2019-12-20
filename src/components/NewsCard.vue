@@ -1,6 +1,6 @@
 <template>
     <div>
-        <el-card shadow="hover" class="outPost" @click.native="ToContent">
+        <el-card shadow="hover" class="outPost" @click.native="toContent">
             <div class="news"> {{this.news}} </div>
             <div class="title"> {{this.title}} </div>
             <div class="time"> {{this.formattedTime}} </div>
@@ -20,6 +20,10 @@
             }
         },
         methods: {
+            toContent() {
+                this.$emit("click", this.id)
+                console.log(this.id)
+            }
         },
         created() {
         }

@@ -115,11 +115,7 @@ export default {
       return (isPNG || isJPG) && isLt2M;
     },
     goExpertPage() {
-      var value = {
-        hasPermission: true,
-        name: this.user.username
-      };
-      this.$store.commit("setPrework", value);
+      this.$store.commit("setPrework", this.user.expertID);
       this.$router.push("/main/overview");
     }
   }
