@@ -95,8 +95,8 @@
 <style>
     .favEnFollow {
         float: none;
-        height: 500px;
-        width: 97.6%;
+        height: 600px;
+        width: 100%;
     }
 
     .favDiv {
@@ -106,7 +106,6 @@
 
     .totalDiv {
         width: 100%;
-        position: absolute;
         float: left;
     }
     .favEnFollow div{
@@ -114,14 +113,14 @@
     }
 
     .infoCardDiv {
-        width: 97.6%;
+        width: 100%;
         margin-top: 40px;
         height: 400px;
     }
 
     .followDiv {
         width: 50%;
-        float: none;
-
+        float: right;
+        child-align: right;
     }
 </style>
