@@ -131,6 +131,7 @@ export default {
 .avatar {
   height: 220px;
   width: 220px;
+  object-fit: cover;
 }
 .wrap {
   text-align: center;

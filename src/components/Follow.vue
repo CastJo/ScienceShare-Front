@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-card shadow="hover" class="mt-5">
+    <el-card shadow="hover" class="mt-5" style="width: 350px">
       <span>关注者</span>
       <div class="followingPart">
         <ul

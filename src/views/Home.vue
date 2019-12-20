@@ -2,8 +2,6 @@
   <el-main style="padding-top: 0;">
     <Navigator />
     <div class="totalDiv">
-      <el-row :gutter="20">
-        <el-col :span="15">
           <div class="infoCardDiv">
             <el-card shadow="hover" style="height: 400px;width: 700px">
               <el-menu
@@ -24,11 +22,8 @@
               <router-view />
             </el-card>
           </div>
-        </el-col>
-        <el-col :span="9">
+          <Favorite />
           <Follow :username="user.username" />
-        </el-col>
-      </el-row>
     </div>
   </el-main>
 </template>
@@ -38,6 +33,7 @@ import Navigator from "@/components/Navigator.vue";
 import Follow from "../components/Follow";
 import url from "@/assets/pic1.png";
 import { dateFormat } from "../assets/js/time";
+import Favorite from "../components/Favorite";
 
 export default {
   name: "Home",
@@ -80,6 +76,7 @@ export default {
     }
   },
   components: {
+    Favorite,
     Follow,
     Navigator
   }
