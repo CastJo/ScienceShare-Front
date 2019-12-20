@@ -158,13 +158,14 @@ npm <template>
                 this.dialogVisible = false;
             },
             sendApplication() {
-                if (this.form.content === '')
+                if (this.content === '')
                     this.$alert('内容不能为空')
                 else {
                     this.$confirm('确认发送专家申请', '', {
                         confirmButtonText: '确定',
                         cancelButtonText: '取消',
                     }).then(() => {
+                        console.log(this.content);
                         this.postToBackEnd();
                     }).catch(() => {
                     });
