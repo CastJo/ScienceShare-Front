@@ -31,7 +31,7 @@
         ><h1>{{ user.username }}</h1></span
         >
                 <span><h5>北京航空航天大学</h5></span>
-                <a v-if="user.identity == 1" @click="visible = true">申请专家认证></a>
+                <a v-if="user.identity === 1" @click="visible = true">申请专家认证></a>
                 <a v-else @click="goExpertPage">我的专家主页></a>
                 <!--                    <el-button @click="visible=true"><span>申请专家认证</span></el-button>-->
             </div>
