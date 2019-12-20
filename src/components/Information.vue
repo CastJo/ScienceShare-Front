@@ -110,7 +110,9 @@ export default {
     };
   },
   mounted() {
-    console.log(this.$store.state.expertPage);
+    console.log("information in");
+    console.log("expertPage.reserachList");
+    console.log(this.expertPage.researchList);
   },
   computed: {
     expertPage: {
@@ -121,8 +123,8 @@ export default {
     hasPermission: {
       get() {
         return (
-          this.$store.state.expertPage.expertName ===
-          this.$store.state.user.username
+          this.$store.state.user.expertID ===
+          this.$store.state.expertPage.expertID
         );
       }
     }
@@ -136,7 +138,7 @@ export default {
         background: "rgba(0, 0, 0, 0.7)"
       });
       this.$axios
-        .post("expert/info", {
+        .get("/homepage/updateInfo", {
           params: {
             institution: this.newInfo.institution,
             degree: this.newInfo.degree,

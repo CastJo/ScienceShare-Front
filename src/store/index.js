@@ -10,6 +10,7 @@ export default new Vuex.Store({
     expertID: "",
     user: {
       isLogin: window.sessionStorage.getItem("isLogin"),
+      expertID: window.sessionStorage.getItem("userExpertID"),
       identity: window.sessionStorage.getItem("identity"),
       username: window.sessionStorage.getItem("username"),
       permission: window.sessionStorage.getItem("permission"),
@@ -22,6 +23,7 @@ export default new Vuex.Store({
       followers: []
     },
     expertPage: {
+      expertID: window.sessionStorage.getItem("expertID"),
       realName: window.sessionStorage.getItem("expertName"),
       follows: window.sessionStorage.getItem("follows"),
       fans: window.sessionStorage.getItem("fans"),
@@ -40,6 +42,7 @@ export default new Vuex.Store({
     SignOut(state) {
       state.user.isLogin = false;
       window.sessionStorage.removeItem("isLogin");
+      window.sessionStorage.removeItem("userExpertID");
       window.sessionStorage.removeItem("username");
       window.sessionStorage.removeItem("permission");
       window.sessionStorage.removeItem("unreadNotification");
@@ -52,6 +55,7 @@ export default new Vuex.Store({
     },
     setUser(state, user) {
       state.user.username = user.username;
+      state.user.expertID = user.expertID;
       state.user.permission = user.permission;
       state.user.unreadNotification = user.unreadNotification;
       state.user.emailAddress = user.emailAddress;
@@ -63,6 +67,7 @@ export default new Vuex.Store({
       state.user.identity = user.identity;
       state.user.isLogin = true;
       window.sessionStorage.setItem("isLogin", state.user.isLogin);
+      window.sessionStorage.setItem("userExpertID", state.user.expertID);
       window.sessionStorage.setItem("username", state.user.username);
       window.sessionStorage.setItem("permission", state.user.permission);
       window.sessionStorage.setItem(
@@ -81,7 +86,10 @@ export default new Vuex.Store({
       if (expertPage.skills == null) expertPage.skills = [];
       if (expertPage.introduction == null) expertPage.introduction = "";
       state.expertPage = expertPage;
+      console.log("in setfunction");
+      console.log(expertPage);
       window.sessionStorage.setItem("expertName", expertPage.expertName);
+      window.sessionStorage.setItem("expertID", expertPage.expertID);
       window.sessionStorage.setItem("follows", expertPage.follows);
       window.sessionStorage.setItem("fans", expertPage.fans);
       window.sessionStorage.setItem("introduction", expertPage.introduction);
@@ -95,12 +103,11 @@ export default new Vuex.Store({
       window.sessionStorage.setItem("email", expertPage.email);
     },
     setPrework(state, value) {
-
       state.expertID = value;
     },
     updateInfo(state, value) {
       state.expertPage.skills = value.skills;
-      state.expertPage.introduce = value.introduce;
+      state.expertPage.introduction = value.introduce;
       /*
       window.sessionStorage.setItem("skills", value.skills);
       window.sessionStorage.setItem("introduce", value.introduce);
@@ -128,8 +135,8 @@ export default new Vuex.Store({
     setUser(context, user) {
       context.commit("setUser", user);
     },
-    setPrework(context,expertID){
-      context.commit("setPrework",expertID);
+    setPrework(context, expertID) {
+      context.commit("setPrework", expertID);
     }
   },
   modules: {}

@@ -25,7 +25,7 @@
             </div>
             <div class="favEnFollow">
                 <div class="favDiv">
-                    <Favorite/>
+                    <Favorite :username="this.user.username"/>
                 </div>
                 <div class="followDiv">
                     <Follow :username="this.user.username"/>
