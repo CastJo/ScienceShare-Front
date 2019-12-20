@@ -124,7 +124,7 @@ export default {
       get() {
         return (
           this.$store.state.user.expertID ===
-          this.$store.state.expertPage.expertId
+          this.$store.state.expertPage.expertID
         );
       }
     }
