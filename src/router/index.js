@@ -105,7 +105,35 @@ const routes = [
         component: loadComponent("Information")
       }
     ]
-  }
+  },
+  {
+    path:'/searchresult/:keyword',
+    name:'searchresult',
+    component: loadView("SearchResult"),
+    children:[
+      {
+        path:"expertresult/:keyword",
+        name:"expertresult",
+        component:loadComponent("ExpertResult")
+      },
+      {
+        path:"mainresults/:keyword",
+        name:"mainresults",
+        component:loadComponent("MainResults")
+      },
+      {
+        path:"userresult/:keyword",
+        name:"userresult",
+        component:loadComponent("UserResult")
+      }
+
+    ]
+  },
+  {
+    path:'/litdetails',
+    name:'litdetails',
+    component: loadComponent("LITDetails"),
+  },
 ];
 
 const router = new VueRouter({
