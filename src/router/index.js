@@ -29,15 +29,20 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/About.vue")
   },
   {
-    path: "/index/:username",
-    name: "Index",
-    component: loadView("Index")
+    path: "/feed",
+    name: "feed",
+    component: loadView("Feed")
   },
   {
-    path: "/manage",
-    name: "Manage",
-    component: loadView("Manage")
+    path: '/index/:username',
+    name: 'Index',
+    component: loadView("Index"),
   },
+    {
+        path: "/manage",
+        name: "Manage",
+        component: loadView("Manage")
+    },
   {
     path: "/home",
     name: "home",

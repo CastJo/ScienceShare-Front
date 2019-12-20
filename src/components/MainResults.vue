@@ -26,6 +26,15 @@
             sortable
             style="float: right;">
     </el-table-column>
+    <el-table-column>
+        <template slot-scope="scope">
+            <el-button
+                    size="mini"
+                    @click="handleAdd(scope.$index, scope.row)">
+                收藏
+            </el-button>
+        </template>
+    </el-table-column>
 <!--    <el-table-column-->
 <!--            prop="collected"-->
 <!--            label="Collect"-->
@@ -79,6 +88,32 @@
         methods:{
             getAuthorName(){
 
+            },
+            handleAdd(index, row) {
+                this.$axios
+                    .get("usercenter/addToFavorites", {
+                        params: {
+                            username: this.$store.state.user.username,
+                            paperId: row.id
+                        }
+                    })
+                    .then(res => {
+                        if (res.data.code == 200) {
+                            this.$notify({
+                                title: "收藏成功",
+                                message: row.title + " 已加入你的收藏",
+                                type: "success"
+                            })
+                        } else {
+                            this.$notify.error({
+                                title: "错误",
+                                message: "未加入收藏"
+                            })
+                        }
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    });
             }
         }
 

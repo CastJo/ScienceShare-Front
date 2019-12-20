@@ -7,8 +7,8 @@
             </div>
         </div>
         <div class="CheckButton">
-            <el-button type="success" @click="">通过</el-button>
-            <el-button type="danger">拒绝</el-button>
+            <el-button type="success" @click="passApplication">通过</el-button>
+            <el-button type="danger" @click="denyApplication">拒绝</el-button>
         </div>
         <el-divider style="margin: 12px" />
     </div>
@@ -22,12 +22,12 @@
         created() {
         },
         methods: {
-            follow() {
+            passApplication(){
                 this.$axios
-                    .get(`usercenter/follow`, {
+                    .get(`usercenter/passApplication`, {
                         params: {
-                            followUserName: this.part.username,
-                            myUserName: this.$store.state.user.username
+                            applyUserName: this.part.applyUserName,
+                            authorId: this.part.authorId
                         }
                     })
                     .then(response => {
@@ -50,16 +50,20 @@
                                     message: response.data.message,
                                     type: "success"
                                 });
+                                this.$emit("deleteLine", this.part);
                                 break;
                         }
-                    });
+
+                    }).catch(function (err) {
+                    console.log(err);
+                });
             },
-            unFollow() {
+            denyApplication(){
                 this.$axios
-                    .get(`usercenter/unFollow`, {
+                    .get(`usercenter/denyApplication`, {
                         params: {
-                            followUserName: this.part.username,
-                            myUserName: this.$store.state.user.username
+                            applyUserName: this.part.applyUserName,
+                            authorId: this.part.authorId
                         }
                     })
                     .then(response => {
@@ -70,7 +74,7 @@
                                     message: response.data.message
                                 });
                                 break;
-                            case 300:
+                            case 201:
                                 this.$notify.error({
                                     title: "错误",
                                     message: response.data.message
@@ -82,10 +86,15 @@
                                     message: response.data.message,
                                     type: "success"
                                 });
+                                this.$emit("deleteLine", this.part);
                                 break;
                         }
-                    });
-            }
+
+                    }).catch(function (err) {
+                    console.log(err);
+                });
+
+            },
         },
         props: ["part"]
     };

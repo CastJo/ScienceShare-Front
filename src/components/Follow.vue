@@ -47,7 +47,11 @@
         },
         methods: {
             handleClickAvatar(val) {
-                this.$router.push(`/index/${val}`);
+                this.$router.push(`/index/${val.username}`);
+                this.$store.dispatch("setPrework",val.expertID);
+                if(val.expertID!=null){
+                    this.$router.push(`main/overview`);
+                }
                 if (this.username !== this.$store.state.user.username) {
                     window.location.reload();
                 }

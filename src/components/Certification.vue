@@ -183,8 +183,21 @@
                         realName: this.value1,
                     }
                 }).then((res)=>{
-                    console.log(res);
-                })
+                    if (res.data.code===200){
+                        this.$notify({
+                            title: "成功",
+                            message: res.data.message,
+                            type: "success"
+                        });
+                    }else {
+                        this.$notify.error({
+                            title: "错误",
+                            message: res.data.message
+                        });
+                    }
+                }).catch(function (err) {
+                    console.log(err);
+                });
 
             }
         },
