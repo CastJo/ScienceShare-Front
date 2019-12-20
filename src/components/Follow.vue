@@ -1,7 +1,7 @@
 <template>
     <div class="followingDiv" style="float:right;">
-        <el-card shadow="hover" style="width: 90%; height: 400px;">
-            <span>关注</span>
+        <el-card shadow="hover" style="width: 100%; height: 400px;">
+            <span>关注</span><br/>
             <div class="followingPart">
                 <ul
                         class="infinite-list"
@@ -57,7 +57,7 @@
                     .get("usercenter/allFollowing", {
                         params: {
                             username: this.username,
-                            myUsername: this.username
+                            myUsername: this.$store.state.user.username
                         }
                     })
                     .then(res => {
@@ -79,7 +79,7 @@
 <style scoped>
     .followingDiv {
 
-        width: 50%;
+        width: 45%;
         margin-top: 20px;
     }
 

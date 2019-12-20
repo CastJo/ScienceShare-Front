@@ -1,7 +1,7 @@
 <template>
     <div class="followerDiv" style="float: right">
         <el-card shadow="hover" style="width: 90%;height: 400px;">
-            <span>粉丝</span>
+            <span>粉丝</span><br/>
             <div class="followingPart">
                 <ul
                         class="infinite-list"
@@ -47,7 +47,7 @@
                     .get("usercenter/allFollowers", {
                         params: {
                             username: this.username,
-                            myUsername: this.username
+                            myUsername: this.$store.state.user.username
                         }
                     })
                     .then(res => {
