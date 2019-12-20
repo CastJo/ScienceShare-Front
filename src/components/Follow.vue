@@ -1,7 +1,7 @@
 <template>
     <div class="followingDiv" style="float:right;">
-        <el-card shadow="hover" style="width: 90%; height: 400px">
-            <span>关注者</span>
+        <el-card shadow="hover" style="width: 90%; height: 400px;">
+            <span>关注</span>
             <div class="followingPart">
                 <ul
                         class="infinite-list"

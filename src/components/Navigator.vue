@@ -8,9 +8,18 @@
         </el-link>
       </el-col>
       <el-col :span="8">
-        <el-input placeholder="Search Something?" v-model="input" class="pt-4">
-          <el-button slot="append" icon="el-icon-search"></el-button>
-        </el-input>
+        <el-autocomplete
+                v-if="isSearch"
+                class="pt-3"
+                v-model="input"
+                :fetch-suggestions="querySearch"
+                placeholder="Search Something?"
+                :trigger-on-focus="false"
+                @select="handleSelect"
+        >
+          <el-button slot="append" icon="el-icon-search" @click="search"></el-button>
+        </el-autocomplete>
+          <span style="color: white">Search Something?</span>
       </el-col>
       <el-col :span="8">
         <div class="pt-3" style="padding-left: 40%">
@@ -50,6 +59,7 @@ export default {
   name: "Navigator",
   data() {
     return {
+      isSearch:"true",
       input: "",
       isNotified: true,
       circleUrl: circle,
@@ -59,6 +69,11 @@ export default {
       hidBadge: true
     };
   },
+  mounted(){
+    if(this.$route.name === "searchresult"||this.$route.name==="mainresults"||this.$route.name==="expertresult"){
+      this.isSearch = false;
+    }
+  },
   methods: {
     ToIndex() {
       this.$router.push("/home");
@@ -66,7 +81,25 @@ export default {
     SignOut() {
       this.$store.dispatch("SignOut");
       window.location.reload();
-    }
+    },
+    querySearch(queryString, cb){
+      var results = queryString;
+      cb(results);
+    },
+    search(){
+      // var input = this.input;
+      if(this.$route.name === 'searchresult'){
+        this.$route.params.keyword = this.input;
+        this.$router.go(0);
+      }
+      this.$router.replace({
+        name:'searchresult',
+        params:{
+          keyword: this.input
+        }
+      })
+    },
+
   },
   computed: {
     currentTimeGreetings: () => {
