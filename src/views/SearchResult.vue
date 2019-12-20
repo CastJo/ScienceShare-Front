@@ -59,13 +59,15 @@
         },
         mounted(){
             this.keyword = this.$route.params.keyword;
-            console.log(this.keyword);
             this.$router.push({
                 name: 'expertresult',
                 params:{
                     keyword:this.keyword
                 }
             });
+            if (this.$store.state.user.isLogin==null){
+                this.$router.push("/");
+            }
         },
         methods:{
             handleClick(tab,event){
@@ -113,32 +115,6 @@
             },
             handleSelect(item){
                 console.log(item);
-            },
-            querySearch(queryString, cb){
-                var list = [{}];
-                this.$axios
-                    .get("litcenter/getBoth", {
-                        params: {
-                            params: queryString
-                        }
-                    })
-                    .then(successResponse => {
-                        // console.log(successResponse.data);
-                        this.searchRecom = successResponse.data;
-                        var results = this.searchRecom.authors;
-                        for(let i=0;i<this.searchRecom.authorLen;i++){
-                            results[i].value = results[i].name;
-                        }
-                        var results2 = this.searchRecom.literature;
-                        for(let i=0;i<this.searchRecom.litlen;i++){
-                            results2[i].value = results2[i].title;
-                        }
-                        list = results.concat(results2);
-                        cb(list);
-                    })
-                    .catch(failResponse => {
-                        console.log(failResponse);
-                    });
             },
 
 
