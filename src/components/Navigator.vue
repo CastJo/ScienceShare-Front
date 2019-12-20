@@ -2,7 +2,7 @@
   <div>
     <el-row>
       <el-col :span="8" class="pt-3">
-        <img src="@/assets/pic1.png" class="image" style="max-height:60px; " />
+        <img src="@/assets/pic1.png" class="image" style="max-height:60px; cursor: pointer" @click="ToFeed"/>
         <el-link :underline="false" type="primary" class="ml-3">
           {{ this.currentTimeGreetings }}, {{ this.$store.state.user.username }}
         </el-link>
@@ -41,9 +41,6 @@
               ></el-avatar>
             </el-badge>
           </el-button>
-          <el-badge :is-dot="isNotified" class="item">
-            <el-button icon="el-icon-chat-dot-round" circle></el-button>
-          </el-badge>
           <el-button class="ml-3" @click="SignOut">Logout</el-button>
         </div>
       </el-col>
@@ -76,6 +73,9 @@ export default {
     }
   },
   methods: {
+    ToFeed(){
+      this.$router.push("/feed");
+    },
     ToIndex() {
       this.$router.push("/home");
     },
