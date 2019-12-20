@@ -1,7 +1,7 @@
 <template>
   <div>
-    <el-row :gutter="20">
-      <el-col :span="15">
+    <el-row >
+      <el-col :span="12">
         <el-card class="my-2 ml-4" shadow="hover">
           <div slot="header" class="mb-3">
             <span style="float: left"><b>Introduction</b></span>
@@ -109,7 +109,7 @@
           </el-col>
         </el-card>
       </el-col>
-      <el-col class="pr-4" :span="9">
+      <el-col class="pr-4" :span="12">
         <el-card class="my-2 mx-3" style="max-height:220px" shadow="hover">
           <div slot="header">
             <b>
@@ -120,7 +120,8 @@
             {{ this.expertPage.institution }}
           </div>
         </el-card>
-        <Follow class="mx-3" :username="this.expertPage.expertName" />
+        <Follower :username="this.expertPage.expertName"></Follower>
+        <Follow  :username="this.expertPage.expertName" />
       </el-col>
     </el-row>
   </div>
@@ -128,6 +129,7 @@
 
 <script>
 import Follow from "@/components/Follow.vue";
+import Follower from "./Follower";
 export default {
   data() {
     return {
@@ -277,6 +279,7 @@ export default {
     }
   },
   components: {
+    Follower,
     Follow
   }
 };

@@ -53,13 +53,6 @@
             handleDeleteLine(val){
                 this.applys.splice(this.applys.indexOf(val),1);
             },
-            handleClickAvatar(val) {
-                this.$router.push(`/index/${val}`);
-                if (this.username !== this.$store.state.user.username) {
-                    window.location.reload();
-                    window.location.reload();
-                }
-            },
             getApplys() {
                 this.$axios
                     .get("usercenter/allApplication")

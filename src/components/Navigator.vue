@@ -59,6 +59,7 @@ export default {
   name: "Navigator",
   data() {
     return {
+        searchRecom:[],
       isSearch:"true",
       input: "",
       isNotified: true,
@@ -82,9 +83,34 @@ export default {
       this.$store.dispatch("SignOut");
       window.location.reload();
     },
+      handleSelect(item){
+          console.log(item);
+      },
     querySearch(queryString, cb){
-      var results = queryString;
-      cb(results);
+        var list = [{}];
+        this.$axios
+            .get("litcenter/getBoth", {
+                params: {
+                    params: queryString
+                }
+            })
+            .then(successResponse => {
+                // console.log(successResponse.data);
+                this.searchRecom = successResponse.data;
+                var results = this.searchRecom.authors;
+                for(let i=0;i<this.searchRecom.authorLen;i++){
+                    results[i].value = results[i].name;
+                }
+                var results2 = this.searchRecom.literature;
+                for(let i=0;i<this.searchRecom.litlen;i++){
+                    results2[i].value = results2[i].title;
+                }
+                list = results.concat(results2);
+                cb(list);
+            })
+            .catch(failResponse => {
+                console.log(failResponse);
+            });
     },
     search(){
       // var input = this.input;

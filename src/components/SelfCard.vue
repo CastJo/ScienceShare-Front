@@ -31,7 +31,7 @@
           ><h1>{{ user.username }}</h1></span
         >
         <span><h5>北京航空航天大学</h5></span>
-        <a v-if="user.identity == 1" @click="visible = true">申请专家认证></a>
+        <a v-if="user.identity === 1" @click="visible = true">申请专家认证></a>
         <a v-else @click="goExpertPage">我的专家主页></a>
         <!--                    <el-button @click="visible=true"><span>申请专家认证</span></el-button>-->
       </div>
@@ -46,7 +46,6 @@
       </div>
     </div>
 
-    <div></div>
     <certification :visible.sync="visible" />
   </div>
 </template>
@@ -116,9 +115,11 @@ export default {
       return (isPNG || isJPG) && isLt2M;
     },
     goExpertPage() {
-      this.$store.commit("setPrework", this.user.expertID);
-      console.log("before into");
-      console.log(this.user);
+      var value = {
+        hasPermission: true,
+        name: this.user.username
+      };
+      this.$store.commit("setPrework", value);
       this.$router.push("/main/overview");
     }
   }
@@ -131,25 +132,31 @@ export default {
   width: 220px;
   object-fit: cover;
 }
+
 .wrap {
   text-align: center;
   padding: 45px 40px 40px 40px;
 }
+
 .self-info {
   text-align: left;
   margin-left: 30px;
   margin-top: 0px;
 }
+
 .wrap div {
   float: left;
 }
+
 .emailEnTime {
   width: 230px;
   height: 45px;
 }
+
 .self-info div {
   float: none;
 }
+
 .nameDiv {
   height: 175px;
   width: 230px;
@@ -170,10 +177,12 @@ export default {
   -webkit-transition: color 0.5s linear, background 0.5s ease-in-out 1s;
   transition: color 0.5s linear, background 0.5s ease-in-out 1s;
 }
+
 .self-info a:hover {
   color: #409eff;
   cursor: pointer;
 }
+
 .self-info a:hover {
   background: rgba(0, 0, 0, 0);
 }
