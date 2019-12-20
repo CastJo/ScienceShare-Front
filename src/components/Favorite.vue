@@ -1,0 +1,17 @@
+<template>
+    <div>
+        <el-card>
+
+        </el-card>
+    </div>
+</template>
+
+<script>
+    export default {
+        name: "Favorite"
+    }
+</script>
+
+<style scoped>
+
+</style>
