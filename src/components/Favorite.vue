@@ -10,7 +10,7 @@
                     <li
                             v-for="i in favorites"
                             class="infinite-list-item"
-                            :key="i.authorId"
+                            :key="i.id"
                     >
                         <FavoritePart :part="i"/>
                     </li>
@@ -21,11 +21,10 @@
 </template>
 
 <script>
-    import FollowPart from "./FollowPart";
     import FavoritePart from "./FavoritePart";
     export default {
         name: "Favorite",
-        components: {FavoritePart, FollowPart},
+        components: {FavoritePart},
         data() {
             return {
                 favorites: [],
