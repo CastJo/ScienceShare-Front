@@ -50,10 +50,13 @@
                                     message: response.data.message,
                                     type: "success"
                                 });
+                                this.$emit("deleteLine", this.part);
                                 break;
                         }
-                        this.$emit("deleteLine", this.part);
-                    });
+
+                    }).catch(function (err) {
+                    console.log(err);
+                });
             },
             denyApplication(){
                 this.$axios
@@ -83,76 +86,15 @@
                                     message: response.data.message,
                                     type: "success"
                                 });
+                                this.$emit("deleteLine", this.part);
                                 break;
                         }
-                        this.$emit("deleteLine", this.part);
-                    });
+
+                    }).catch(function (err) {
+                    console.log(err);
+                });
 
             },
-            follow() {
-                this.$axios
-                    .get(`usercenter/follow`, {
-                        params: {
-                            followUserName: this.part.username,
-                            myUserName: this.$store.state.user.username
-                        }
-                    })
-                    .then(response => {
-                        switch (response.data.code) {
-                            case 404:
-                                this.$notify.error({
-                                    title: "错误",
-                                    message: response.data.message
-                                });
-                                break;
-                            case 201:
-                                this.$notify.error({
-                                    title: "错误",
-                                    message: response.data.message
-                                });
-                                break;
-                            case 200:
-                                this.$notify({
-                                    title: "成功",
-                                    message: response.data.message,
-                                    type: "success"
-                                });
-                                break;
-                        }
-                    });
-            },
-            unFollow() {
-                this.$axios
-                    .get(`usercenter/unFollow`, {
-                        params: {
-                            followUserName: this.part.username,
-                            myUserName: this.$store.state.user.username
-                        }
-                    })
-                    .then(response => {
-                        switch (response.data.code) {
-                            case 404:
-                                this.$notify.error({
-                                    title: "错误",
-                                    message: response.data.message
-                                });
-                                break;
-                            case 300:
-                                this.$notify.error({
-                                    title: "错误",
-                                    message: response.data.message
-                                });
-                                break;
-                            case 200:
-                                this.$notify({
-                                    title: "成功",
-                                    message: response.data.message,
-                                    type: "success"
-                                });
-                                break;
-                        }
-                    });
-            }
         },
         props: ["part"]
     };
