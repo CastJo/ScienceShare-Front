@@ -95,13 +95,14 @@
 <style>
     .favEnFollow {
         float: none;
-        height: 600px;
+        height: 500px;
         width: 100%;
     }
 
     .favDiv {
         width: 50%;
         margin-top: 20px;
+        height: 500px;
     }
 
     .totalDiv {

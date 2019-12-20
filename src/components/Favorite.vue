@@ -1,6 +1,6 @@
 <template>
     <div class="favoriteDiv">
-        <el-card style="height: 400px; width: 100%">
+        <el-card style="height: 500px; width: 100%">
             <span>收藏夹</span>
             <div class="checkApply">
                 <ul
