@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="certification">
         <el-dialog :before-close="handleClose" :visible.sync="this.dialogVisible" title="专家认证">
             您的姓名：
             <el-autocomplete
@@ -28,11 +28,11 @@
                     @change="handleS"
                     @select="handleS"
                     placeholder="请选择属于您的文章">
-                <el-option
+                <el-option style="width: 90px"
                         v-for="item in this.pubs"
                         :key="item.title"
                         :label="item.title"
-                        :value="item.id">
+                        :value="item.title">
                 </el-option>
             </el-select>
             <div class="dialog-footer" slot="footer">
@@ -108,7 +108,7 @@
                         keyword: queryString,
                     }
                 }).then((res) => {
-                    for (var i = 0; i < res.data.length; ++i) {
+                    for (let i = 0; i < res.data.length; ++i) {
                         res.data[i].value = res.data[i].name;
                     }
                     callback(res.data);
@@ -160,7 +160,7 @@
             },
             sendApplication() {
                 if (this.content === '')
-                    this.$alert('内容不能为空')
+                    this.$alert('内容不能为空');
                 else {
                     this.$confirm('确认发送专家申请', '', {
                         confirmButtonText: '确定',
@@ -173,6 +173,7 @@
                 }
             },
             postToBackEnd(){
+                var bb = JSON.stringify(this.value3);
                 this.$axios.get('usercenter/sendApplication', {
                     params: {
                         username: this.$store.state.user.username,
@@ -197,4 +198,8 @@
     */
 
 </script>
-<style scoped></style>
+<style scoped>
+    .certification{
+        width: 80%;
+    }
+</style>
