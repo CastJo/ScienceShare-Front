@@ -44,6 +44,7 @@
                     .then(res => {
                         if (res.data != null) {
                             this.favorites = res.data;
+                            console.log(this.favorites);
                         }
                     })
                     .catch(function(err) {

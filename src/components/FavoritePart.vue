@@ -2,11 +2,12 @@
     <div class="userInfoDiv">
         <div class="nameEnCollege">
             <div>
-                <h5>文章标题：{{ this.part.tittle }}</h5>
-                <span>作者：{{ this.part.authors[0] }}</span>
+                <h5>{{ this.part.title[0]}}</h5>
+<!--                <span>{{ this.part.authors[0] }}</span>-->
             </div>
+            <el-divider style="margin: 12px" />
         </div>
-        <el-divider style="margin: 12px" />
+
     </div>
 </template>
 
@@ -19,7 +20,7 @@
 
 <style scoped>
     .userInfoDiv {
-        height: 60px;
+        height: 120px;
     }
 
     .userInfoDiv div {
@@ -28,16 +29,11 @@
 
     .nameEnCollege {
         margin-left: 10px;
-        width: 170px;
-        height: 60px;
+        height: 120px;
     }
 
     .nameEnCollege div {
         float: none;
     }
 
-    .CheckButton {
-        padding-top: 15px;
-        height: 60px;
-    }
 </style>
