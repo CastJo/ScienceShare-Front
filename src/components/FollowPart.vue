@@ -31,88 +31,88 @@
 </template>
 
 <script>
-export default {
-  name: "FollowPart",
-  data() {
-    return {
-      checked: ""
-    };
-  },
-  created() {
-    if (this.part.isFollowing === 0) this.checked = false;
-    else if (this.part.isFollowing === 1) this.checked = true;
-  },
-  methods: {
-    handleClickAvatar() {
-      this.$emit("click-avatar", this.part.username);
-    },
-    follow() {
-      this.$axios
-        .get(`usercenter/follow`, {
-          params: {
-            followUserName: this.part.username,
-            myUserName: this.$store.state.user.username
-          }
-        })
-        .then(response => {
-          switch (response.data.code) {
-            case 404:
-              this.$notify.error({
-                title: "错误",
-                message: response.data.message
-              });
-              break;
-            case 201:
-              this.$notify.error({
-                title: "错误",
-                message: response.data.message
-              });
-              break;
-            case 200:
-              this.$notify({
-                title: "成功",
-                message: response.data.message,
-                type: "success"
-              });
-              break;
-          }
-        });
-    },
-    unFollow() {
-      this.$axios
-        .get(`usercenter/unFollow`, {
-          params: {
-            followUserName: this.part.username,
-            myUserName: this.$store.state.user.username
-          }
-        })
-        .then(response => {
-          switch (response.data.code) {
-            case 404:
-              this.$notify.error({
-                title: "错误",
-                message: response.data.message
-              });
-              break;
-            case 300:
-              this.$notify.error({
-                title: "错误",
-                message: response.data.message
-              });
-              break;
-            case 200:
-              this.$notify({
-                title: "成功",
-                message: response.data.message,
-                type: "success"
-              });
-              break;
-          }
-        });
-    }
-  },
-  props: ["part"]
-};
+    export default {
+        name: "FollowPart",
+        data() {
+            return {
+                checked: ""
+            };
+        },
+        created() {
+            if (this.part.isFollowing === 0) this.checked = false;
+            else if (this.part.isFollowing === 1) this.checked = true;
+        },
+        methods: {
+            handleClickAvatar() {
+                this.$emit("click-avatar", this.part);
+            },
+            follow() {
+                this.$axios
+                    .get(`usercenter/follow`, {
+                        params: {
+                            followUserName: this.part.username,
+                            myUserName: this.$store.state.user.username
+                        }
+                    })
+                    .then(response => {
+                        switch (response.data.code) {
+                            case 404:
+                                this.$notify.error({
+                                    title: "错误",
+                                    message: response.data.message
+                                });
+                                break;
+                            case 201:
+                                this.$notify.error({
+                                    title: "错误",
+                                    message: response.data.message
+                                });
+                                break;
+                            case 200:
+                                this.$notify({
+                                    title: "成功",
+                                    message: response.data.message,
+                                    type: "success"
+                                });
+                                break;
+                        }
+                    });
+            },
+            unFollow() {
+                this.$axios
+                    .get(`usercenter/unFollow`, {
+                        params: {
+                            followUserName: this.part.username,
+                            myUserName: this.$store.state.user.username
+                        }
+                    })
+                    .then(response => {
+                        switch (response.data.code) {
+                            case 404:
+                                this.$notify.error({
+                                    title: "错误",
+                                    message: response.data.message
+                                });
+                                break;
+                            case 300:
+                                this.$notify.error({
+                                    title: "错误",
+                                                                                         message: response.data.message
+                                });
+                                break;
+                            case 200:
+                                this.$notify({
+                                    title: "成功",
+                                    message: response.data.message,
+                                    type: "success"
+                                });
+                                break;
+                        }
+                    });
+            }
+        },
+        props: ["part"]
+  }
 </script>
 
 <style scoped>

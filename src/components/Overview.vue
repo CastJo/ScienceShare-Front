@@ -1,7 +1,7 @@
 <template>
   <div>
-    <el-row :gutter="20">
-      <el-col :span="15">
+    <el-row >
+      <el-col :span="12">
         <el-card class="my-2 ml-4" shadow="hover">
           <div slot="header" class="mb-3">
             <span style="float: left"><b>Introduction</b></span>
@@ -13,7 +13,7 @@
               >Edit<i class="el-icon-edit"></i
             ></el-button>
             <br />
-            <div v-if="expertPage.introduce === ''">
+            <div v-if="expertPage.introduction === ''">
               <el-button
                 v-if="hasPermission"
                 @click="dialogVisible = true"
@@ -28,7 +28,7 @@
               </p>
             </div>
             <p v-else class="mt-4">
-              {{ this.expertPage.introduce }}
+              {{ this.expertPage.introduction }}
             </p>
           </div>
           <el-dialog
@@ -109,7 +109,7 @@
           </el-col>
         </el-card>
       </el-col>
-      <el-col class="pr-4" :span="9">
+      <el-col class="pr-4" :span="12">
         <el-card class="my-2 mx-3" style="max-height:220px" shadow="hover">
           <div slot="header">
             <b>
@@ -120,7 +120,8 @@
             {{ this.expertPage.institution }}
           </div>
         </el-card>
-        <Follow class="mx-3" :username="this.expertPage.expertName" />
+        <Follower :username="this.expertPage.expertName"></Follower>
+        <Follow  :username="this.expertPage.expertName" />
       </el-col>
     </el-row>
   </div>
@@ -128,6 +129,7 @@
 
 <script>
 import Follow from "@/components/Follow.vue";
+import Follower from "./Follower";
 export default {
   data() {
     return {
@@ -161,6 +163,7 @@ export default {
     if (this.expertPage.skills != null) {
       this.newInfo.skills = this.expertPage.skills;
     }
+    console.log(this.expertPage)
   },
   computed: {
     anyType() {
@@ -179,8 +182,8 @@ export default {
     hasPermission: {
       get() {
         return (
-          this.$store.state.user.username ===
-          this.$store.state.expertPage.expertName
+          this.$store.state.user.expertID ===
+          this.$store.state.expertPage.expertID
         );
       }
     }
@@ -246,11 +249,13 @@ export default {
         spinner: "el-icon-loading",
         background: "rgba(0, 0, 0, 0.7)"
       });
+      console.log(this.newInfo);
       this.$axios
-        .post("expert/info", {
+        .get("homepage/updateIntroduction", {
           params: {
+            expertId: this.expertPage.expertID,
             introduction: this.newInfo.introduce,
-            skills: this.newInfo.tags
+            skills: "iamtag"
           }
         })
         .then(successResponse => {
@@ -267,12 +272,15 @@ export default {
         });
       loading.close();
       this.dialogVisible = false;
+      console.log("after submit")
+      console.log(this.expertPage)
     },
     goResearch() {
       this.$router.push("/main/research");
     }
   },
   components: {
+    Follower,
     Follow
   }
 };

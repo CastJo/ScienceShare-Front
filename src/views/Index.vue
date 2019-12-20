@@ -28,7 +28,7 @@
       </div>
       <div class="favEnFollow">
         <div class="favDiv">
-          <Favorite/>
+          <Favorite :username="this.$route.params.username"/>
         </div>
         <div class="followDiv">
           <Follow :username=" this.$route.params.username"/>

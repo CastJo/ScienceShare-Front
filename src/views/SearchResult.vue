@@ -1,5 +1,5 @@
 <template>
-    <el-main style="">
+    <el-main style="padding-top: 0;">
         <Navigator/>
 
         <el-row style="min-height: 150px;margin-top: 100px;">
@@ -57,24 +57,6 @@
                 keyword:''
             }
         },
-        watch:{
-            input: function(val){
-                this.$axios
-                    .get("litcenter/getBoth", {
-                        params: {
-                            params: val
-                        }
-                    })
-                    .then(successResponse => {
-                        console.log(successResponse);
-                        this.tepSearch = successResponse.map(obj => obj.title);
-                        //arr.map(obj => {return obj.name}
-                    })
-                    .catch(failResponse => {
-                        console.log(failResponse);
-                    });
-            },
-        },
         mounted(){
             this.keyword = this.$route.params.keyword;
             console.log(this.keyword);
@@ -128,7 +110,36 @@
                         keyword:this.keyword
                     }
                 });
-            }
+            },
+            handleSelect(item){
+                console.log(item);
+            },
+            querySearch(queryString, cb){
+                var list = [{}];
+                this.$axios
+                    .get("litcenter/getBoth", {
+                        params: {
+                            params: queryString
+                        }
+                    })
+                    .then(successResponse => {
+                        // console.log(successResponse.data);
+                        this.searchRecom = successResponse.data;
+                        var results = this.searchRecom.authors;
+                        for(let i=0;i<this.searchRecom.authorLen;i++){
+                            results[i].value = results[i].name;
+                        }
+                        var results2 = this.searchRecom.literature;
+                        for(let i=0;i<this.searchRecom.litlen;i++){
+                            results2[i].value = results2[i].title;
+                        }
+                        list = results.concat(results2);
+                        cb(list);
+                    })
+                    .catch(failResponse => {
+                        console.log(failResponse);
+                    });
+            },
 
 
         },

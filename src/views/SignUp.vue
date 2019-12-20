@@ -51,6 +51,14 @@
             >
           </el-row>
         </div>
+        请输入您的学校：
+        <el-autocomplete
+                style="width: 225px"
+                class="inline-input"
+                v-model="school"
+                :fetch-suggestions="querySearch2"
+                placeholder="输入并选择内容"
+        />
         <el-button v-on:click="register" class="register-bottomcontrol"
           >注册</el-button
         >
@@ -70,6 +78,7 @@ export default {
         emailAddress: "",
         code: ""
       },
+      school:"",
       responseResult: [],
       code: "",
       emailAddress: "",
@@ -78,12 +87,70 @@ export default {
       valid_time: ""
     };
   },
+  created() {
+    this.getSchool();
+  },
   mounted() {
     if (this.$store.state.user.username!=null){
       this.$router.replace("home");
     }
   },
   methods: {
+    getSchool() {
+      this.$axios.get('usercenter/getCollegeByKeyword', {
+        params: {
+          keyword: this.value2,
+        }
+      }).then((res) => {
+        this.options2 = res.data;
+      });
+
+    },
+    querySearch2(queryString, callback) {
+      this.$axios.get('usercenter/getCollegeByKeyword', {
+        params: {
+          keyword: queryString,
+        }
+      }).then((res) => {
+        for (let i = 0; i < res.data.length; ++i) {
+          res.data[i].value = res.data[i].name;
+        }
+        callback(res.data);
+      });
+    },
+    querySearch1(queryString, callback) {
+      this.$axios.get('litcenter/getTop5Authors', {
+        params: {
+          name: queryString,
+        }
+      }).then((res) => {
+        for (var i = 0; i < res.data.length; ++i) {
+          res.data[i].value = res.data[i].name;
+        }
+        callback(res.data)
+      });
+    },
+    handleS(){
+      console.log(this.value3)
+    },
+    recordId(item){
+      this.expertID = item.id;
+      this.curExpert = item;
+      let i = 0;
+      for(let cnt = 0; cnt < this.curExpert.n_pubs; cnt++){
+        this.$axios.get('litcenter/getLIT',{
+          params:{
+            id:this.curExpert.pubs[cnt].i,
+          }
+        }).then((res)=>{
+          if(res.status === 200 && res.data !== ""){
+            this.pubs[i] = res.data;
+            i++;
+          }
+        })
+      }
+      //todo
+    },
     ToMain() {
       this.$router.push("/main");
     },

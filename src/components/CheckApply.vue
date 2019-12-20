@@ -17,7 +17,7 @@
                             :content=i.content
                             placement="top"
                     >
-                        <ApplyPart :part="i"/>
+                        <ApplyPart :part="i" @deleteLine="handleDeleteLine"/>
                     </el-tooltip>
                     </li>
                 </ul>
@@ -50,12 +50,8 @@
             }
         },
         methods: {
-            handleClickAvatar(val) {
-                this.$router.push(`/index/${val}`);
-                if (this.username !== this.$store.state.user.username) {
-                    window.location.reload();
-                    window.location.reload();
-                }
+            handleDeleteLine(val){
+                this.applys.splice(this.applys.indexOf(val),1);
             },
             getApplys() {
                 this.$axios

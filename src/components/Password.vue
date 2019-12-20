@@ -73,6 +73,7 @@
 	.password {
 		text-align: center;
 		padding: 40px 120px;
+		width: 600px;
 	}
 
 	.password input {

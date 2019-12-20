@@ -1,6 +1,6 @@
 <template>
     <div class="followerDiv" style="float: right">
-        <el-card shadow="hover" style="width: 90%;height: 400px;padding-right: 0">
+        <el-card shadow="hover" style="width: 90%;height: 500px;padding-right: 0">
             <span>粉丝</span><br/>
             <div class="followingPart">
                 <ul
@@ -37,7 +37,11 @@
         },
         methods: {
             handleClickAvatar(val) {
-                this.$router.push(`/index/${val}`);
+                this.$router.push(`/index/${val.username}`);
+                this.$store.dispatch("setPrework",val.expertID);
+                if(val.expertID!=null){
+                    this.$router.push(`main/overview`);
+                }
                 if (this.username !== this.$store.state.user.username) {
                     window.location.reload();
                 }
