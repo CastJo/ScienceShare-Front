@@ -94,7 +94,8 @@ export default {
       });
 
       loading.close();
-    }
+    },
+
   },
   components: {
     Navigator
