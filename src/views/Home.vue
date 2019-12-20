@@ -28,8 +28,8 @@
                     <Favorite/>
                 </div>
                 <div class="followDiv">
-                    <Follow :username="user.username"/>
-                    <Follower :username="user.username"/>
+                    <Follow :username="this.user.username"/>
+                    <Follower :username="this.user.username"/>
                 </div>
             </div>
         </div>
