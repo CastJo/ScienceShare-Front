@@ -103,6 +103,9 @@ export default new Vuex.Store({
     setPrework(state, value) {
       state.expertID = value;
     },
+    setResearchList(state, value) {
+      state.expertPage.researchList = value;
+    },
     updateInfo(state, value) {
       state.expertPage.skills = value.skills;
       state.expertPage.introduction = value.introduce;

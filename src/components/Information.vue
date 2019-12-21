@@ -140,9 +140,10 @@ export default {
       this.$axios
         .get("/homepage/updateInfo", {
           params: {
+            expertId: this.$store.state.expertPage.expertID,
             institution: this.newInfo.institution,
             degree: this.newInfo.degree,
-            webSiteUrl: this.newInfo.webSiteUrl,
+            websiteUrl: this.newInfo.webSiteUrl,
             phone: this.newInfo.phone,
             email: this.newInfo.email
           }

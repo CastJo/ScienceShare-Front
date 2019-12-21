@@ -120,8 +120,8 @@
             {{ this.expertPage.institution }}
           </div>
         </el-card>
-        <Follower :username="this.expertPage.expertName"></Follower>
-        <Follow  :username="this.expertPage.expertName" />
+        <Follower :username="this.$store.stat"/>
+        <Follow  :username="this.expertPage.realName" />
       </el-col>
     </el-row>
   </div>
@@ -144,7 +144,7 @@ export default {
       nResearch: [
         {
           name: "Research items",
-          value: "2"
+          value: this.$store.state.expertPage.researchList.length,
         },
         {
           name: "Projects",
@@ -163,7 +163,16 @@ export default {
     if (this.expertPage.skills != null) {
       this.newInfo.skills = this.expertPage.skills;
     }
-    console.log(this.expertPage)
+    console.log(this.expertPage);
+    var list = this.$store.state.expertPage.researchList;
+    var trueList=[];
+    var cnt = 0;
+    for(let i = 0 ; i < list.length; i++) {
+      if(list[i] !== null) {
+        trueList[cnt ++] = list[i];
+      }
+    }
+    this.$store.commit("setResearchList",trueList)
   },
   computed: {
     anyType() {

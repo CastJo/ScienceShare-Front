@@ -1,12 +1,12 @@
 <template>
   <div style="padding: 10px 30px">
     <ResearchItem
-      v-for="item in researchList"
-      :key="item.id"
-      :title="item.title"
-      :date="item.year"
-      :venue="item.venue"
-      :authors="item.authors"
+      v-for="item in trueList"
+      :key="item.id[0]"
+      :title="item.title[1]"
+      :date="item.year[0]"
+      :venue="item.venue[0]"
+      :authors="item.authors[0]"
     />
   </div>
 </template>
@@ -15,11 +15,13 @@
 import ResearchItem from "@/components/ResearchItem.vue";
 export default {
   data() {
-    return {};
+    return {
+      trueList: [],
+    };
   },
   mounted() {
-    console.log("expertPage : ");
-    console.log(this.$store.state.expertPage);
+
+
   },
   computed: {
     researchList: {

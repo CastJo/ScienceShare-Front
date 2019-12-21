@@ -85,7 +85,15 @@ export default {
       .catch(failResponse => {
         console.log(failResponse);
       });
-    console.log("44");
+    var list = this.$store.state.expertPage.researchList;
+    var trueList =[];
+    var cnt = 0;
+    for(let i = 0 ; i < list.length; i++) {
+      if(list[i] !== null) {
+        trueList[cnt ++] = list[i];
+      }
+    }
+    this.$store.commit("setResearchList", trueList);
   },
   methods: {
     GoBack(){
