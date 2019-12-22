@@ -3,7 +3,7 @@
         <div class="nameEnCollege">
             <div style="">
                 <el-button type="text" plain size="medium" style="color: black;border: white" @click="toLitInfo">
-                <div style="width: 90%;display: flex;flex-wrap: wrap">
+                <div style="width: 400px;display: flex;flex-wrap: wrap">
                     <h4>{{ this.part.title[0]}}</h4>
                 </div></el-button>
 <!--                <span>{{ this.part.authors[0] }}</span>-->

@@ -3,6 +3,10 @@
         <el-card style="height: 500px; width: inherit" shadow="always">
             <span>收藏夹</span>
             <div class="checkApply">
+                <ul
+                        class="infinite-list"
+                        style="overflow:auto;list-style: none;padding: 0 0 0 0; max-height: 410px"
+                >
                     <li
                             style="list-style: none"
                             v-for="i in favorites"
@@ -10,7 +14,7 @@
                             :key="i.id"
                     >
                         <FavoritePart :part="i"/>
-                    </li>
+                    </li></ul>
             </div>
         </el-card>
     </div>
