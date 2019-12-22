@@ -1,6 +1,7 @@
 <template>
-    <div style="width: 100%">
-        <navigator></navigator>
+    <el-main style="padding-top: 0;">
+    <div style="min-width: 890px">
+        <navigator/>
         <div class="body">
             <div class="select-zone mt-3">
                 <el-menu @select="handleSelect">
@@ -13,7 +14,9 @@
                 </el-menu>
             </div>
             <div class="feed-zone">
-                <news-card v-for="feed in feeds"
+                <news-card @click="jumpToLitInfo"
+                           style="cursor: pointer"
+                        v-for="feed in feeds"
                            class="mt-3"
                            :key="feed.paperId"
                            :id="feed.paperId"
@@ -42,7 +45,7 @@
                 </el-pagination>
             </div>
         </div>
-    </div>
+    </div></el-main>
 </template>
 
 <script>
@@ -56,6 +59,9 @@
             NewsCard
         },
         methods: {
+            jumpToLitInfo(val){
+                this.$router.push(`/litInfo/${val}`);
+            },
             handleCurrentChange(val) {
                 this.getFeedsPage()
                 console.log(`当前页: ${val}`);

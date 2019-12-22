@@ -1,33 +1,30 @@
 <template>
-    <div>
+    <div >
         <el-table
                 :data="searchresults"
-                style="width: 100%;text-align: center; margin-left: 30px;">
+                stripe
+                highlight-current-row
+                @current-change="jumpToLitInfo"
+                style="width: 100%;text-align: center;cursor:pointer">
             <el-table-column
                     prop="title"
-                    label="Title"
-                    width="550">
+                    label="标题"
+                    width="600">
             </el-table-column>
             <el-table-column
+                    @click="jumpToLitInfo"
                     prop="authors[0].name"
-                    label="Authors"
-                    width="150">
+                    label="作者"
+                    width="180">
             </el-table-column>
-            <!--    <el-table-column-->
-            <!--            prop="time"-->
-            <!--            label="Time"-->
-            <!--            sortable-->
-            <!--            width="120">-->
-            <!--            width="120">-->
-            <!--    </el-table-column>-->
             <el-table-column
                     prop="n_citation"
-                    label="Citation"
-                    width="70"
+                    label="引用数"
+                    width="90"
                     sortable
                     style="float: right;">
             </el-table-column>
-            <el-table-column >
+            <el-table-column>
                 <template slot-scope="scope">
                     <el-button
                             size="mini"
@@ -66,12 +63,12 @@
         data() {
             return {
                 searchresults: [],
-                pageNum: '1',
+                pageNum: 1,
                 max: ''
             }
         },
         mounted() {
-            //console.log(this.$route.params.keyword);
+            console.log(this.$route.params.keyword);
             this.$axios
                 .get("litcenter/getTop100LITsByPaging", {
                     params: {
@@ -89,6 +86,9 @@
                 });
         },
         methods: {
+            jumpToLitInfo(val){
+                this.$router.push(`/litInfo/${val.id}`);
+            },
             handleCurrentChange(val) {
                 console.log(val);
                 this.$axios

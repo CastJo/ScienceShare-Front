@@ -1,20 +1,16 @@
 <template>
     <div class="favoriteDiv">
-        <el-card style="height: 500px; width: 100%" shadow="hover">
+        <el-card style="height: 500px; width: inherit" shadow="always">
             <span>收藏夹</span>
             <div class="checkApply">
-                <ul
-                        class="infinite-list"
-                        style="overflow:auto;list-style: none;padding: 0 0 0 0; height:500px;max-height: 500px"
-                >
                     <li
+                            style="list-style: none"
                             v-for="i in favorites"
                             class="infinite-list-item"
                             :key="i.id"
                     >
                         <FavoritePart :part="i"/>
                     </li>
-                </ul>
             </div>
         </el-card>
     </div>
@@ -64,6 +60,8 @@
         height: 400px;
     }
     .checkApply{
+        width: 780px;
+        margin-top: 30px;
         padding-right: 10px;
         padding-left: 10px;
         height: 500px;

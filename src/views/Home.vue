@@ -3,7 +3,7 @@
         <Navigator/>
         <div class="totalDiv">
             <div class="infoCardDiv">
-                <el-card shadow="hover" style="height: 400px;width: 100%">
+                <el-card shadow="always" style="height: 400px;width: 100%">
                     <el-menu
                             router
                             :default-active="activeIndex"
@@ -115,7 +115,6 @@
 
     .infoCardDiv {
         width: 100%;
-        margin-top: 40px;
         height: 400px;
     }
 

@@ -16,25 +16,27 @@
                         @select="handleSelect"
                 >
                     <el-button slot="append" icon="el-icon-search" @click="search"></el-button>
+                    <template slot-scope="{ item }">
+                        <div style="float: left;width:350px;text-overflow:ellipsis;white-space:nowrap; overflow:hidden"><strong>{{ item.value }}</strong></div>
+                        <div style="float: right">{{ item.type }}</div>
+                    </template>
                 </el-autocomplete>
             </el-col>
         </el-row>
         <el-row style="margin: auto;max-width: 1000px;">
-            <el-col :span="16">
                 <el-tabs v-model="activeName" @tab-click="handleClick" style="min-width: 900px;margin: auto;">
-                    <el-tab-pane label="Experts" name="expertresult">
+                    <el-tab-pane label="专家" name="expertresult">
                         <router-view></router-view>
                     </el-tab-pane>
-                    <el-tab-pane label="Literature" name="mainresults">
+                    <el-tab-pane label="文献" name="mainresults">
                         <el-card class="mid-center" style="max-width: 1000px;margin:auto;">
                         <router-view></router-view>
                     </el-card></el-tab-pane>
-                    <el-tab-pane label="Users" name="userresult">
+                    <el-tab-pane label="用户" name="userresult">
                         <router-view></router-view>
                     </el-tab-pane>
                 </el-tabs>
 
-            </el-col>
         </el-row>
     </el-main>
        
@@ -88,9 +90,22 @@
                         }
                     })
                     .then(successResponse => {
-                        console.log(successResponse.data);
-                        var result = successResponse.data
-                        this.tepSearch = successResponse.map(obj => obj.title);
+                        console.log(successResponse.data.literature[0].title)
+                        var cnt = 0;
+                        for(let i = 0; i < successResponse.data.authorLen;++i) {
+                            this.tepSearch[cnt] = successResponse.data.authors[i];
+                            this.tepSearch[cnt].value = this.tepSearch[cnt].name;
+                            this.tepSearch[cnt].type = "专家";
+                            cnt++;
+                        }
+                        for(let i = 0; i < successResponse.data.litlen;++i){
+                            this.tepSearch[cnt] = successResponse.data.literature[i];
+                            this.tepSearch[cnt].value = this.tepSearch[cnt].title;
+                            this.tepSearch[cnt].type = "文献";
+                            cnt++;
+                        }
+                        console.log(this.tepSearch);
+                        cb(this.tepSearch);
                         //arr.map(obj => {return obj.name}
                     })
                     .catch(failResponse => {

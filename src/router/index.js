@@ -29,6 +29,11 @@ const routes = [
     name: 'Index',
     component: loadView("Index"),
   },
+  {
+    path: '/litInfo/:litID',
+    name: 'litInfo',
+    component: loadView("LITInfo"),
+  },
     {
         path: "/manage",
         name: "Manage",
